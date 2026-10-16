@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "scope": "development_reference_requires_review",
+  "image": "examples/user_bjt_bias.jpg",
+  "image_sha256": "6262d32fa64aee86b9cfc237c03d0db2c58256ec8307a82c9e60e23f1b607b2f",
+  "independent_test": false,
+  "human_review_status": "not_documented",
+  "second_human_review": null,
+  "approved_for_scoring": false,
+  "provenance": {
+    "kind": "recovered historical spot-check reference, not API response",
+    "git_commit": "80f147774cfbdb8e8588f7892f1af0698281d936",
+    "source_path": "experiments/prompt-benchmark/cases.json",
+    "human_reviewer_identity": null,
+    "note": "Historical records used the key truth, but no signed human/second-person review is present. Reclassified as unapproved development references."
+  },
+  "limitations": [
+    "symbolic parameters; four visibly labelled resistors; BJT has no visible reference",
+    "Already used during workflow tuning; not an independent test sample.",
+    "Legacy instance IDs and integer network labels are tied to an earlier run; match by original image and component geometry, not by ID equality across new runs.",
+    "No reviewed OCR polygon boxes or semantic pin coordinate annotations provided.",
+    "Normalized references are not exact OCR transcriptions; subscripts/underscores require a separate text annotation policy."
+  ],
+  "reference_components": [
+    {
+      "legacy_instance_id": "Resistor_1",
+      "kind": "R",
+      "normalized_ref": "R2",
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "10",
+        "0"
+      ],
+      "approved_for_scoring": false
+    },
+    {
+      "legacy_instance_id": "Resistor_2",
+      "kind": "R",
+      "normalized_ref": "R1",
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "4",
+        "10"
+      ],
+      "approved_for_scoring": false
+    },
+    {
+      "legacy_instance_id": "Resistor_3",
+      "kind": "R",
+      "normalized_ref": "RC",
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "4",
+        "9"
+      ],
+      "approved_for_scoring": false
+    },
+    {
+      "legacy_instance_id": "Transistor_BJT_1",
+      "kind": "Q",
+      "normalized_ref": null,
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "9",
+        "10",
+        "25"
+      ],
+      "approved_for_scoring": false,
+      "legacy_pin_order": [
+        "C",
+        "B",
+        "E"
+      ]
+    },
+    {
+      "legacy_instance_id": "Resistor_4",
+      "kind": "R",
+      "normalized_ref": "RE",
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "25",
+        "0"
+      ],
+      "approved_for_scoring": false
+    }
+  ]
+}

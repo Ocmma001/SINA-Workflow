@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "scope": "development_reference_requires_review",
+  "image": "resources/development-references/circuit_0003.jpg",
+  "image_sha256": "b411c7ec1b8422af6f1f2986d54c742aaec6bd51d20961d48390f493b317fd27",
+  "independent_test": false,
+  "human_review_status": "not_documented",
+  "second_human_review": null,
+  "approved_for_scoring": false,
+  "provenance": {
+    "kind": "recovered historical spot-check reference, not API response",
+    "git_commit": "80f147774cfbdb8e8588f7892f1af0698281d936",
+    "source_path": "experiments/prompt-benchmark/cases.json",
+    "human_reviewer_identity": null,
+    "note": "Historical records used the key truth, but no signed human/second-person review is present. Reclassified as unapproved development references."
+  },
+  "limitations": [
+    "Prompt-only test: BJT base node and MOSFET D/G/S/B order manually corrected. This image belongs to the upstream val set.",
+    "Already used during workflow tuning; not an independent test sample.",
+    "Legacy instance IDs and integer network labels are tied to an earlier run; match by original image and component geometry, not by ID equality across new runs.",
+    "No reviewed OCR polygon boxes or semantic pin coordinate annotations provided.",
+    "Normalized references are not exact OCR transcriptions; subscripts/underscores require a separate text annotation policy."
+  ],
+  "reference_components": [
+    {
+      "legacy_instance_id": "Voltage_src_1",
+      "kind": "V",
+      "normalized_ref": "V1",
+      "numeric_value_reference": 5,
+      "legacy_ordered_network_labels": [
+        "2",
+        "0"
+      ],
+      "approved_for_scoring": false
+    },
+    {
+      "legacy_instance_id": "Transistor_MOSFET_1",
+      "kind": "M",
+      "normalized_ref": "M1",
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "28",
+        "20",
+        "2",
+        "2"
+      ],
+      "approved_for_scoring": false,
+      "legacy_pin_order": [
+        "D",
+        "G",
+        "S",
+        "B"
+      ],
+      "unresolved_issues": [
+        "Legacy reference repeats the source network for the bulk pin; no independently reviewed separate bulk evidence. Do not assume this is image ground truth."
+      ]
+    },
+    {
+      "legacy_instance_id": "Resistor_1",
+      "kind": "R",
+      "normalized_ref": "R1",
+      "numeric_value_reference": 47,
+      "legacy_ordered_network_labels": [
+        "2",
+        "20"
+      ],
+      "approved_for_scoring": false
+    },
+    {
+      "legacy_instance_id": "Transistor_BJT_1",
+      "kind": "Q",
+      "normalized_ref": "Q1",
+      "numeric_value_reference": null,
+      "legacy_ordered_network_labels": [
+        "20",
+        "50",
+        "0"
+      ],
+      "approved_for_scoring": false,
+      "legacy_pin_order": [
+        "C",
+        "B",
+        "E"
+      ]
+    },
+    {
+      "legacy_instance_id": "Resistor_2",
+      "kind": "R",
+      "normalized_ref": "R2",
+      "numeric_value_reference": 100,
+      "legacy_ordered_network_labels": [
+        "28",
+        "0"
+      ],
+      "approved_for_scoring": false
+    }
+  ]
+}

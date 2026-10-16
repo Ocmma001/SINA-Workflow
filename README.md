@@ -22,6 +22,8 @@ GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITH
 
 当前人员分工：[组员A（RTX 5070 Laptop 8GB）任务单](docs/team/ASSIGNMENT-MEMBER-A.md)。可执行的开发与评测交给组员A，高显存训练由用户电脑承担。
 
+现有图片/标注参考与缺口：[材料说明](resources/development-references/README.md)。含两张待复核开发参考；尚无完整独立测试集或第二人复核真值。
+
 ```text
 图片 → YOLO11m → 导线连通区域 → 引脚连接
 图片 → EasyOCR → 位号/参数绑定
