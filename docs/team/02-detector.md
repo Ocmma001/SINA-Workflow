@@ -3,7 +3,7 @@
 ## 任务边界
 
 负责文件：tools/modules/detector.py、tools/train_round.py；新增检测专项评估。
-设备建议：优先由用户现有 RTX 5080 Laptop 16GB 承担。
+设备安排：组员A的RTX 5070 Laptop 8GB负责推理、评测、训练方案与小批量训练适配；用户RTX 5080 Laptop 16GB负责高显存训练和较重复验。具体配置与移交规则见[组员A任务单](ASSIGNMENT-MEMBER-A.md)。
 优先优化当前实现，任何新增模型先提供数据需求和成本。本指南是待执行任务，不是已完成的准确率承诺。
 
 ## 统一验收与交接

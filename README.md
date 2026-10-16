@@ -20,6 +20,8 @@
 
 GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITHUB.md)。
 
+当前人员分工：[组员A（RTX 5070 Laptop 8GB）任务单](docs/team/ASSIGNMENT-MEMBER-A.md)。可执行的开发与评测交给组员A，高显存训练由用户电脑承担。
+
 ```text
 图片 → YOLO11m → 导线连通区域 → 引脚连接
 图片 → EasyOCR → 位号/参数绑定
