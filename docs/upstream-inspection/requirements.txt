@@ -1,0 +1,11 @@
+ultralytics
+opencv-python
+easyocr
+numpy
+matplotlib
+scikit-learn
+scipy
+requests
+python-dotenv
+networkx
+pytesseract

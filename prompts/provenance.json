@@ -1,0 +1,16 @@
+{
+  "sina_inventory.txt": {
+    "source": "SINA/Netlist Generator/IC/program_test/netlist_generator_algorithm_test/helper_files/ocr_module.py",
+    "function": "extract_components_from_image_api",
+    "source_sha256": "da8f769c9ad667a0489b0d3520dfba82d1d0c3d1e57a592a9fe19d235c54516c",
+    "prompt_sha256": "14990ea3ab8f2fd31e5c89bf1284f37d718930f17759800dd35bfe676b0ea4f4",
+    "adaptation": "verbatim prompt; stage2 dynamic fields replaced by sentinel placeholders"
+  },
+  "sina_named_netlist.txt": {
+    "source": "SINA/Netlist Generator/IC/program_test/netlist_generator_algorithm_test/helper_files/generate_netlists.py",
+    "function": "generate_named_netlist",
+    "source_sha256": "5deef2bcfd4d441e61b73933657e227b8020516ea655ff586b5fbee4f4aaa0e8",
+    "prompt_sha256": "4ae86dee14d0e2a03d90acc02e20bcff1ac7855eb8657ce3ddbbfc01178872a5",
+    "adaptation": "verbatim prompt; stage2 dynamic fields replaced by sentinel placeholders"
+  }
+}

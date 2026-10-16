@@ -1,0 +1,5 @@
+Voltage_src_1 2 0
+Transistor_MOSFET_1 28 20 2 2
+Resistor_1 2 20
+Transistor_BJT_1 20 50 0
+Resistor_2 28 0

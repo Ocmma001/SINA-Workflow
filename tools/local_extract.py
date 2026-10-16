@@ -1,0 +1,134 @@
+"""Offline SINA candidate extraction: trained detector + upstream CCL + EasyOCR.
+
+Produces reviewable candidates, never a confirmed or simulation-ready circuit.
+"""
+import argparse
+from collections import Counter
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+from modules import detector, topology, ocr as ocr_stage
+from modules.pins import attach_pins
+from modules.image_io import read_image
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('image', type=Path)
+    p.add_argument('--weights', type=Path)
+    p.add_argument('--detections', type=Path, help='Precomputed direct Pro detection.json, bypass YOLO')
+    p.add_argument('--out', type=Path, required=True)
+    p.add_argument('--device', default='cpu')
+    p.add_argument('--conf', type=float, default=0.25)
+    p.add_argument('--imgsz', type=int, default=960)
+    p.add_argument('--skip-ocr', action='store_true')
+    p.add_argument('--skip-crossings', action='store_true')
+    p.add_argument('--sina-root', type=Path, help='Override the SINA source snapshot')
+    p.add_argument('--ocr-model-dir', type=Path, help='Override EasyOCR model directory')
+    args = p.parse_args()
+    return extract(args)
+
+
+def extract(args, on_stage=None):
+    """Callable pipeline shared by CLI and GUI; callbacks never launch child processes."""
+    p = argparse.ArgumentParser(description=__doc__)
+    emit = on_stage or (lambda stage, message: None)
+    args.image, args.out = args.image.resolve(), args.out.resolve()
+    if args.weights:
+        args.weights = args.weights.resolve()
+    if not args.image.is_file() or (not args.detections and (not args.weights or not args.weights.is_file())):
+        p.error('image and either weights or precomputed detections must exist')
+    if args.detections and not args.skip_crossings:
+        p.error('Direct detection requires --skip-crossings to avoid upstream YOLO re-detection')
+    if args.out.exists() and any(args.out.iterdir()):
+        p.error('use a new output directory')
+    if not 0 <= args.conf <= 1 or args.imgsz < 1:
+        p.error('invalid confidence or image size')
+    if args.device == 'cpu':
+        os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+    os.environ.setdefault('YOLO_CONFIG_DIR', str(ROOT / '.ultralytics'))
+    os.environ.setdefault('MPLCONFIGDIR', str(ROOT / '.matplotlib'))
+    os.environ.setdefault('EASYOCR_MODULE_PATH', str(ROOT / 'SINA-venv/easyocr_module'))
+    import cv2
+    import numpy as np
+    image = read_image(args.image)
+    args.out.mkdir(parents=True, exist_ok=True)
+    debug = args.out / 'debug'
+    debug.mkdir()
+    counts, detected = Counter(), []
+    confidences = {}
+    emit('detection', '正在使用 YOLO11m 检测元件…')
+    if args.detections:
+        evidence = json.loads(args.detections.read_text(encoding='utf-8'))
+        if evidence['image_sha256'] != hashlib.sha256(args.image.read_bytes()).hexdigest():
+            p.error('Precomputed detections belong to a different image')
+        for c in evidence['components']:
+            detected.append({'id': c['id'], 'type': c['type'], 'bbox': c['bbox'], 'color': [255, 155, 0]})
+            confidences[c['id']] = None
+        cv2.imwrite(str(args.out / 'detected.jpg'), image)
+    else:
+        detected, confidences = detector.detect(image, args.weights, args.out / 'detected.jpg',
+                                                   args.device, args.conf, args.imgsz)
+    emit('topology', '正在分析导线和引脚连接候选…')
+    circuit, labels = topology.analyze(image, detected, debug, args.weights, not args.skip_crossings)
+    pin_map = attach_pins(circuit, labels)
+    ocr = []
+    ocr_warning = None
+    if not args.skip_ocr:
+        emit('ocr', '正在使用 EasyOCR 识别编号和参数…')
+        model_dir = args.ocr_model_dir or Path(os.environ.get('EASYOCR_MODEL_DIR', str(ROOT / 'SINA-venv/easyocr_models')))
+        user_dir = getattr(args, 'ocr_user_dir', None) or ROOT / 'SINA-venv/easyocr_user_network'
+        user_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            ocr = ocr_stage.recognize(image, model_dir, user_dir, args.device)
+        except Exception:
+            if not getattr(args, 'ocr_optional', False):
+                raise
+            ocr_warning = 'OCR 未完成，保留元件和连接候选，请手动补充编号和参数。'
+    warnings = ['Review all values, pin semantics, and connections before netlist generation.',
+                'Local CCL crossing output is a candidate; full upstream crossing variants are not merged here.']
+    if ocr_warning:
+        warnings.append(ocr_warning)
+    if not any(c['label'] in {'Voltage_src', 'Current_src'} for c in circuit):
+        warnings.append('No source symbol detected; review external supply labels and excitation.')
+    components = []
+    for c in circuit:
+        cid = c['id']
+        pins = pin_map[cid]
+        if not pins or any(pin['connection_candidate'] is None for pin in pins):
+            warnings.append(f'{cid}: missing or unresolved pin connection')
+        x1, y1, x2, y2 = c['bounding_box']
+        cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
+        nearby = sorted(ocr, key=lambda t: (
+            sum(v[0] for v in t['bbox']) / 4 - cx) ** 2 + (
+            sum(v[1] for v in t['bbox']) / 4 - cy) ** 2)[:3]
+        components.append({'id': cid, 'type': c['label'], 'ref': None, 'value': None,
+                           'model': None, 'bbox': c['bounding_box'],
+                           'confidence': confidences.get(cid), 'pin_candidates': pins,
+                           'text_candidates': nearby, 'nodes': [],
+                           'pin_order_confirmed': False, 'needs_user_confirmation': True})
+    output = {'schema_version': '1.0', 'scope': 'local_sina_candidates',
+              'ready_for_simulation': False, 'image': str(args.image),
+              'model_sha256': hashlib.sha256(args.weights.read_bytes()).hexdigest() if not args.detections else None,
+              'detector_source': evidence['detector'] if args.detections else 'YOLO',
+              'components': components, 'ocr': ocr, 'warnings': warnings,
+              'inference': {'conf': args.conf, 'imgsz': args.imgsz, 'device': args.device,
+                            'pin_search_radius_pixels': 5,
+                            'crossing_detection': not args.skip_crossings,
+                            'ocr_enabled': not args.skip_ocr}}
+    (args.out / 'recognized.json').write_text(json.dumps(output, indent=2, ensure_ascii=False),
+                                             encoding='utf-8')
+    print(f'Local extraction complete: {len(components)} components, {len(ocr)} OCR texts')
+    print(f'Review candidates at {args.out}')
+    emit('local_complete', '本地识别完成，正在生成可编辑草稿…')
+    return output
+
+
+if __name__ == '__main__':
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    main()

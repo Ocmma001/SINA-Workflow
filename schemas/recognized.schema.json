@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LabPilot editable recognition document v2",
+  "type": "object",
+  "required": ["schema_version", "scope", "components", "recognition", "ready_for_simulation"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "scope": {"enum": ["labpilot_circuit_draft", "labpilot_confirmed_circuit"]},
+    "components": {"type": "array", "items": {
+      "type": "object", "required": ["ref", "type", "value", "nodes"],
+      "properties": {
+        "sina_id": {"type": ["string", "null"]},
+        "ref": {"type": "string"},
+        "type": {"enum": ["resistor", "capacitor", "inductor", "voltage_source", "current_source", "diode", "led", "bjt", "mosfet", "opamp", "switch"]},
+        "value": {"type": ["string", "number", "null"]},
+        "nodes": {"type": "array", "items": {"type": "string"}},
+        "model": {"type": ["string", "null"]},
+        "waveform": {"type": ["string", "null"]},
+        "bbox": {"type": ["array", "null"]},
+        "needs_user_confirmation": {"type": "boolean"},
+        "review_notes": {"type": "array", "items": {"type": "string"}},
+        "field_status": {"type": "object"}
+      }, "additionalProperties": true
+    }},
+    "recognition": {"type": "object", "required": ["user_confirmed"], "properties": {
+      "user_confirmed": {"type": "boolean"},
+      "status": {"enum": ["needs_review", "incomplete", "confirmed"]}
+    }, "additionalProperties": true},
+    "ready_for_simulation": {"type": "boolean"},
+    "artifacts": {"type": "object"},
+    "validation": {"type": "object"}
+  }, "additionalProperties": true
+}

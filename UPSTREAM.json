@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/medal-ece/SINA",
+  "commit": "a4f138852d40004ffdb4f69a67a27250c4d44db7",
+  "scope": "IC module including weights and bundled dataset; root README and licenses",
+  "method": "pinned raw GitHub snapshot, each file verified against Git blob SHA1",
+  "files": 1375,
+  "errors": [],
+  "complete": true
+}

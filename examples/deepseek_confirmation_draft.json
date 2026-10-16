@@ -1,0 +1,116 @@
+{
+  "circuit_summary": "这是一个典型的NPN型BJT分压偏置共射极放大电路。电路由基极分压电阻R1和R2提供偏置电压，发射极电阻RE用于稳定直流工作点（直流负反馈），集电极电阻RC将集电极电流变化转换为电压变化。信号路径：输入信号通常加在基极（图中未画出耦合电容和信号源），输出信号从集电极取出（图中未画出耦合电容和负载）。图中标注了Ucc为电源正极，底部为地。电流方向：基极电流IB流入基极，集电极电流IC从集电极流向发射极，发射极电流IE从发射极流向地。",
+  "components": [
+    {
+      "ref": "R1",
+      "type": "resistor",
+      "symbol_observation": "矩形电阻符号，位于上方，连接Ucc与基极节点",
+      "value_from_image": null,
+      "model_candidates": [{"model": "generic", "why": "图中未给出具体阻值，需用户提供"}],
+      "recommended_model": "generic",
+      "parameters": {"value": null, "unit": "ohm", "polarity": null, "pin_order": null},
+      "connections": ["Ucc", "基极节点"],
+      "confidence": 0.9,
+      "needs_user_confirmation": true,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    },
+    {
+      "ref": "R2",
+      "type": "resistor",
+      "symbol_observation": "矩形电阻符号，位于下方，连接基极节点与地",
+      "value_from_image": null,
+      "model_candidates": [{"model": "generic", "why": "图中未给出具体阻值，需用户提供"}],
+      "recommended_model": "generic",
+      "parameters": {"value": null, "unit": "ohm", "polarity": null, "pin_order": null},
+      "connections": ["基极节点", "地"],
+      "confidence": 0.9,
+      "needs_user_confirmation": true,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    },
+    {
+      "ref": "RC",
+      "type": "resistor",
+      "symbol_observation": "矩形电阻符号，位于集电极支路，连接Ucc与集电极节点",
+      "value_from_image": null,
+      "model_candidates": [{"model": "generic", "why": "图中未给出具体阻值，需用户提供"}],
+      "recommended_model": "generic",
+      "parameters": {"value": null, "unit": "ohm", "polarity": null, "pin_order": null},
+      "connections": ["Ucc", "集电极节点"],
+      "confidence": 0.9,
+      "needs_user_confirmation": true,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    },
+    {
+      "ref": "RE",
+      "type": "resistor",
+      "symbol_observation": "矩形电阻符号，位于发射极支路，连接发射极节点与地",
+      "value_from_image": null,
+      "model_candidates": [{"model": "generic", "why": "图中未给出具体阻值，需用户提供"}],
+      "recommended_model": "generic",
+      "parameters": {"value": null, "unit": "ohm", "polarity": null, "pin_order": null},
+      "connections": ["发射极节点", "地"],
+      "confidence": 0.9,
+      "needs_user_confirmation": true,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    },
+    {
+      "ref": "Q1",
+      "type": "bjt",
+      "symbol_observation": "NPN三极管符号，箭头指向发射极，基极水平，集电极向上，发射极向下",
+      "value_from_image": null,
+      "model_candidates": [
+        {"model": "2N3904", "why": "通用NPN小信号晶体管，常用于此类放大电路"},
+        {"model": "BC547", "why": "通用NPN小信号晶体管，常用于此类放大电路"},
+        {"model": "2N2222", "why": "通用NPN开关/放大晶体管"}
+      ],
+      "recommended_model": "generic",
+      "parameters": {"value": null, "unit": null, "polarity": "NPN", "pin_order": "C-B-E"},
+      "connections": ["集电极节点", "基极节点", "发射极节点"],
+      "confidence": 0.8,
+      "needs_user_confirmation": true,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    },
+    {
+      "ref": "Ucc",
+      "type": "source",
+      "symbol_observation": "电源节点，标注Ucc，顶部圆点表示正极",
+      "value_from_image": null,
+      "model_candidates": [{"model": "DC voltage source", "why": "为电路提供直流偏置"}],
+      "recommended_model": "generic",
+      "parameters": {"value": null, "unit": "V", "polarity": "positive", "pin_order": null},
+      "connections": ["R1", "RC"],
+      "confidence": 0.9,
+      "needs_user_confirmation": true,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    },
+    {
+      "ref": "GND",
+      "type": "ground",
+      "symbol_observation": "接地符号，位于底部，连接R2、RE和地",
+      "value_from_image": null,
+      "model_candidates": [{"model": "0", "why": "SPICE地节点"}],
+      "recommended_model": "0",
+      "parameters": {"value": "0", "unit": "V", "polarity": null, "pin_order": null},
+      "connections": ["R2", "RE"],
+      "confidence": 1.0,
+      "needs_user_confirmation": false,
+      "user_editable_fields": ["model", "value", "parameters", "connections"]
+    }
+  ],
+  "nets": [
+    {"name": "Ucc", "kind": "power", "evidence": "图中标注Ucc，顶部圆点"},
+    {"name": "GND", "kind": "ground", "evidence": "接地符号，底部连线"},
+    {"name": "基极节点", "kind": "signal", "evidence": "R1、R2和基极的连接点，标注IB和UBE"},
+    {"name": "集电极节点", "kind": "signal", "evidence": "RC和集电极的连接点，标注IC和UCE"},
+    {"name": "发射极节点", "kind": "signal", "evidence": "发射极和RE的连接点，标注IE"}
+  ],
+  "spice_warnings": [
+    "图中未给出任何电阻值、电源电压和晶体管型号，必须由用户提供后才能生成可仿真网表。",
+    "三极管引脚顺序（C-B-E）需根据实际型号确认，不同封装可能不同。",
+    "输入和输出耦合电容未在图中画出，若需交流仿真需补充。",
+    "电源Ucc的电压值未知，需用户指定。",
+    "基极分压电阻R1和R2的阻值未知，影响静态工作点。",
+    "发射极电阻RE的阻值未知，影响直流负反馈和增益。",
+    "集电极电阻RC的阻值未知，影响输出电压摆幅和增益。"
+  ]
+}

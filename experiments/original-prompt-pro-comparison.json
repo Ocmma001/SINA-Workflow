@@ -1,0 +1,35 @@
+[
+  {
+    "run": "ark-sina-original-pro-bjt-001",
+    "correct_resistor_label_bindings": 2,
+    "total_labelled_resistors": 4,
+    "matched_refs": {
+      "Resistor_1": "R1",
+      "Resistor_2": "R2",
+      "Resistor_3": "RC",
+      "Resistor_4": "RE"
+    }
+  },
+  {
+    "run": "ark-sina-original-pro-image-bjt-001",
+    "correct_resistor_label_bindings": 2,
+    "total_labelled_resistors": 4,
+    "matched_refs": {
+      "Resistor_1": "R1",
+      "Resistor_2": "R2",
+      "Resistor_3": "RC",
+      "Resistor_4": "RE"
+    }
+  },
+  {
+    "run": "ark-sina-original-pro-boxes-bjt-001",
+    "correct_resistor_label_bindings": 2,
+    "total_labelled_resistors": 4,
+    "matched_refs": {
+      "Resistor_1": "R2",
+      "Resistor_2": "RC",
+      "Resistor_3": "R1",
+      "Resistor_4": "RE"
+    }
+  }
+]

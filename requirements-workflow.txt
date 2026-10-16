@@ -1,0 +1,10 @@
+# Install a suitable CPU/CUDA torch + torchvision pair separately first.
+ultralytics==8.4.178
+easyocr==1.7.2
+opencv-python==5.0.0.93
+numpy==2.5.2
+scikit-learn==1.9.1
+matplotlib==3.11.2
+python-dotenv==1.2.4
+requests==2.34.2
+PyYAML==6.0.3
