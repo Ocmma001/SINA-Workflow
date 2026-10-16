@@ -4,6 +4,7 @@ import math
 import numpy as np
 import os
 import json
+from pathlib import Path
 
 DETECTION_COLOR = (0,255,0)
 CROSSING_DOT_COLOR = (0,0,255)  # Red color for crossing dots
@@ -286,10 +287,10 @@ def getLines(img, outputPath):
             intersecting.append(backDiagLine)
 
     # output debug results for each extracted image
-    write_image(outputPath.replace('.', 'vert.'), imgVert)
-    write_image(outputPath.replace('.', 'horz.'), imgHorz)
-    write_image(outputPath.replace('.', 'backD.'), imgBackDiag)
-    write_image(outputPath.replace('.', 'forwD.'), imgForwardDiag)
+    output_file = Path(outputPath)
+    for tag, variant in [('vert',imgVert),('horz',imgHorz),('backD',imgBackDiag),('forwD',imgForwardDiag)]:
+        variant_path = output_file.with_name(output_file.stem+tag+output_file.suffix)
+        write_image(variant_path, variant)
 
     # Save all detected lines to JSON for visualization (before returning)
     debugDir = os.path.dirname(outputPath)

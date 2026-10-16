@@ -96,6 +96,37 @@ def save_circuit_info_json(components, component_connections, output_folder):
         json.dump(circuit_info, f, indent=4)
     print(f"Saved circuit_info.json to {json_path}")
 
+
+def perimeter_contacts(node_labels, bbox):
+    """Read perimeter pixels once, retaining label then row-major legacy order."""
+    height,width=node_labels.shape
+    x1,y1,x2,y2=map(int,bbox)
+    xs=np.arange(max(0,x1),min(width,x2+1),dtype=np.intp)
+    ys=np.arange(max(0,y1),min(height,y2+1),dtype=np.intp)
+    edges=[]
+    if 0<=y1<height: edges.append(y1*width+xs)
+    if 0<=y2<height: edges.append(y2*width+xs)
+    if 0<=x1<width: edges.append(ys*width+x1)
+    if 0<=x2<width: edges.append(ys*width+x2)
+    if not edges: return {}
+    indices=np.unique(np.concatenate(edges))
+    values=node_labels.ravel()[indices]
+    positive=values>0
+    indices,values=indices[positive],values[positive]
+    order=np.lexsort((indices,values))
+    result={}
+    for value,index in zip(values[order],indices[order]):
+        result.setdefault(int(value),[]).append((int(index%width),int(index//width)))
+    return result
+
+
+def label_visualization(node_labels, node_ids, num_labels):
+    palette=np.zeros((num_labels,3),dtype=np.uint8)
+    ids=np.asarray(list(node_ids),dtype=np.intp)
+    if len(ids):
+        palette[ids]=np.random.randint(0,255,(len(ids),3))
+    return palette[node_labels]
+
 def identify_circuit_nodes(merged_labels, components, output_folder, original_image, model_path=None, detect_crossings=True, crossing_data=None, disambiguation_context=None):
     h, w = merged_labels.shape
     circuit_image = merged_labels.copy()
@@ -190,10 +221,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
     # saving node labels to be later used for netlist generation 
     np.save(os.path.join(output_folder, "node_labels.npy"), node_labels)
 
-    step2_node_vis = np.zeros((h, w, 3), dtype=np.uint8)
-    for label_id in range(1, num_labels):
-        color = np.random.randint(0, 255, 3).tolist()
-        step2_node_vis[node_labels == label_id] = color
+    step2_node_vis = label_visualization(node_labels, range(1,num_labels), num_labels)
     write_image(os.path.join(output_folder, "7_node_labels.png"), step2_node_vis)
 
     # STEP 3: Identify valid nodes and collect raw contact points
@@ -205,29 +233,14 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
     for component in components:
         x_min, y_min, x_max, y_max = component["bbox"]
         comp_id = component["id"]
-        comp_perimeter = np.zeros((h, w), dtype=np.uint8)
-        if y_min < h: comp_perimeter[y_min, max(0, x_min):min(w, x_max + 1)] = 1
-        if y_max < h: comp_perimeter[y_max, max(0, x_min):min(w, x_max + 1)] = 1
-        if x_min < w: comp_perimeter[max(0, y_min):min(h, y_max + 1), x_min] = 1
-        if x_max < w: comp_perimeter[max(0, y_min):min(h, y_max + 1), x_max] = 1
-
-        for label_id in range(1, num_labels):
-            node_mask = (node_labels == label_id)
-            intersection = np.logical_and(comp_perimeter, node_mask)
-            if np.any(intersection):
-                valid_nodes.add(label_id)
-                node_to_components[label_id].add(comp_id)
-                component_to_nodes[comp_id].add(label_id)
-
-                y_points, x_points = np.where(intersection)
-                for cx, cy in zip(x_points, y_points):
-                    raw_contact_points[comp_id].append((cx, cy))
+        for label_id, points in perimeter_contacts(node_labels, component['bbox']).items():
+            valid_nodes.add(label_id)
+            node_to_components[label_id].add(comp_id)
+            component_to_nodes[comp_id].add(label_id)
+            raw_contact_points[comp_id].extend(points)
 
     # STEP 4: Show valid nodes and all raw contact points
-    step4_vis = np.zeros((h, w, 3), dtype=np.uint8)
-    for node_id in valid_nodes:
-        color = np.random.randint(0, 255, 3).tolist()
-        step4_vis[node_labels == node_id] = color
+    step4_vis = label_visualization(node_labels, valid_nodes, num_labels)
 
     component_colors = {
         component["id"]: (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255))
@@ -459,14 +472,11 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
         if comp_id not in clustered_contact_points or comp_id not in component_to_real_nodes:
             continue
 
-        relevant_nodes = component_to_real_nodes[comp_id]
+        relevant_nodes = set(component_to_real_nodes[comp_id])
         for (x, y) in clustered_contact_points[comp_id]:
-            for node_id in relevant_nodes:
-                node_mask = (node_labels == node_id)
-                if node_mask[y, x]:  # pixel overlaps node
-                    component_connections[comp_id].append((x, y))
-                    cv2.circle(step6_intersections, (x, y), 3, (0, 0, 255), -1)
-                    break  # avoid duplicating same point for multiple nodes
+            if 0<=x<w and 0<=y<h and int(node_labels[y,x]) in relevant_nodes:
+                component_connections[comp_id].append((x,y))
+                cv2.circle(step6_intersections,(x,y),3,(0,0,255),-1)
 
     write_image(os.path.join(output_folder, "10_node_intersections.png"), step6_intersections)
 
@@ -475,8 +485,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
 
     # Use a single color for all valid nodes (cyan)
     valid_node_color = (0, 225, 0)
-    for node_id in real_nodes:
-        valid_node_only_vis[node_labels == node_id] = valid_node_color
+    valid_node_only_vis[np.isin(node_labels,list(real_nodes))] = valid_node_color
 
     # Overlay the actual confirmed connection points
     for comp_id, points in component_connections.items():
