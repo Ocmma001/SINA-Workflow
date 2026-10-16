@@ -27,6 +27,10 @@ def main():
     p.add_argument('--device', default='cpu')
     p.add_argument('--conf', type=float, default=0.25)
     p.add_argument('--imgsz', type=int, default=960)
+    p.add_argument('--nms-iou', type=float, default=.7)
+    p.add_argument('--class-thresholds', type=Path)
+    p.add_argument('--tile-size', type=int)
+    p.add_argument('--tile-overlap', type=float, default=.2)
     p.add_argument('--ocr-min-side', type=int, default=0)
     p.add_argument('--ocr-preprocess', choices=['none','gray','clahe'], default='none')
     p.add_argument('--skip-ocr', action='store_true')
@@ -34,6 +38,7 @@ def main():
     p.add_argument('--sina-root', type=Path, help='Override the SINA source snapshot')
     p.add_argument('--ocr-model-dir', type=Path, help='Override EasyOCR model directory')
     args = p.parse_args()
+    args.class_conf = json.loads(args.class_thresholds.read_text(encoding='utf-8')) if args.class_thresholds else None
     return extract(args)
 
 
@@ -74,12 +79,19 @@ def extract(args, on_stage=None):
         write_image(args.out / 'detected.jpg', image)
     else:
         detected, confidences = detector.detect(image, args.weights, args.out / 'detected.jpg',
-                                                   args.device, args.conf, args.imgsz)
+                                                   args.device, args.conf, args.imgsz, iou=getattr(args,'detector_iou',getattr(args,'nms_iou',.7)),
+                class_conf=getattr(args,'class_conf',None), tile_size=getattr(args,'tile_size',None), overlap=getattr(args,'tile_overlap',.2))
     stage_metrics['detection'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
     stage_start = time.perf_counter()
     emit('topology', '正在分析导线和引脚连接候选…')
     circuit, labels = topology.analyze(image, detected, debug, args.weights, not args.skip_crossings)
     stage_metrics['topology'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
+    crossing_file = debug / 'crossing_status.json'
+    if crossing_file.is_file():
+        crossing = json.loads(crossing_file.read_text(encoding='utf-8'))
+        stage_metrics['topology']['crossing_status'] = crossing['status']
+        if crossing['status'] == 'failed':
+            stage_metrics['topology'].update(status='degraded', error_type=crossing.get('error_type'))
     stage_start = time.perf_counter()
     pin_map = attach_pins(circuit, labels)
     stage_metrics['pins'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
@@ -104,6 +116,8 @@ def extract(args, on_stage=None):
             ocr_warning = 'OCR 未完成，保留元件和连接候选，请手动补充编号和参数。'
     warnings = ['Review all values, pin semantics, and connections before netlist generation.',
                 'Local CCL crossing output is a candidate; full upstream crossing variants are not merged here.']
+    if stage_metrics['topology']['status'] == 'degraded':
+        warnings.append('Crossing analysis failed; wire connectivity is provisional.')
     if ocr_warning:
         warnings.append(ocr_warning)
     if not any(c['label'] in {'Voltage_src', 'Current_src'} for c in circuit):
@@ -132,6 +146,9 @@ def extract(args, on_stage=None):
               'stage_metrics': stage_metrics,
               'inference': {'conf': args.conf, 'imgsz': args.imgsz, 'device': args.device,
                             'pin_search_radius_pixels': 5,
+                            'nms_iou':getattr(args,'detector_iou',getattr(args,'nms_iou',.7)),
+                            'class_conf':getattr(args,'class_conf',None),
+                            'tile_size':getattr(args,'tile_size',None), 'tile_overlap':getattr(args,'tile_overlap',.2),
                             'crossing_detection': not args.skip_crossings,
                             'ocr_enabled': not args.skip_ocr,
                             'ocr_min_side': getattr(args,'ocr_min_side',0),
