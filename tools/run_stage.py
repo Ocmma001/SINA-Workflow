@@ -24,6 +24,8 @@ def main():
     p.add_argument('--conf', type=float, default=.25)
     p.add_argument('--radius', type=int, default=5)
     p.add_argument('--ocr-model-dir', type=Path, default=ROOT / 'SINA-venv/easyocr_models')
+    p.add_argument('--ocr-min-side', type=int, default=0)
+    p.add_argument('--ocr-preprocess', choices=['none','gray','clahe'], default='none')
     p.add_argument('--skip-crossings', action='store_true')
     a = p.parse_args()
     if a.stage in {'detector', 'ocr', 'topology'} and (not a.image or not a.image.is_file()):
@@ -57,7 +59,7 @@ def main():
     elif a.stage == 'ocr':
         from modules.ocr import recognize
         save(a.out / 'ocr.json', {'image_sha256': digest, 'ocr': recognize(
-            image, a.ocr_model_dir, a.out / 'user_network', a.device)})
+            image, a.ocr_model_dir, a.out / 'user_network', a.device, min_side=a.ocr_min_side, preprocess=a.ocr_preprocess)})
     elif a.stage == 'topology':
         from modules.topology import analyze
         detected = json.loads(a.input.read_text(encoding='utf-8'))

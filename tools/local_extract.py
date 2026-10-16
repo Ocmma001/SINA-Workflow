@@ -12,6 +12,7 @@ import sys
 import time
 from modules import detector, topology, ocr as ocr_stage
 from modules.pins import attach_pins
+from modules.text_binding import analyze_text_bindings
 from modules.image_io import read_image, write_image
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,6 +27,8 @@ def main():
     p.add_argument('--device', default='cpu')
     p.add_argument('--conf', type=float, default=0.25)
     p.add_argument('--imgsz', type=int, default=960)
+    p.add_argument('--ocr-min-side', type=int, default=0)
+    p.add_argument('--ocr-preprocess', choices=['none','gray','clahe'], default='none')
     p.add_argument('--skip-ocr', action='store_true')
     p.add_argument('--skip-crossings', action='store_true')
     p.add_argument('--sina-root', type=Path, help='Override the SINA source snapshot')
@@ -90,7 +93,8 @@ def extract(args, on_stage=None):
         user_dir.mkdir(parents=True, exist_ok=True)
         stage_start = time.perf_counter()
         try:
-            ocr = ocr_stage.recognize(image, model_dir, user_dir, args.device)
+            ocr = ocr_stage.recognize(image, model_dir, user_dir, args.device,
+                min_side=getattr(args,'ocr_min_side',0), preprocess=getattr(args,'ocr_preprocess','none'))
             stage_metrics['ocr'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
         except Exception as exc:
             stage_metrics['ocr'] = {'status': 'failed', 'seconds': time.perf_counter() - stage_start,
@@ -129,7 +133,13 @@ def extract(args, on_stage=None):
               'inference': {'conf': args.conf, 'imgsz': args.imgsz, 'device': args.device,
                             'pin_search_radius_pixels': 5,
                             'crossing_detection': not args.skip_crossings,
-                            'ocr_enabled': not args.skip_ocr}}
+                            'ocr_enabled': not args.skip_ocr,
+                            'ocr_min_side': getattr(args,'ocr_min_side',0),
+                            'ocr_preprocess': getattr(args,'ocr_preprocess','none')}}
+    binding = analyze_text_bindings(output)
+    output['text_binding'] = binding['diagnostics']
+    for component in components:
+        component['text_candidates'] = binding['assignments'][component['id']]
     (args.out / 'recognized.json').write_text(json.dumps(output, indent=2, ensure_ascii=False),
                                              encoding='utf-8')
     print(f'Local extraction complete: {len(components)} components, {len(ocr)} OCR texts')
