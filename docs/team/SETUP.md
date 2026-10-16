@@ -30,7 +30,6 @@ Linux激活为 `source SINA-venv/bin/activate`，本轮只验证Windows，其他
 OCR两个权重 → SINA-venv/easyocr_models/。
 SINA许可 → SINA/License.txt。
 生产拓扑源码已经在tools/modules/topology_impl，离线识别不需要克隆上游全部历史。
-历史sina_lab等研究入口可能需要完整上游快照；它们不在本资源包启动承诺内。
 
 ## 云端复核
 

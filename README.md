@@ -36,4 +36,4 @@ GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITH
 大资源单独分发，Git不含权重、数据集、虚拟环境、API密钥及运行历史。下载源码后按SETUP导入资源。
 公开协作仓库：[Ocmma001/SINA-Workflow](https://github.com/Ocmma001/SINA-Workflow)。模型和数据下载：[workflow-v1 Release](https://github.com/Ocmma001/SINA-Workflow/releases/tag/workflow-v1)。
 
-历史实验与原版流程保留作参考；当前生产架构以team指南为准。
+仓库保留当前工作流、YOLO11m训练基线与协作指南；旧Pro直接检测、Lite/Pro对比及重复历史交接材料已清理。

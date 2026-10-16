@@ -2,11 +2,9 @@
   "selected_detector": "YOLO11m",
   "weights": "runs/round-002/delivery/detector.pt",
   "sha256": "0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d",
-  "reason": "User retained YOLO11m; direct Pro did not outperform it in any of seven fixed-config trials",
-  "evidence": "experiments/baseline/pro-seven-trials.json",
+  "reason": "Selected fine-tuned YOLO11m; candidate improved mAP50-95 over the upstream checkpoint on the development validation set",
+  "evidence": "experiments/baseline/yolo11m-training.json",
   "yolo_f1_iou50": 0.9515235457063712,
-  "pro_mean_f1_iou50": 0.6721356080588325,
   "independent_test_set": false,
-  "yolo26l_status": "stopped by user; no replacement applied",
   "ready_for_simulation": false
 }

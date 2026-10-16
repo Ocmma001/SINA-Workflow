@@ -30,7 +30,7 @@
 ## 独立运行
 
 ```powershell
-python -m unittest discover -s tools -p "test_*benchmark*.py"
+python -m unittest discover -s tools -p test_training_contract.py
 ```
 
 ## 新聊天启动语

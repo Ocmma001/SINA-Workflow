@@ -52,4 +52,4 @@ BJT C/B/E，二极管 A/K，电源 +/-，MOS D/G/S/B；不得假定 MOS 体端�
 
 保留工具旧名称 gui_workflow/gui_contract 是为了避免 GUI 调用中断，它们不依赖 Qt。
 local_extract 的 --sina-root 参数保留兼容；当前本地拓扑实际使用已纳管的 modules/topology_impl，SINA快照用于训练资源/研究入口。
-历史研究脚本 run_workflow、run_pro_workflow、sina_lab 不作为当前发布入口；其指标不能直接冒充新流程指标。
+旧模型对比与直接Pro检测研究入口已移除；生产入口统一为gui_workflow，单模块入口为run_stage。

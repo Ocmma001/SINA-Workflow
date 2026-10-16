@@ -1,5 +1,0 @@
-Resistor_1 10 0
-Resistor_2 4 10
-Resistor_3 4 9
-Transistor_BJT_1 9 10 25
-Resistor_4 25 0
