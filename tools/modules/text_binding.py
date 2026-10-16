@@ -34,27 +34,86 @@ def parse_quantity(text, kind):
     return value + scale.lower()
 
 
-def _point(item):
+def _rect(item):
     box = item.get('bbox', [])
-    if len(box) != 4:
+    try:
+        if len(box) != 4:
+            return None
+        if isinstance(box[0], (list, tuple)):
+            xs, ys = [float(p[0]) for p in box], [float(p[1]) for p in box]
+            rect = (min(xs), min(ys), max(xs), max(ys))
+        else:
+            rect = tuple(float(v) for v in box)
+        if not all(math.isfinite(v) for v in rect) or rect[2] <= rect[0] or rect[3] <= rect[1]:
+            return None
+        return rect
+    except (TypeError, ValueError, IndexError):
         return None
-    if isinstance(box[0], list):
-        return [sum(p[i] for p in box)/4 for i in (0, 1)]
-    return [(box[0]+box[2])/2, (box[1]+box[3])/2]
+
+
+def _eligible_types(text):
+    ref = re.fullmatch(r'([RCLVIDQM])_?(?:[0-9]+[A-Za-z]?|[A-Za-z])', str(text).strip(), re.IGNORECASE)
+    if ref:
+        return {'R': {'Resistor'}, 'C': {'Capacitor'}, 'L': {'Inductor'},
+                'V': {'Voltage_src'}, 'I': {'Current_src'}, 'D': {'Diode'},
+                'Q': {'Transistor_BJT'}, 'M': {'Transistor_MOSFET'}}[ref[1].upper()]
+    kinds = {'Resistor':'resistor', 'Capacitor':'capacitor', 'Inductor':'inductor',
+             'Voltage_src':'voltage_source', 'Current_src':'current_source'}
+    valid = {name for name, kind in kinds.items() if parse_quantity(text, kind) is not None}
+    # A bare number can be a pin/annotation, so it must not migrate away
+    # from the geometrically closest transistor just to find a parseable value.
+    return valid if valid and re.search(r'[A-Za-zΩΩµμ]', str(text)) else DEVICE_TYPES
+
+
+def analyze_text_bindings(candidates, *, min_confidence=.5):
+    """Exclusive bounded assignment with explicit evidence for rejected text."""
+    assignments = {c['id']: [] for c in candidates['components']}
+    components = [(c, _rect(c)) for c in candidates['components'] if c['type'] in DEVICE_TYPES]
+    diagnostics = []
+    for index, item in enumerate(candidates.get('ocr', [])):
+        rect = _rect(item)
+        record = {'ocr_index': index, 'status': 'unassigned', 'component_id': None}
+        if rect is None:
+            record['status'] = 'invalid_box'
+            diagnostics.append(record)
+            continue
+        try:
+            confidence = float(item.get('confidence', 0))
+        except (TypeError, ValueError):
+            confidence = float('nan')
+        if not math.isfinite(confidence) or not min_confidence <= confidence <= 1:
+            record['status'] = 'low_confidence'
+            diagnostics.append(record)
+            continue
+        px, py = (rect[0]+rect[2])/2, (rect[1]+rect[3])/2
+        text_height = rect[3]-rect[1]
+        allowed = _eligible_types(item.get('text', ''))
+        ranked = []
+        for component, bbox in components:
+            if bbox is None or component['type'] not in allowed:
+                continue
+            x1,y1,x2,y2 = bbox
+            dx,dy = max(x1-px,0,px-x2),max(y1-py,0,py-y2)
+            distance = math.hypot(dx,dy)
+            limit = max(12.0, 3*text_height, .75*min(x2-x1,y2-y1))
+            if distance > limit:
+                continue
+            score = distance + (.25*min(text_height,x2-x1,y2-y1) if dx and dy else 0)
+            ranked.append((score, component['id'], distance))
+        ranked.sort()
+        record['alternatives'] = [{'component_id': cid, 'score': score, 'distance_pixels': distance}
+                                  for score,cid,distance in ranked[:2]]
+        if ranked:
+            best = ranked[0]
+            ambiguous = len(ranked)>1 and ranked[1][0]-best[0] <= max(1,.25*text_height) and ranked[1][0] <= best[0]*1.15+1
+            if ambiguous:
+                record['status'] = 'ambiguous'
+            else:
+                assignments[best[1]].append(item)
+                record.update(status='assigned', component_id=best[1], distance_pixels=best[2])
+        diagnostics.append(record)
+    return {'assignments': assignments, 'diagnostics': diagnostics}
 
 
 def assign_text(candidates):
-    assignments = {c['id']: [] for c in candidates['components']}
-    components = [c for c in candidates['components'] if c['type'] in DEVICE_TYPES]
-    for item in candidates.get('ocr', []):
-        point = _point(item)
-        if point is None or not components:
-            continue
-        def distance(c):
-            x1, y1, x2, y2 = c['bbox']
-            return math.hypot(max(x1-point[0], 0, point[0]-x2), max(y1-point[1], 0, point[1]-y2))
-        chosen = min(components, key=distance)
-        assignments[chosen['id']].append(item)
-    return assignments
-
-
+    return analyze_text_bindings(candidates)['assignments']

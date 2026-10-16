@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def recognize(image, output, weights, sina_root, ocr_models, device='cpu', conf=.25,
-              imgsz=960, allow_cloud=False, config=None, on_event=None):
+              imgsz=960, allow_cloud=False, config=None, on_event=None, ocr_min_side=0, ocr_preprocess='none'):
     image, output = Path(image).resolve(), Path(output).resolve()
     if output.exists() and any(output.iterdir()):
         raise ValueError('请使用新的识别输出目录，原始识别记录不会覆盖。')
@@ -37,6 +37,7 @@ def recognize(image, output, weights, sina_root, ocr_models, device='cpu', conf=
     args = argparse.Namespace(image=image, weights=Path(weights), out=output / 'evidence',
         device=device, conf=conf, imgsz=imgsz, detections=None, skip_ocr=False,
         skip_crossings=False, sina_root=Path(sina_root), ocr_model_dir=Path(ocr_models),
+        ocr_min_side=ocr_min_side, ocr_preprocess=ocr_preprocess,
         ocr_user_dir=Path(ocr_models) / 'user_network', ocr_optional=True)
     try:
         candidates = extract(args, emit)
@@ -104,12 +105,15 @@ def main():
     p.add_argument('--device', default='cpu')
     p.add_argument('--conf', type=float, default=.25)
     p.add_argument('--imgsz', type=int, default=960)
+    p.add_argument('--ocr-min-side', type=int, default=0)
+    p.add_argument('--ocr-preprocess', choices=['none','gray','clahe'], default='none')
     p.add_argument('--allow-cloud', action='store_true')
     a = p.parse_args()
     weights = a.weights or selected_weights(ROOT, ROOT / 'runs/round-002/delivery/detector.pt')
     recognize(a.image, a.out, weights, a.sina_root, a.ocr_model_dir,
               device=a.device, conf=a.conf, imgsz=a.imgsz,
               allow_cloud=a.allow_cloud, config=a.config,
+              ocr_min_side=a.ocr_min_side, ocr_preprocess=a.ocr_preprocess,
               on_event=lambda e: print('LABPILOT_EVENT ' + json.dumps(e, ensure_ascii=False), flush=True))
 
 
