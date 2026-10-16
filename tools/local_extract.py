@@ -9,9 +9,10 @@ import json
 import os
 from pathlib import Path
 import sys
+import time
 from modules import detector, topology, ocr as ocr_stage
 from modules.pins import attach_pins
-from modules.image_io import read_image
+from modules.image_io import read_image, write_image
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -61,6 +62,8 @@ def extract(args, on_stage=None):
     debug.mkdir()
     counts, detected = Counter(), []
     confidences = {}
+    stage_metrics = {}
+    stage_start = time.perf_counter()
     emit('detection', '正在使用 YOLO11m 检测元件…')
     if args.detections:
         evidence = json.loads(args.detections.read_text(encoding='utf-8'))
@@ -69,23 +72,33 @@ def extract(args, on_stage=None):
         for c in evidence['components']:
             detected.append({'id': c['id'], 'type': c['type'], 'bbox': c['bbox'], 'color': [255, 155, 0]})
             confidences[c['id']] = None
-        cv2.imwrite(str(args.out / 'detected.jpg'), image)
+        write_image(args.out / 'detected.jpg', image)
     else:
         detected, confidences = detector.detect(image, args.weights, args.out / 'detected.jpg',
                                                    args.device, args.conf, args.imgsz)
+    stage_metrics['detection'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
+    stage_start = time.perf_counter()
     emit('topology', '正在分析导线和引脚连接候选…')
     circuit, labels = topology.analyze(image, detected, debug, args.weights, not args.skip_crossings)
+    stage_metrics['topology'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
+    stage_start = time.perf_counter()
     pin_map = attach_pins(circuit, labels)
+    stage_metrics['pins'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
     ocr = []
     ocr_warning = None
+    stage_metrics['ocr'] = {'status': 'skipped', 'seconds': 0.0}
     if not args.skip_ocr:
         emit('ocr', '正在使用 EasyOCR 识别编号和参数…')
         model_dir = args.ocr_model_dir or Path(os.environ.get('EASYOCR_MODEL_DIR', str(ROOT / 'SINA-venv/easyocr_models')))
         user_dir = getattr(args, 'ocr_user_dir', None) or ROOT / 'SINA-venv/easyocr_user_network'
         user_dir.mkdir(parents=True, exist_ok=True)
+        stage_start = time.perf_counter()
         try:
             ocr = ocr_stage.recognize(image, model_dir, user_dir, args.device)
-        except Exception:
+            stage_metrics['ocr'] = {'status': 'completed', 'seconds': time.perf_counter() - stage_start}
+        except Exception as exc:
+            stage_metrics['ocr'] = {'status': 'failed', 'seconds': time.perf_counter() - stage_start,
+                                    'error_type': type(exc).__name__}
             if not getattr(args, 'ocr_optional', False):
                 raise
             ocr_warning = 'OCR 未完成，保留元件和连接候选，请手动补充编号和参数。'
@@ -116,6 +129,7 @@ def extract(args, on_stage=None):
               'model_sha256': hashlib.sha256(args.weights.read_bytes()).hexdigest() if not args.detections else None,
               'detector_source': evidence['detector'] if args.detections else 'YOLO',
               'components': components, 'ocr': ocr, 'warnings': warnings,
+              'stage_metrics': stage_metrics,
               'inference': {'conf': args.conf, 'imgsz': args.imgsz, 'device': args.device,
                             'pin_search_radius_pixels': 5,
                             'crossing_detection': not args.skip_crossings,

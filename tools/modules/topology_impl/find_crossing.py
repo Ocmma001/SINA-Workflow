@@ -1,3 +1,4 @@
+from ..image_io import read_image, write_image
 import cv2
 from ultralytics import YOLO
 import math
@@ -296,10 +297,10 @@ def getLines(img, outputPath):
             intersecting.append(backDiagLine)
 
     # output debug results for each extracted image
-    cv2.imwrite(outputPath.replace('.', 'vert.'), imgVert)
-    cv2.imwrite(outputPath.replace('.', 'horz.'), imgHorz)
-    cv2.imwrite(outputPath.replace('.', 'backD.'), imgBackDiag)
-    cv2.imwrite(outputPath.replace('.', 'forwD.'), imgForwardDiag)
+    write_image(outputPath.replace('.', 'vert.'), imgVert)
+    write_image(outputPath.replace('.', 'horz.'), imgHorz)
+    write_image(outputPath.replace('.', 'backD.'), imgBackDiag)
+    write_image(outputPath.replace('.', 'forwD.'), imgForwardDiag)
 
     # Save all detected lines to JSON for visualization (before returning)
     debugDir = os.path.dirname(outputPath)
@@ -380,7 +381,7 @@ def detectCrossingLines(imgPath, modelPath, outputPath, debugPath):
     """
     
     # load schematic image
-    img = cv2.imread(imgPath)
+    img = read_image(imgPath)
     
     # simplifiy images and isolate crossing wires
     roundCnts = getDots(img)
@@ -471,7 +472,7 @@ def detectCrossingLines(imgPath, modelPath, outputPath, debugPath):
             json.dump(crossing_data, f, indent=4)
     
     # output result
-    cv2.imwrite(outputPath, img)
+    write_image(outputPath, img)
 
 
 if __name__ == '__main__':

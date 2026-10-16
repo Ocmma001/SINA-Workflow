@@ -1,3 +1,4 @@
+from ..image_io import read_image, write_image
 from sklearn.cluster import DBSCAN
 import numpy as np
 import cv2
@@ -75,7 +76,7 @@ def create_comprehensive_detection_visualization(original_image, components, cro
 
     # Save the comprehensive visualization
     output_path = os.path.join(output_folder, "6a_all_detected_lines_and_crossings.png")
-    cv2.imwrite(output_path, vis_image)
+    write_image(output_path, vis_image)
     print(f"Saved comprehensive detection visualization: 6a_all_detected_lines_and_crossings.png")
 
 
@@ -113,7 +114,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
 
     circuit_cut = circuit_image.copy()
     circuit_cut[component_mask == 1] = 0
-    cv2.imwrite(os.path.join(output_folder, "6_circuit_cut.png"), circuit_cut * 255)
+    write_image(os.path.join(output_folder, "6_circuit_cut.png"), circuit_cut * 255)
 
     # Save circuit_cut as numpy array for crossing variant generation
     np.save(os.path.join(output_folder, "circuit_cut.npy"), circuit_cut)
@@ -127,7 +128,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
     if detect_crossings and model_path:
         # Save original image temporarily for crossing detection
         temp_image_path = os.path.join(output_folder, "temp_original.png")
-        cv2.imwrite(temp_image_path, original_image)
+        write_image(temp_image_path, original_image)
 
         # Create paths for crossing detection output
         crossing_output_path = os.path.join(output_folder, "6a_crossings_detected.png")
@@ -186,7 +187,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
     for label_id in range(1, num_labels):
         color = np.random.randint(0, 255, 3).tolist()
         step2_node_vis[node_labels == label_id] = color
-    cv2.imwrite(os.path.join(output_folder, "7_node_labels.png"), step2_node_vis)
+    write_image(os.path.join(output_folder, "7_node_labels.png"), step2_node_vis)
 
     # STEP 3: Identify valid nodes and collect raw contact points
     valid_nodes = set()
@@ -236,7 +237,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
         for (cx, cy) in raw_contact_points[comp_id]:
             cv2.circle(step4_vis, (cx, cy), 2, color, -1)
 
-    cv2.imwrite(os.path.join(output_folder, "8_valid_nodes.png"), step4_vis)
+    write_image(os.path.join(output_folder, "8_valid_nodes.png"), step4_vis)
 
     # STEP 4.5: Add bridge components immediately after node validation
     if crossing_data and disambiguation_context == "line1_connected":
@@ -355,7 +356,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
                 for (x, y) in points:
                     cv2.circle(step4b_vis, (x, y), 2, (255, 255, 255), -1)  # White dots for connection points
 
-            cv2.imwrite(os.path.join(output_folder, "8b_nodes_with_bridges_before_filtering.png"), step4b_vis)
+            write_image(os.path.join(output_folder, "8b_nodes_with_bridges_before_filtering.png"), step4b_vis)
 
             # Create second debugging image (showing bridge attachments)
             step6b_vis = step4b_vis.copy()
@@ -371,7 +372,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
                             cv2.line(step6b_vis, bridge_center, (conn_x, conn_y), (255, 255, 255), 2)
                             cv2.circle(step6b_vis, (conn_x, conn_y), 5, (0, 255, 255), -1)  # Cyan for connection points
 
-            cv2.imwrite(os.path.join(output_folder, "8c_bridges_attached_to_nearest_nodes.png"), step6b_vis)
+            write_image(os.path.join(output_folder, "8c_bridges_attached_to_nearest_nodes.png"), step6b_vis)
 
         except Exception as e:
             print(f"Error processing bridge components: {e}")
@@ -411,7 +412,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
             cv2.putText(cluster_vis, comp_id, (cx + 4, cy - 4),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.35, component_colors[comp_id], 1)
 
-    cv2.imwrite(os.path.join(output_folder, "9_clustered_connection_points.png"), cluster_vis)
+    write_image(os.path.join(output_folder, "9_clustered_connection_points.png"), cluster_vis)
 
     # STEP 6: Filter clustered contact points by real node intersection
     # Include bridge connections when counting components per node
@@ -460,7 +461,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
                     cv2.circle(step6_intersections, (x, y), 3, (0, 0, 255), -1)
                     break  # avoid duplicating same point for multiple nodes
 
-    cv2.imwrite(os.path.join(output_folder, "10_node_intersections.png"), step6_intersections)
+    write_image(os.path.join(output_folder, "10_node_intersections.png"), step6_intersections)
 
     # STEP 6a: Visualize only real (valid) nodes with connection points and bounding boxes
     valid_node_only_vis = original_image.copy()
@@ -482,7 +483,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
         cv2.rectangle(valid_node_only_vis, (x_min, y_min), (x_max, y_max), (255, 155, 0) , 1)
 
     # Save the visualization
-    cv2.imwrite(os.path.join(output_folder, "10a_valid_nodes_with_contacts_and_boxes.png"), valid_node_only_vis)
+    write_image(os.path.join(output_folder, "10a_valid_nodes_with_contacts_and_boxes.png"), valid_node_only_vis)
 
     # STEP 7: Final annotated result — clean output with labeled connection points
     final_image = original_image.copy()
@@ -492,7 +493,7 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
             cv2.putText(final_image, comp_id, (x + 5, y - 5),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
 
-    cv2.imwrite(os.path.join(output_folder, "11_final_connection_points.png"), final_image)
+    write_image(os.path.join(output_folder, "11_final_connection_points.png"), final_image)
 
     # prepare circuit_info.json for netlist generation
     save_circuit_info_json(updated_components, component_connections, output_folder)
