@@ -17,7 +17,7 @@ def _spice_number(value):
 
 def parse_quantity(text, kind):
     text = unicodedata.normalize('NFKC', str(text)).replace('µ', 'u').replace('μ', 'u')
-    match = re.fullmatch(r'([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)(meg|[kKmMuUnNpPfF]?)([A-Za-zΩΩ]*)', re.sub(r'\s+', '', text))
+    match = re.fullmatch(r'([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)\s*(meg|[kKmMuUnNpPfF]?)\s*([A-Za-zΩΩ]*)', text.strip())
     if not match:
         return None
     value, scale, unit = match.groups()
