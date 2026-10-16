@@ -23,3 +23,16 @@ class OcrCoordinateTests(unittest.TestCase):
         self.assertIs(native,image)
         self.assertEqual((sx,sy),(1,1))
         with self.assertRaises(ValueError): ocr._prepare_image(image,10,'unknown')
+
+
+    def test_reader_cache_uses_requested_gpu_index(self):
+        import sys,types
+        from unittest.mock import Mock
+        constructor=Mock(return_value=object())
+        ocr.clear_reader_cache()
+        with patch.dict(sys.modules,{'easyocr':types.SimpleNamespace(Reader=constructor)}):
+            first=ocr._reader('models','user','1',())
+            self.assertIs(first,ocr._reader('models','user','1',()))
+            self.assertEqual(constructor.call_args.kwargs['gpu'],'cuda:1')
+            self.assertEqual(constructor.call_count,1)
+        ocr.clear_reader_cache()

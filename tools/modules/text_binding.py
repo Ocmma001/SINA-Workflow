@@ -41,6 +41,8 @@ def _rect(item):
             return None
         if isinstance(box[0], (list, tuple)):
             xs, ys = [float(p[0]) for p in box], [float(p[1]) for p in box]
+            if not all(math.isfinite(v) for v in xs+ys):
+                return None
             rect = (min(xs), min(ys), max(xs), max(ys))
         else:
             rect = tuple(float(v) for v in box)
@@ -67,6 +69,8 @@ def _eligible_types(text):
 
 def analyze_text_bindings(candidates, *, min_confidence=.5):
     """Exclusive bounded assignment with explicit evidence for rejected text."""
+    if not math.isfinite(min_confidence) or not 0<=min_confidence<=1:
+        raise ValueError('min_confidence must be in [0,1]')
     assignments = {c['id']: [] for c in candidates['components']}
     components = [(c, _rect(c)) for c in candidates['components'] if c['type'] in DEVICE_TYPES]
     diagnostics = []
