@@ -50,7 +50,7 @@ def build_draft(candidates, review=None, artifacts=None):
             normalized = unicodedata.normalize('NFKC', t['text']).replace(' ', '')
             if re.fullmatch(prefix + r'(?:_?[A-Za-z0-9]+)', normalized, re.IGNORECASE):
                 ref_options.append((t.get('confidence', 0), normalized))
-            parsed = parse_quantity(normalized, kind)
+            parsed = parse_quantity(t['text'], kind)
             if parsed is not None:
                 values.append(parsed)
         ref = max(ref_options)[1] if ref_options else temporary
