@@ -5,6 +5,8 @@
 **新聊天入口：[docs/team/START-HERE.md](docs/team/START-HERE.md)**。
 安装与资源导入：[SETUP](docs/team/SETUP.md)。模块接口：[INTERFACES](docs/team/INTERFACES.md)。设备分配：[HARDWARE](docs/team/HARDWARE.md)。
 
+GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITHUB.md)。
+
 ```text
 图片 → YOLO11m → 导线连通区域 → 引脚连接
 图片 → EasyOCR → 位号/参数绑定
