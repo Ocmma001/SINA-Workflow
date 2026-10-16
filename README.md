@@ -21,6 +21,6 @@ GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITH
 上游拓扑源码在 `tools/modules/topology_impl`，含MIT许可和出处。依赖各自许可见 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
 大资源单独分发，Git不含权重、数据集、虚拟环境、API密钥及运行历史。下载源码后按SETUP导入资源。
-目前为本地Git仓库；GitHub发布需要目标账户/远程仓库地址，尚未配置。
+公开协作仓库：[Ocmma001/SINA-Workflow](https://github.com/Ocmma001/SINA-Workflow)。模型和数据下载：[workflow-v1 Release](https://github.com/Ocmma001/SINA-Workflow/releases/tag/workflow-v1)。
 
 历史实验与原版流程保留作参考；当前生产架构以team指南为准。

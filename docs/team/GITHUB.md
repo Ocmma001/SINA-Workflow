@@ -1,6 +1,6 @@
 # GitHub 组员接手指南
 
-计划仓库：`Ocmma001/SINA-Workflow`。首次创建默认为私有；仓库拥有者需要在 Settings → Collaborators 为组员开通访问权限。具体发布状态以仓库实际可访问为准。
+公开仓库：[Ocmma001/SINA-Workflow](https://github.com/Ocmma001/SINA-Workflow)。任何人都可以克隆源码；需要直接推送模块分支的组员，由仓库拥有者在 Settings → Collaborators 添加写入权限。未获得写权限的成员也可通过 fork 和 Pull Request 提交改进。
 
 ## 克隆与选择任务
 

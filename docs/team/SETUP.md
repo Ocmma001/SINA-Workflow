@@ -49,7 +49,7 @@ git switch -c opt/ocr-text
 
 分支名按自己的模块替换。bundle带Git历史但不是可供多人推送的在线服务；建立GitHub远程后统一更换origin。资源包仍需按上面步骤导入。
 
-当前是本地Git仓库，尚无GitHub远程。拿到远程地址后由仓库拥有者添加origin并push main，邀请组员。
+公开GitHub仓库为 https://github.com/Ocmma001/SINA-Workflow ，组员可直接克隆。需要直接推送分支的成员由仓库拥有者添加协作者权限，也可使用fork与Pull Request。
 组员各自clone并创建模块分支；同一电脑的多个聊天也用独立clone/worktree，避免共享工作目录冲突。
 新成员设置自己的git user.name和user.email。不要复制仓库拥有者身份。当前初始提交以Codex本地代理身份记录。
 大资源可通过小组共享盘或GitHub Release附件分发，文件校验以assets/manifest.json为准。
