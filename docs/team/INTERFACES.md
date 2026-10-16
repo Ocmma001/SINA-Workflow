@@ -21,14 +21,15 @@ recognized.json（待确认的电路草稿）
 | 输出 | tools/gui_contract.py、schemas/recognized.schema.json | 各模型参数 |
 | 集成 | tools/local_extract.py、gui_workflow.py、run_stage.py、model_selection.py | 未经评测的模型选择 |
 
-当前 topology 内仍包含上游交叉分析二次 YOLO 调用；这是已知耦合点，04 应优先复用 detector 输出，避免隐藏地重复检测。当前接触点提取也仍在 topology_impl；05 先优化接触点→区域的适配，若迁移接触点提取需与04约定接口后由08合并。
+交叉分析已复用detector传入的冻结元件框，不再内部加载YOLO；topology的weights/model_path参数仅保留调用兼容，可传None。接触点提取保留在topology_impl，pins负责有界、方向约束及歧义判定。阶段错误另写crossing_status.json；失败会在完整流程标为degraded。
+
 
 ## Python 接口（真实入口）
 
-- detector.detect(image, weights, annotated_path, device='cpu', conf=.25, imgsz=960) → (detected, confidences)。image 为 BGR 数组。detected 为 id/type/bbox/color 列表，bbox=[x1,y1,x2,y2] 原图像素。
+- detector.detect(image, weights, annotated_path, device='cpu', conf=.25, imgsz=960, *, iou=.7, class_conf=None, tile_size=None, overlap=.2) → (detected, confidences)。image 为 BGR 数组。detected 为 id/type/bbox/color 列表，bbox=[x1,y1,x2,y2] 原图像素。
 - topology.analyze(image, detected, debug, weights, detect_crossings=True) → (circuit, labels)。labels 是 H×W 区域整数数组，0 在栅格中表示背景；它不等于电路节点地0。
-- pins.attach_pins(circuit, labels, radius=5) → {id: [{image_point, connection_candidate}]}。candidate 为 {region,pixel,distance} 或 null。
-- ocr.recognize(image, model_dir, user_dir, device='cpu') → [{text,confidence,bbox}]，bbox 为原图四个顶点，不是 xyxy。
+- pins.attach_pins(circuit, labels, radius=5) → {id: [{image_point, connection_candidate}]}。candidate 为 {region,pixel,distance} 或 null；增加connection_alternatives、search_direction、connection_status。不同网络等距、重复触点保持null；搜索半径限定0–32像素，默认5。
+- ocr.recognize(image, model_dir, user_dir, device='cpu', *, min_side=0, preprocess='none', allowlist=None) → [{text,confidence,bbox}]，bbox 为原图四个顶点，不是 xyxy。
 - text_binding.assign_text(candidates) → {id:[OCR条目]}；parse_quantity(text,kind) → SPICE可读字符串或null。
 - vision.review_candidates(image, output, candidates, config=None) → review，保留输入 ID，输出建议，不改变连通区域。
 - gui_contract.build_draft(candidates, review=None, artifacts=None) → schema v2 JSON。
@@ -53,3 +54,14 @@ BJT C/B/E，二极管 A/K，电源 +/-，MOS D/G/S/B；不得假定 MOS 体端�
 保留工具旧名称 gui_workflow/gui_contract 是为了避免 GUI 调用中断，它们不依赖 Qt。
 local_extract 的 --sina-root 参数保留兼容；当前本地拓扑实际使用已纳管的 modules/topology_impl，SINA快照用于训练资源/研究入口。
 旧模型对比与直接Pro检测研究入口已移除；生产入口统一为gui_workflow，单模块入口为run_stage。
+
+
+## 离线推理实验参数
+
+完整CLI/独立阶段支持`--nms-iou`、`--class-thresholds`（类别名到阈值的JSON文件）、`--tile-size`、`--tile-overlap`。分块默认关闭；元件框统一恢复到原图并按类别NMS去重。
+
+OCR支持`--ocr-min-side`、`--ocr-preprocess none|gray|clahe`；默认不放大、不预处理。放大上限3倍，放大后总像素上限400万（原图已超出时不再放大，也不缩小原图），输出框分别按实际x/y比例恢复。Reader/检测模型缓存区分设备，模型文件尺寸/mtime变化会换缓存，可调用clear_reader_cache/clear_model_cache释放引用。
+
+文字绑定保留原始OCR；候选增加text_binding诊断，记录距离、类型/单位约束、低置信度、远距离或歧义拒绝原因。归属函数签名兼容，原始文字不会因未绑定被删除。
+
+`experiments/candidates/member-a-class-thresholds.json`仅为开发集候选；默认conf=.25及全局选定模型未变，不能把该候选当成独立测试结论。
