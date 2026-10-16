@@ -2,6 +2,19 @@
 
 只管理电路图片识别、模型训练、评测、输出契约和文档；不包含GUI前端或ngspice。
 
+**组员先读：[分区指南](分区指南.md) · [优化指南](优化指南.md)**。分区指南明确负责文件、独立运行和协作边界；优化指南汇总各部分方案与验收要求。
+
+| 独立优化部分 | 详细任务 |
+|---|---|
+| 数据与评估 | [01指南](docs/team/01-data-evaluation.md) |
+| YOLO11m检测 | [02指南](docs/team/02-detector.md) |
+| OCR与参数绑定 | [03指南](docs/team/03-ocr-text.md) |
+| 导线与交叉连接 | [04指南](docs/team/04-topology.md) |
+| 引脚分析 | [05指南](docs/team/05-pins.md) |
+| 豆包复核 | [06指南](docs/team/06-vision-review.md) |
+| 输出契约与校验 | [07指南](docs/team/07-contract.md) |
+| 集成与发布 | [08指南](docs/team/08-integration.md) |
+
 **新聊天入口：[docs/team/START-HERE.md](docs/team/START-HERE.md)**。
 安装与资源导入：[SETUP](docs/team/SETUP.md)。模块接口：[INTERFACES](docs/team/INTERFACES.md)。设备分配：[HARDWARE](docs/team/HARDWARE.md)。
 

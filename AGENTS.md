@@ -1,7 +1,7 @@
 # SINA 工作流协作约定
 
 本 Git 根目录仅包含识别工作流。不要修改同级 LabPilot-GUI 或 LabPilot，前端不在本仓库管理范围。
-新聊天先读 docs/team/START-HERE.md、对应模块指南、docs/team/INTERFACES.md。
+新聊天先读分区指南.md、优化指南.md、docs/team/START-HERE.md、对应模块指南、docs/team/INTERFACES.md。
 生产入口 tools/gui_workflow.py 是无桌面依赖的识别服务，名字保留是为了兼容已有调用者。
 
 - 每个聊天只优化一个模块；使用独立分支/工作副本，避免多个聊天同时操作同一个工作目录。
