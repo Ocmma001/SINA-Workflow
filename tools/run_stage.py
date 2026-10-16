@@ -22,6 +22,10 @@ def main():
     p.add_argument('--device', default='cpu')
     p.add_argument('--imgsz', type=int, default=960)
     p.add_argument('--conf', type=float, default=.25)
+    p.add_argument('--nms-iou', type=float, default=.7)
+    p.add_argument('--class-thresholds', type=Path)
+    p.add_argument('--tile-size', type=int)
+    p.add_argument('--tile-overlap', type=float, default=.2)
     p.add_argument('--radius', type=int, default=5)
     p.add_argument('--ocr-model-dir', type=Path, default=ROOT / 'SINA-venv/easyocr_models')
     p.add_argument('--ocr-min-side', type=int, default=0)
@@ -51,11 +55,14 @@ def main():
         weights = a.weights or selected_weights(ROOT, ROOT / 'runs/round-002/delivery/detector.pt')
     if a.stage == 'detector':
         from modules.detector import detect
-        detected, confidences = detect(image, weights, a.out / 'detected.jpg', a.device, a.conf, a.imgsz)
+        class_conf = json.loads(a.class_thresholds.read_text(encoding='utf-8')) if a.class_thresholds else None
+        detected, confidences = detect(image, weights, a.out / 'detected.jpg', a.device, a.conf, a.imgsz,
+            iou=a.nms_iou, class_conf=class_conf, tile_size=a.tile_size, overlap=a.tile_overlap)
         save(a.out / 'detection.json', {'schema_version': '1.0', 'image_sha256': digest,
              'model_sha256': hashlib.sha256(weights.read_bytes()).hexdigest(),
              'detector': 'YOLO', 'components': detected, 'confidences': confidences,
-             'inference': {'imgsz': a.imgsz, 'conf': a.conf, 'device': a.device}})
+             'inference': {'imgsz': a.imgsz, 'conf': a.conf, 'device': a.device, 'nms_iou':a.nms_iou,
+                           'class_conf':class_conf, 'tile_size':a.tile_size, 'tile_overlap':a.tile_overlap}})
     elif a.stage == 'ocr':
         from modules.ocr import recognize
         save(a.out / 'ocr.json', {'image_sha256': digest, 'ocr': recognize(
