@@ -1,0 +1,12 @@
+{
+  "Resistor": 0.3,
+  "Capacitor": 0.45,
+  "Inductor": 0.25,
+  "Transistor_BJT": 0.4,
+  "Transistor_MOSFET": 0.4,
+  "Voltage_src": 0.55,
+  "Current_src": 0.75,
+  "GND": 0.25,
+  "Op-Amp": 0.7,
+  "Diode": 0.25
+}

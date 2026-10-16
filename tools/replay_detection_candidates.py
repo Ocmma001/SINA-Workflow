@@ -15,10 +15,12 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--predictions',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--class-thresholds',type=Path)
     p.add_argument('--confidences',type=float,nargs='+',default=[.25,.5])
     args=p.parse_args()
     args.out.mkdir(parents=True,exist_ok=False)
     records=json.loads(args.predictions.read_text(encoding='utf-8'))
+    thresholds=json.loads(args.class_thresholds.read_text(encoding='utf-8')) if args.class_thresholds else {}
     rows=[]
     data=ROOT/'SINA/Netlist Generator/IC/model_training/data/images/val'
     for record in records:
@@ -31,7 +33,7 @@ def main():
         for conf in args.confidences:
             # Stable explicit IDs only within this frozen prediction table.
             boxes=[{'id':'box_'+str(index),'type':box['type'],'bbox':[int(v) for v in box['bbox']]}
-                   for index,box in enumerate(record['predictions']) if box['confidence']>=conf]
+                   for index,box in enumerate(record['predictions']) if box['confidence']>=thresholds.get(box['type'],conf)]
             start=time.perf_counter()
             try:
                 circuit,labels=analyze(image,boxes,args.out/image_path.stem/str(conf),None)
@@ -65,7 +67,7 @@ def main():
         (args.out/'summary.json').write_text(json.dumps({'images_attempted':len(rows),
             'stage_attempts':sum(len(r['variants']) for r in rows),
             'stage_failures':sum(v['status']!='completed' for r in rows for v in r['variants']),
-            'scope':'regression diagnostics, not topology ground-truth accuracy','results':rows},indent=2),encoding='utf-8')
+            'class_thresholds':thresholds,'scope':'regression diagnostics, not topology ground-truth accuracy','results':rows},indent=2),encoding='utf-8')
         print(record['image'],comparisons,flush=True)
 
 
