@@ -22,7 +22,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('image', type=Path)
     p.add_argument('--weights', type=Path)
-    p.add_argument('--detections', type=Path, help='Precomputed direct Pro detection.json, bypass YOLO')
+    p.add_argument('--detections', type=Path, help='Saved detection.json; bypass YOLO and reuse frozen boxes')
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--device', default='cpu')
     p.add_argument('--conf', type=float, default=0.25)
@@ -75,7 +75,7 @@ def extract(args, on_stage=None):
             p.error('Precomputed detections belong to a different image')
         for c in evidence['components']:
             detected.append({'id': c['id'], 'type': c['type'], 'bbox': c['bbox'], 'color': [255, 155, 0]})
-            confidences[c['id']] = None
+            confidences[c['id']] = evidence.get('confidences', {}).get(c['id'], c.get('confidence'))
         write_image(args.out / 'detected.jpg', image)
     else:
         detected, confidences = detector.detect(image, args.weights, args.out / 'detected.jpg',
@@ -140,7 +140,7 @@ def extract(args, on_stage=None):
                            'pin_order_confirmed': False, 'needs_user_confirmation': True})
     output = {'schema_version': '1.0', 'scope': 'local_sina_candidates',
               'ready_for_simulation': False, 'image': str(args.image),
-              'model_sha256': hashlib.sha256(args.weights.read_bytes()).hexdigest() if not args.detections else None,
+              'model_sha256': hashlib.sha256(args.weights.read_bytes()).hexdigest() if not args.detections else evidence.get('model_sha256'),
               'detector_source': evidence['detector'] if args.detections else 'YOLO',
               'components': components, 'ocr': ocr, 'warnings': warnings,
               'stage_metrics': stage_metrics,

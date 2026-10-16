@@ -56,3 +56,38 @@ class FrozenCrossingTests(unittest.TestCase):
                  patch('local_extract.attach_pins', return_value={}):
                 local_extract.extract(args)
                 self.assertEqual(os.environ['CUDA_VISIBLE_DEVICES'], '0')
+
+
+    def test_debug_variants_preserve_dots_in_parent_directories(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)/'experiment.v1'/'0.25'
+            root.mkdir(parents=True)
+            find_crossing.getLines(np.full((40,40,3),255,np.uint8),str(root/'debug.png'))
+            for tag in ('vert','horz','backD','forwD'):
+                self.assertTrue((root/('debug'+tag+'.png')).is_file())
+            self.assertTrue((root/'testing_all_lines.json').is_file())
+
+
+    def test_precomputed_detection_keeps_model_provenance_without_yolo(self):
+        import argparse,hashlib,json
+        import local_extract
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            image=root/'input.png'
+            image.write_bytes(b'fixed fixture')
+            detections=root/'detection.json'
+            detections.write_text(json.dumps({'image_sha256':hashlib.sha256(image.read_bytes()).hexdigest(),
+                'model_sha256':'known-model-hash','detector':'YOLO','components':[{'id':'R1','type':'Resistor','bbox':[0,0,4,4]}],
+                'confidences':{'R1':.9}}))
+            args=argparse.Namespace(image=image,out=root/'out',weights=None,detections=detections,
+                device='cpu',conf=.25,imgsz=960,skip_ocr=True,skip_crossings=False)
+            circuit=[{'id':'R1','label':'Resistor','bounding_box':[0,0,4,4],'connection_points':[]}]
+            with patch('local_extract.read_image',return_value=np.full((8,8,3),255,np.uint8)), \
+                 patch('local_extract.detector.detect') as detect, \
+                 patch('local_extract.topology.analyze',return_value=(circuit,None)), \
+                 patch('local_extract.attach_pins',return_value={'R1':[]}):
+                result=local_extract.extract(args)
+            detect.assert_not_called()
+            self.assertEqual(result['model_sha256'],'known-model-hash')
+            self.assertEqual(result['components'][0]['confidence'],.9)
+            self.assertTrue(result['inference']['crossing_detection'])
