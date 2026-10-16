@@ -43,11 +43,14 @@ def main():
     p.add_argument('--baseline', type=Path, help='Existing circuit detector to compare against')
     p.add_argument('--lr0', type=float, default=0.0002)
     p.add_argument('--patience', type=int, default=10)
+    p.add_argument('--mosaic', type=float, default=0.2, help='Mosaic augmentation probability; zero disables it')
     args = p.parse_args()
     if Path(args.name).name != args.name or args.name in {'.', '..'}:
         p.error('name must be a single directory name')
     if min(args.epochs, args.imgsz, args.batch) < 1:
         p.error('epochs/imgsz/batch must be positive')
+    if not 0 <= args.mosaic <= 1:
+        p.error('mosaic must be between 0 and 1')
     os.environ.setdefault('YOLO_CONFIG_DIR', str(ROOT / '.ultralytics'))
     os.environ.setdefault('MPLCONFIGDIR', str(ROOT / '.matplotlib'))
     os.environ.setdefault('PYTHONIOENCODING', 'utf-8')
@@ -96,7 +99,7 @@ def main():
                 project=str(run), name='finetune', exist_ok=False,
                 optimizer='AdamW', lr0=args.lr0, lrf=0.1, patience=args.patience,
                 warmup_epochs=2, cos_lr=True, weight_decay=0.0005,
-                mosaic=0.2, close_mosaic=5, mixup=0.0, degrees=0.0,
+                mosaic=args.mosaic, close_mosaic=5, mixup=0.0, degrees=0.0,
                 fliplr=0.0, flipud=0.0, hsv_h=0.0, hsv_s=0.0, hsv_v=0.15,
                 scale=0.15, translate=0.05, amp=True, cache=False, plots=True,
                 save=True, save_period=10)
