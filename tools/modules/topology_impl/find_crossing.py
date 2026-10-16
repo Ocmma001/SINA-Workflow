@@ -1,6 +1,5 @@
 from ..image_io import read_image, write_image
 import cv2
-from ultralytics import YOLO
 import math
 import numpy as np
 import os
@@ -33,36 +32,26 @@ def getDots(img):
     return roundCnts
 
 
-def removeObjects(imgPath, modelPath, dots):
-    """
-    Function removes components detected by machine learning model and connection dots
-    found via morphological operation
-    """
-    
-    # instantiate model
-    model = YOLO(modelPath)
-    results = model(imgPath, conf=0.1)[0]
-    img = results.orig_img.copy()
-    
-    # remove unwanted items by coloring over them with background color
-    bgColor = img[0, 0] # backgroung color likely in corner of schematic
-    bgColor = (int(bgColor[0]), int(bgColor[1]), int(bgColor[2])) 
-
-    # get coordinates of bounding boxes around components and fill with background color
-    if results.boxes is not None:
-      boxes = results.boxes.cpu().numpy()
-
-      for box in boxes.xyxy:
-          x1, y1, x2, y2 = box.astype(int)
-          img = cv2.rectangle(img, (x1-REDUCTION,y1-REDUCTION), 
-                              (x2+REDUCTION, y2+REDUCTION), bgColor, -1)
-
-    # fill in detected connection dots with background color
+def removeObjects(image, components, dots):
+    """Mask exactly the caller's frozen boxes; never load a detector here."""
+    img = image.copy()
+    background = tuple(int(v) for v in img[0, 0])
+    height, width = img.shape[:2]
+    for component in components:
+        box = component['bbox']
+        if len(box) != 4 or not all(math.isfinite(float(v)) for v in box):
+            raise ValueError('Invalid component bounding box')
+        x1, y1, x2, y2 = [int(v) for v in box]
+        if x2 <= x1 or y2 <= y1:
+            raise ValueError('Empty component bounding box')
+        left, top = max(0, x1-REDUCTION), max(0, y1-REDUCTION)
+        right, bottom = min(width-1, x2+REDUCTION), min(height-1, y2+REDUCTION)
+        if left <= right and top <= bottom:
+            cv2.rectangle(img, (left, top), (right, bottom), background, -1)
     if dots is not None:
-        for c in dots:
-            ((x, y), r) = cv2.minEnclosingCircle(c)
-            cv2.circle(img, (int(x), int(y)), int(r+2), bgColor, -1)
-    
+        for contour in dots:
+            ((x, y), radius) = cv2.minEnclosingCircle(contour)
+            cv2.circle(img, (int(x), int(y)), int(radius+2), background, -1)
     return img
 
 
@@ -192,8 +181,8 @@ def getLines(img, outputPath):
     """
 
     print(f"\nSTARTING LINE DETECTION PROCESS...")
-    print(f"📁 Input image shape: {img.shape}")
-    print(f"📁 Output path: {outputPath}")
+    print(f" Input image shape: {img.shape}")
+    print(f" Output path: {outputPath}")
     
     # convert image to grayscale, then create threshold image
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -372,7 +361,7 @@ def getLines(img, outputPath):
     return intersecting, crossingPoints, crossingLinePairs
 
 
-def detectCrossingLines(imgPath, modelPath, outputPath, debugPath):
+def detectCrossingLines(imgPath, modelPath, outputPath, debugPath, *, components=None):
     """
     Program handles overall structure of program. Schematic image is first loaded,
     then connection dots and component symbols are removed from the image. Then the 
@@ -380,12 +369,14 @@ def detectCrossingLines(imgPath, modelPath, outputPath, debugPath):
     original schematic, and outputed to results folder  
     """
     
-    # load schematic image
+    # modelPath remains positional for compatibility; detection belongs upstream.
+    if components is None:
+        raise ValueError('Frozen component boxes are required for crossing analysis')
     img = read_image(imgPath)
     
     # simplifiy images and isolate crossing wires
     roundCnts = getDots(img)
-    workingImg = removeObjects(imgPath, modelPath, roundCnts)
+    workingImg = removeObjects(img, components, roundCnts)
     
     # find coordinates of endpoints of crossing line and intersection points
     interLines, crossingPoints, crossingLinePairs = getLines(workingImg, debugPath)

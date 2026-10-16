@@ -43,7 +43,8 @@ def main():
         digest = hashlib.sha256(a.image.read_bytes()).hexdigest()
         import torch
         torch.set_num_threads(min(4, os.cpu_count() or 1))
-    if a.stage in {'detector', 'topology'}:
+    weights = a.weights  # Topology now uses frozen boxes, not model inference.
+    if a.stage == 'detector':
         from model_selection import selected_weights
         weights = a.weights or selected_weights(ROOT, ROOT / 'runs/round-002/delivery/detector.pt')
     if a.stage == 'detector':

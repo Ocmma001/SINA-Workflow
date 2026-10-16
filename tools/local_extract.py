@@ -43,14 +43,10 @@ def extract(args, on_stage=None):
         args.weights = args.weights.resolve()
     if not args.image.is_file() or (not args.detections and (not args.weights or not args.weights.is_file())):
         p.error('image and either weights or precomputed detections must exist')
-    if args.detections and not args.skip_crossings:
-        p.error('Direct detection requires --skip-crossings to avoid upstream YOLO re-detection')
     if args.out.exists() and any(args.out.iterdir()):
         p.error('use a new output directory')
     if not 0 <= args.conf <= 1 or args.imgsz < 1:
         p.error('invalid confidence or image size')
-    if args.device == 'cpu':
-        os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
     os.environ.setdefault('YOLO_CONFIG_DIR', str(ROOT / '.ultralytics'))
     os.environ.setdefault('MPLCONFIGDIR', str(ROOT / '.matplotlib'))
     os.environ.setdefault('EASYOCR_MODULE_PATH', str(ROOT / 'SINA-venv/easyocr_module'))

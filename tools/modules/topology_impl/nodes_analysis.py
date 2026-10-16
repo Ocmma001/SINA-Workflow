@@ -125,7 +125,8 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
     # STEP 1.5: Detect and handle wire crossings
     # crossing_data is now passed as a parameter, don't overwrite it
 
-    if detect_crossings and model_path:
+    crossing_status = {'status': 'skipped', 'source': 'fixed_detection_boxes', 'component_count': len(components)}
+    if detect_crossings:
         # Save original image temporarily for crossing detection
         temp_image_path = os.path.join(output_folder, "temp_original.png")
         write_image(temp_image_path, original_image)
@@ -136,7 +137,9 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
 
         # Run crossing detection
         try:
-            detectCrossingLines(temp_image_path, model_path, crossing_output_path, crossing_debug_path)
+            detectCrossingLines(temp_image_path, model_path, crossing_output_path, crossing_debug_path, components=components)
+
+            crossing_status['status'] = 'completed'
 
             # Load crossing data from JSON
             image_name = os.path.splitext(os.path.basename(temp_image_path))[0]
@@ -160,12 +163,16 @@ def identify_circuit_nodes(merged_labels, components, output_folder, original_im
                     print(f"Processed {len(crossing_data['crossings'])} wire crossings")
 
         except Exception as e:
-            print(f"Warning: Crossing detection failed: {e}")
+            crossing_status.update(status='failed', error_type=type(e).__name__)
+            print(f"Warning: Crossing detection failed ({type(e).__name__})")
             crossing_data = None
 
         # Clean up temporary file
         if os.path.exists(temp_image_path):
             os.remove(temp_image_path)
+
+    with open(os.path.join(output_folder, 'crossing_status.json'), 'w', encoding='utf-8') as stream:
+        json.dump(crossing_status, stream, indent=2)
 
     # Save crossing data for later use in netlist generation
     if crossing_data:
