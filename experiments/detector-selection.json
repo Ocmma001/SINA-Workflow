@@ -6,5 +6,8 @@
   "evidence": "experiments/baseline/yolo11m-training.json",
   "yolo_f1_iou50": 0.9515235457063712,
   "independent_test_set": false,
-  "ready_for_simulation": false
+  "ready_for_simulation": false,
+  "class_thresholds": "experiments/candidates/member-a-class-thresholds.json",
+  "selected_profile_f1_iou50": 0.9635343618513323,
+  "profile_evidence": "docs/team/COMBINED-2026-10-17.md"
 }
