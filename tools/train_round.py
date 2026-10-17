@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import math
 import os
 import platform
 import shutil
@@ -44,6 +45,8 @@ def main():
     p.add_argument('--lr0', type=float, default=0.0002)
     p.add_argument('--patience', type=int, default=10)
     p.add_argument('--mosaic', type=float, default=0.2, help='Mosaic augmentation probability; zero disables it')
+    p.add_argument('--warmup-bias-lr', type=float, default=0.1,
+                   help='Bias learning-rate warmup starting value; zero avoids the high-bias-lr warmup')
     args = p.parse_args()
     if Path(args.name).name != args.name or args.name in {'.', '..'}:
         p.error('name must be a single directory name')
@@ -51,6 +54,8 @@ def main():
         p.error('epochs/imgsz/batch must be positive')
     if not 0 <= args.mosaic <= 1:
         p.error('mosaic must be between 0 and 1')
+    if not math.isfinite(args.warmup_bias_lr) or args.warmup_bias_lr < 0:
+        p.error('warmup bias learning rate must be finite and nonnegative')
     os.environ.setdefault('YOLO_CONFIG_DIR', str(ROOT / '.ultralytics'))
     os.environ.setdefault('MPLCONFIGDIR', str(ROOT / '.matplotlib'))
     os.environ.setdefault('PYTHONIOENCODING', 'utf-8')
@@ -98,7 +103,8 @@ def main():
                 device=args.device, workers=0, seed=42, deterministic=True,
                 project=str(run), name='finetune', exist_ok=False,
                 optimizer='AdamW', lr0=args.lr0, lrf=0.1, patience=args.patience,
-                warmup_epochs=2, cos_lr=True, weight_decay=0.0005,
+                warmup_epochs=2, warmup_bias_lr=args.warmup_bias_lr,
+                cos_lr=True, weight_decay=0.0005,
                 mosaic=args.mosaic, close_mosaic=5, mixup=0.0, degrees=0.0,
                 fliplr=0.0, flipud=0.0, hsv_h=0.0, hsv_s=0.0, hsv_v=0.15,
                 scale=0.15, translate=0.05, amp=True, cache=False, plots=True,
