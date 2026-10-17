@@ -1,0 +1,1058 @@
+[
+  {
+    "image": "circuit_0001.jpg",
+    "image_sha256": "0b7424de454b642c9ae213449a5c4c4df2730f8d81a8c5c5a17d6c3528578de0",
+    "label_sha256": "1bc89ad75f0118489f6de3505f66d977a7974f3d79e2e32f45e7f3d991b272f2",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 2,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0003.jpg",
+    "image_sha256": "b411c7ec1b8422af6f1f2986d54c742aaec6bd51d20961d48390f493b317fd27",
+    "label_sha256": "53406752088cb39bf320d61559b8dd0f69a457648d2975d6da8cd594a167fc01",
+    "failure": null,
+    "iou50": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0007.jpg",
+    "image_sha256": "b1651412516e71fea9639e884512743e1c06a77ab4de04126beb14523f3ae236",
+    "label_sha256": "e829b54de7921f986670ed847d7113e6dd7464c3ca35a6b68c17720f4beb8e21",
+    "failure": null,
+    "iou50": {
+      "tp": 10,
+      "fp": 1,
+      "fn": 1
+    },
+    "iou75": {
+      "tp": 9,
+      "fp": 2,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0013.jpg",
+    "image_sha256": "4590687696cd73ac43ff3950b6f6ec2097a5277afd77fbe6f0f02888e8e68c78",
+    "label_sha256": "911e38f2ba3b3f0dd1ae6f4450894600468316858a742fdefd27dd653bcad459",
+    "failure": null,
+    "iou50": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0017.jpg",
+    "image_sha256": "51344c5dd8a25fcd42f67a36aea5630c95ce92fd1adb6c4e70799dbe2ee7f1ad",
+    "label_sha256": "fa8bfe2bcf62b1be5ba4586bc06a58ce949a20a75c56339020c8901a56d3f20e",
+    "failure": null,
+    "iou50": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0020.jpg",
+    "image_sha256": "059cad1346e7e9c155ddec86440919922ff8e37ac4a6b2e75d10ea5c3d473780",
+    "label_sha256": "3ffa63c9ae74615195afafbf3873a7cfe8a8e31c326c762c896ea05a488f59c7",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0021.jpg",
+    "image_sha256": "9dcde35632d9dfe5cbfd17f95348191bcefa464531613a810885443f3cc431e0",
+    "label_sha256": "2a8948301f4f668a7174483446e00170fa7788784601a5a927f5e0daf934ffae",
+    "failure": null,
+    "iou50": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0027.jpg",
+    "image_sha256": "1b4011bb18ee1a420b3f6e49b99d08a0dab71861397bf0cc36068116d828333e",
+    "label_sha256": "1e279957713d745ecf0dc12ad3c879c0fb4c7e664260df5476dff140740b7f99",
+    "failure": null,
+    "iou50": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0029.jpg",
+    "image_sha256": "eb227570fdd6ecc208e03cf55424f6c9cf84983a6d0e78c30d657836dcba3dc7",
+    "label_sha256": "a942577953c1c07496516fd4bb0bb293883782cd3311752151bdc54b4fae1627",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0033.jpg",
+    "image_sha256": "cff76365176496ece7af0d92c8607f581436077db4b6301bcd65825a559a8840",
+    "label_sha256": "c162bc9375448ab201eb16e9cad19753e4e87f6c0041c299a8b7f19b593e8c42",
+    "failure": null,
+    "iou50": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0035.jpg",
+    "image_sha256": "228ee20bf0af61f8d7c08a10a79ef4f800e6f5575dacac8c329be079e944307c",
+    "label_sha256": "00e343c091e019d31197258851ae13d382f2af1322874c9c1f67ba7b2a9f497e",
+    "failure": null,
+    "iou50": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0039.jpg",
+    "image_sha256": "295881ef755f4bff21cb33cbfffd52633ef9a499077c2674c6a24d1a068cee87",
+    "label_sha256": "bf9717f6e512fba1f93df6d1639ff4859f2840bca3d0d8030dd149746b632672",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0042.jpg",
+    "image_sha256": "5387c35a57a15739a9eb0d26368f12dd6588a8486df7defdad79161db1867375",
+    "label_sha256": "387fa9ac5eb709926771b9f3bc91a6b56fd7b38027f544d20b57222d0ba0b83e",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0045.jpg",
+    "image_sha256": "ad492f682036962ac6f76ba7a0b6d36206d7e3f10676b9f6a4a142948879e12d",
+    "label_sha256": "a6cb45bf334e13fbaa6924e54edcbcdeea7ee196813de383ee1f82fbd330dc31",
+    "failure": null,
+    "iou50": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 1
+    },
+    "iou75": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0046.jpg",
+    "image_sha256": "71493f641e076820251e4986336ae93c61e4a6b16834ccbfd2bb163780428da1",
+    "label_sha256": "9b20067663f8dfc094c402b671730b2e00d86532923aa2061d1d8aa2febbf1a4",
+    "failure": null,
+    "iou50": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 3
+    },
+    "iou75": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 3
+    }
+  },
+  {
+    "image": "circuit_0052.jpg",
+    "image_sha256": "e30cfe2bafc904b3032a31f2328f27aa61d66a2374c9815253cbf47c692205d2",
+    "label_sha256": "bbceca5e5f86e1950c0c44fed7e8eeb171059532bac2545b005b852d1ad680d8",
+    "failure": null,
+    "iou50": {
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 23,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0056.jpg",
+    "image_sha256": "288efceaa739a99422b300c1bbe2f167f0dae83b888e073aa99a09a18f520e14",
+    "label_sha256": "03043484c9980474c2b479784b334daab3ab8e056b41564735c8c0fd8bf4fdb5",
+    "failure": null,
+    "iou50": {
+      "tp": 24,
+      "fp": 0,
+      "fn": 1
+    },
+    "iou75": {
+      "tp": 24,
+      "fp": 0,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0058.jpg",
+    "image_sha256": "16f32ac8ba54f1d01a9924afc39d6907587bb83bfb6d964486338615b7c47b9e",
+    "label_sha256": "982df0608e4c0039037e8f6d0b4af8db04219f091a0e4c451da54c2fbaad6580",
+    "failure": null,
+    "iou50": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0065.jpg",
+    "image_sha256": "4d77a5da3e34dbfe3a8be4d2df858e16801ee805076606c3963515f7da2d9237",
+    "label_sha256": "6da2beeb24b77e6fabef4d566d35607b2fa282fe6fc3044e004bfda5e819e646",
+    "failure": null,
+    "iou50": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0067.jpg",
+    "image_sha256": "1d0a6c214dffafa9677d39e40188413d214e549a35f994dda509d6ef4d8e2d15",
+    "label_sha256": "6a09b04705ce65bb4a85413e3521064d8bfaa8810ae468a77f44eddb814a3d68",
+    "failure": null,
+    "iou50": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0070.jpg",
+    "image_sha256": "b37516c3ad63f7a2d49441e30b570fcacbce5fd5e323c2bb5aa25a71c30216b4",
+    "label_sha256": "1188f133107d793883677e2d89ae382db41235d76a7110abb02ae32dd7b9c2b1",
+    "failure": null,
+    "iou50": {
+      "tp": 21,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 21,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0072.jpg",
+    "image_sha256": "5670568b18fc195206a2cb1b5e0f182f9a87e3b42404530adb188c2c440cd845",
+    "label_sha256": "93c584660fde1cebcca64759b1d8b9fcc399836925d7b4daa34de992facc4c6a",
+    "failure": null,
+    "iou50": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0076.jpg",
+    "image_sha256": "8090528df16593ae642d413bd7661fe6c88b07ce17ccc03d21c55a707e9097c6",
+    "label_sha256": "aaa54c2edbeb6055ab4f9c1f85247482a7f0be0eeb4264a64a54352d94244cf8",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0079.jpg",
+    "image_sha256": "cfcd894f41ab94fb79b2262f288629a96b7c81ce8c3c66253e8bab1d974cdbbe",
+    "label_sha256": "450b8f4a9c16fd1403dca9aa00c2f9b4099ec7d7845039c6d5b893e92f273bd8",
+    "failure": null,
+    "iou50": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0084.jpg",
+    "image_sha256": "74b7cbefc1f966c449dc5cbf99bd46177786021a57ea21896537a4c34fb8dce8",
+    "label_sha256": "aa2b69455f38cc8316defafecf04e33546495d8502529147df9b8207eb14fe53",
+    "failure": null,
+    "iou50": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0085.jpg",
+    "image_sha256": "2a82a30dfe40ad3f8ae7ae4ed7c689342bded18ff51d679a3a59d369f4318103",
+    "label_sha256": "7002519d9c1e9eeecf4e05a6a4668e9ad45aabe40c193932f1ff14549d2b487f",
+    "failure": null,
+    "iou50": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0086.jpg",
+    "image_sha256": "a0b35d6552276e0adc19298c344adcb8a18c8c66b8b521f4aaf9b5f2b2200715",
+    "label_sha256": "5634b7cbfa37e4feab12236ccc8fb1bb59d23f2efe1522f9799f2a752673c19d",
+    "failure": null,
+    "iou50": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0093.jpg",
+    "image_sha256": "9b9b3388f695895a985eb5ec7dc912afd897d114487f4090ee78f53fd1811278",
+    "label_sha256": "1f0c554b4495dfed23b43a7e0c99d56e497342095f561d2a118cf8607b3a86f5",
+    "failure": null,
+    "iou50": {
+      "tp": 25,
+      "fp": 2,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 25,
+      "fp": 2,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0095.jpg",
+    "image_sha256": "38e3828512bc2af55c96c21243b9def7f75607db0239ee42377bd521652930f3",
+    "label_sha256": "2b9ec1c3480a5f1c5d8f1fe3d3af845e388d75a9b0b84524e1e46a6d6cdc23f8",
+    "failure": null,
+    "iou50": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0097.jpg",
+    "image_sha256": "7f063e71f1b373f1903156cabe53bd2b0cc86d11fb093e53a2c7d9b5706e8a68",
+    "label_sha256": "5032f01e98b5f2705dd467bc7bf57e5b468a0291b69e71275e79f8e93f2be4b0",
+    "failure": null,
+    "iou50": {
+      "tp": 29,
+      "fp": 4,
+      "fn": 4
+    },
+    "iou75": {
+      "tp": 21,
+      "fp": 12,
+      "fn": 12
+    }
+  },
+  {
+    "image": "circuit_0105.jpg",
+    "image_sha256": "443d7d968e4151dd710ebb84ea07a7ca2dfee300dd0e4b084a2e4d0b6816fd15",
+    "label_sha256": "10dd7bbb4ce0f210a60e81376aba8b33341efb592bd88d01165a59c42526bf6c",
+    "failure": null,
+    "iou50": {
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 23,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0107.jpg",
+    "image_sha256": "8605f61b53a9e21bb041c6bab055c8e72a1fd613775fa6dcd99e747b3ace1848",
+    "label_sha256": "49f02eefe421e3adad048db62d4d7a2ae0b04cb9869af5216d4bdb5db90586fe",
+    "failure": null,
+    "iou50": {
+      "tp": 18,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 16,
+      "fp": 2,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0108.jpg",
+    "image_sha256": "9b912066eba2dabc425f2d4ac57ed7060bbf0892818d537a5319b787b688f4ff",
+    "label_sha256": "5572e015f2147436c196b1593d3e708ed2d4190c50d41cfbdaa7096181af129b",
+    "failure": null,
+    "iou50": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 13,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0111.jpg",
+    "image_sha256": "eb91f212db44d78e0488dc178d07859248f3db1f33af743f1806acba2d7d3312",
+    "label_sha256": "e11da98171f987812780ba02fb99c89dc0de256825c20165a8cf258eaa767d07",
+    "failure": null,
+    "iou50": {
+      "tp": 41,
+      "fp": 8,
+      "fn": 3
+    },
+    "iou75": {
+      "tp": 40,
+      "fp": 9,
+      "fn": 4
+    }
+  },
+  {
+    "image": "circuit_0112.jpg",
+    "image_sha256": "2d7b23cb05b74a5bb2c568151d5f84ef9c425cb0c2ae8da31c9e2f0d6157dcb3",
+    "label_sha256": "659b0debc184231eeb00b1118b6b781c1704ee7ce215ebf3b3d3fdaaeeb09e23",
+    "failure": null,
+    "iou50": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0116.jpg",
+    "image_sha256": "3b910b840e284a3387552eb9f02e7d41cb9ceabac3aba4fee0a9e00f4c6e0b2d",
+    "label_sha256": "63008551e9bb26135ab081f4c045fed4839b7633e66dfe97b9db744bdde5ab06",
+    "failure": null,
+    "iou50": {
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 13,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0149.jpg",
+    "image_sha256": "64d182ce3442f92b187e239f56d1bc40a4fb6d8fe02584475ec192aae1887742",
+    "label_sha256": "9906acac0e59401365c6988bd78bf4ce669ffd86b7a95bfa64031c692798b3dc",
+    "failure": null,
+    "iou50": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0150.jpg",
+    "image_sha256": "5950c74a9b76f10507621a0a7c82bee9c45711f611c99395b7c6e7aab15cf683",
+    "label_sha256": "f7cdc941c6e428be249dd623b3d8686efb550b9a15da4067857f5deda024a150",
+    "failure": null,
+    "iou50": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 2,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0151.jpg",
+    "image_sha256": "9af742edc2f66afdd33a8af34a8671c0e62eeb92802ae021cb6a3611250c1c80",
+    "label_sha256": "26622ede8372ed9f92377dc589f0ea04692f8559f5169eeabd57305048fc6e0b",
+    "failure": null,
+    "iou50": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0152.jpg",
+    "image_sha256": "f559e5729decaeacf4275723e9fd521393bacc204932cd566ec59c5ec2c74719",
+    "label_sha256": "8ab4050cef4b84dd103888371d680f974fbe84d6d798a92071973a7db606140d",
+    "failure": null,
+    "iou50": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0153.jpg",
+    "image_sha256": "8c41a19f33df0a656c11bc7ae5d628095cc88a4751978bf93b35f44901afb6fc",
+    "label_sha256": "175bc6836c977277e5946d081f7dc5d16dc0def1b10f881d51ceb760364b6599",
+    "failure": null,
+    "iou50": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0154.jpg",
+    "image_sha256": "35bdfc6ea1927fe451f1a0cd5f819bb1d40f83340dc434bf41fe370afedb5aba",
+    "label_sha256": "145655267c5247828b8d49490e297ab33e36683c451ed139d9eb3a0f7ab6cbb0",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0155.jpg",
+    "image_sha256": "52c444047b28e030e6d111082266da5b0e210bc487f504146b63e35bbcaf05ac",
+    "label_sha256": "0e502c477eed62285e1f5276a2f34b251a5fcfbd40573fc2017bdcabef4b909a",
+    "failure": null,
+    "iou50": {
+      "tp": 6,
+      "fp": 2,
+      "fn": 2
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 2,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0288.jpg",
+    "image_sha256": "b98243a8781f26cf35264369f7fd1683bb6d9efcdf0f4ea2d840045df09d8874",
+    "label_sha256": "7aa5ffbcf60f6564bce8cb8ec107f3b61c23c4871a912708ce7e370cae4b9d9e",
+    "failure": null,
+    "iou50": {
+      "tp": 54,
+      "fp": 2,
+      "fn": 1
+    },
+    "iou75": {
+      "tp": 39,
+      "fp": 17,
+      "fn": 16
+    }
+  },
+  {
+    "image": "circuit_0289.jpg",
+    "image_sha256": "679a3d92aaad336ca9b4a5bd5c21f4f376a98e1f0a12f20e0f0713b03135ed7d",
+    "label_sha256": "b6f338872613906e036ea40af5be6def4c460c2a714dfd22b6db60dffd83ccfe",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0290.jpg",
+    "image_sha256": "b0099966a3eed6530bbc28b7b6a0e29bbecb6143e97438488e9b44a2bd6d2907",
+    "label_sha256": "7e8f9ff5cbfb6528bc8069093e9023cacdd9141987d2c4391bc9730ee8b97d28",
+    "failure": null,
+    "iou50": {
+      "tp": 11,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 7,
+      "fp": 4,
+      "fn": 4
+    }
+  },
+  {
+    "image": "circuit_0291.jpg",
+    "image_sha256": "ae9ebc7da5481e199caa878eba164d83626773f9e0494846ab61ddcd035b94e8",
+    "label_sha256": "b84afd38f7bd5f12be59909b54b91a01f276e6c9189bc27f5d5012d9ffdee9c2",
+    "failure": null,
+    "iou50": {
+      "tp": 22,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 20,
+      "fp": 2,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0292.jpg",
+    "image_sha256": "62b95d03e241841610170d50c5141eea8b293fc1d8e754a533a4511ccd7577e5",
+    "label_sha256": "8be6073946b7acd616969e552a7607d108bcdf0f0d8e62c9caf1eb6192b65f17",
+    "failure": null,
+    "iou50": {
+      "tp": 24,
+      "fp": 1,
+      "fn": 2
+    },
+    "iou75": {
+      "tp": 21,
+      "fp": 4,
+      "fn": 5
+    }
+  },
+  {
+    "image": "circuit_0360.jpg",
+    "image_sha256": "3336412093d8312016252a60ca8dbe29481e1260955b8e102e73ef9f9c1a9221",
+    "label_sha256": "076eaf1011c211535686077578665431b8a164b8c6a8aeee175002abed8da1be",
+    "failure": null,
+    "iou50": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 2
+    },
+    "iou75": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0361.jpg",
+    "image_sha256": "a7caa88c3bdd8d9023e3d425b16f93fcbec550ced333eaba67d01f18bc6ae221",
+    "label_sha256": "d05cc66e9c0ad95757bd5c7694907bbccbaa634d741b11f6bad53c19dbaf3b94",
+    "failure": null,
+    "iou50": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0362.jpg",
+    "image_sha256": "a2a58a01e922fe4ccd961ee470a7102b645444c3c6b7e5f421eb00f95834e364",
+    "label_sha256": "9671fdf091f00ffcd5a702a2aee3aca03cd9da364b2ace72f1bf73cdb5fcf3e0",
+    "failure": null,
+    "iou50": {
+      "tp": 12,
+      "fp": 1,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 11,
+      "fp": 2,
+      "fn": 1
+    }
+  },
+  {
+    "image": "circuit_0363.jpg",
+    "image_sha256": "548f02cfe907d5399ef91dbcde3330e1b67d9a94f70b48f7554e8d1f8a6f42d7",
+    "label_sha256": "9d4daeed253fb64334a2df0fd15ff2c496a45f4777696dda46acbc23af9f338b",
+    "failure": null,
+    "iou50": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0364.jpg",
+    "image_sha256": "161c7295974efdd9d1bb19fda9b2bd7d7e4b19632e4e86fcbf48a6d507b13279",
+    "label_sha256": "d869086445bc1158223f5197f9c2b060730baebfca896c163f397b14f3a4afb6",
+    "failure": null,
+    "iou50": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0650.jpg",
+    "image_sha256": "7f0c3584f9ec66cf28260861a92d402ca418e97e61842d151e012545765c6af0",
+    "label_sha256": "0e39fdadb04103c21c0eb69e245284daf09d35d1f305ede39acc3168ff425280",
+    "failure": null,
+    "iou50": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0651.jpg",
+    "image_sha256": "28adfe75b3522144d70f8eb9fa883c4cbfc71d2bbcb00776752e81b3ff6c9063",
+    "label_sha256": "bc7b66cc068a503d75ac5e6937a740b6792cf087d40cb6d56809d99d6b9f3cca",
+    "failure": null,
+    "iou50": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0652.jpg",
+    "image_sha256": "0cb6d28e70fec8a0b22d75bb87c2459c2cdc6941f2e9b037b0d09ed338bd225b",
+    "label_sha256": "a83e47b871a269458a03f6b3e72fd4b6b7fb8b62f153977c04070d13bdf48594",
+    "failure": null,
+    "iou50": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 2,
+      "fn": 2
+    }
+  },
+  {
+    "image": "circuit_0653.jpg",
+    "image_sha256": "f8eab1820ca40f60246889b89b9c5406cc01defa358907d846862b0da6a527a1",
+    "label_sha256": "ec6af48abe1a7d27aa6f305a8205a654775f541ac85ebba500ff6dde7711cea3",
+    "failure": null,
+    "iou50": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0654.jpg",
+    "image_sha256": "d3f479b062b4d5afa46d35ef03bf3180db6d525917aaa4ee4ce0d6390fda85b5",
+    "label_sha256": "387b50e8968e53b33e1b48d165efddfea770938c66fa5fce142e90efc3dea167",
+    "failure": null,
+    "iou50": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0655.jpg",
+    "image_sha256": "df84711634da3be15a0bd723dd42f1871c397e69f5d7b62408942d3c268eafa5",
+    "label_sha256": "c508a8aa29695795c40b7314c8163574e878f61b513bcb17758fe4c27ccfae74",
+    "failure": null,
+    "iou50": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0656.jpg",
+    "image_sha256": "b72713f73e571ac275921806e872c5a80053f62de657560d53a0fd2af7b44472",
+    "label_sha256": "7a7b71765a1d78c2c5e69e0fe5cec15c9dcdb94ab591df182b87d6b15f9b6645",
+    "failure": null,
+    "iou50": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0657.jpg",
+    "image_sha256": "c8524c3bc08f9e0bcc1ff5f50df4bd1a26778575ba8fd6f7b78b2e0c0ce39bc0",
+    "label_sha256": "bf60ab592b9ff7a558587f3148ee21a4c13a889ac38c0cf1a4f72d1d136d843f",
+    "failure": null,
+    "iou50": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0658.jpg",
+    "image_sha256": "e7b90c1995591caab9e638b8ad2ce4f940d755ec08ebe619a4c754175ee787e4",
+    "label_sha256": "79a73aa50851234c253bbc4a78bed6ce966ef2b55be8e2d3d9feab5794251682",
+    "failure": null,
+    "iou50": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0659.jpg",
+    "image_sha256": "fc0952b57792613ca720520682116ef0df07baaf9fa266c2404053959ce73a1f",
+    "label_sha256": "c2a82f43ec07a79f6a4f11cc5bc30fc591974f7682183965416512e12563a6f4",
+    "failure": null,
+    "iou50": {
+      "tp": 31,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 31,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0660.jpg",
+    "image_sha256": "27dd89614460ff389c2102d34192bb66c8cc444a3e5326aedaa466ff556723a8",
+    "label_sha256": "f1e15072b8e5fa7dbba85b6ff5a6983abbe43fc063730325e00aef967d2f73e9",
+    "failure": null,
+    "iou50": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0661.jpg",
+    "image_sha256": "d383d23e56dd39aed3db2d9b3c5b39743679704901ac2c37d7daa024bdf1cff9",
+    "label_sha256": "f822db92b81fe4ffa9f68c1d97d25d0372930683328562d3c80ac8bd1e44842e",
+    "failure": null,
+    "iou50": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "image": "circuit_0662.jpg",
+    "image_sha256": "6a8cbac67ca5fd398303b4a8537e9bff632fd83bd2d35a028e60af919e65c174",
+    "label_sha256": "58d7b47f5ed12ee5a4532599d059ff85228dda99e32daa06bd3bf496127b7d9e",
+    "failure": null,
+    "iou50": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "iou75": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    }
+  }
+]

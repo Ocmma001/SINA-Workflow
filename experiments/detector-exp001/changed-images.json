@@ -1,0 +1,362 @@
+[
+  {
+    "image": "circuit_0097.jpg",
+    "error_delta_iou75": -8,
+    "baseline": {
+      "tp": 21,
+      "fp": 17,
+      "fn": 12,
+      "precision": 0.5526315789473685,
+      "recall": 0.6363636363636364,
+      "f1": 0.5915492957746479
+    },
+    "candidate": {
+      "tp": 21,
+      "fp": 9,
+      "fn": 12,
+      "precision": 0.7,
+      "recall": 0.6363636363636364,
+      "f1": 0.6666666666666666
+    }
+  },
+  {
+    "image": "circuit_0288.jpg",
+    "error_delta_iou75": -4,
+    "baseline": {
+      "tp": 39,
+      "fp": 17,
+      "fn": 16,
+      "precision": 0.6964285714285714,
+      "recall": 0.7090909090909091,
+      "f1": 0.7027027027027027
+    },
+    "candidate": {
+      "tp": 41,
+      "fp": 15,
+      "fn": 14,
+      "precision": 0.7321428571428571,
+      "recall": 0.7454545454545455,
+      "f1": 0.7387387387387387
+    }
+  },
+  {
+    "image": "circuit_0007.jpg",
+    "error_delta_iou75": -2,
+    "baseline": {
+      "tp": 9,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.8181818181818182,
+      "recall": 0.8181818181818182,
+      "f1": 0.8181818181818182
+    },
+    "candidate": {
+      "tp": 10,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.9090909090909091,
+      "recall": 0.9090909090909091,
+      "f1": 0.9090909090909091
+    }
+  },
+  {
+    "image": "circuit_0150.jpg",
+    "error_delta_iou75": -2,
+    "baseline": {
+      "tp": 6,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75
+    },
+    "candidate": {
+      "tp": 7,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.875,
+      "recall": 0.875,
+      "f1": 0.875
+    }
+  },
+  {
+    "image": "circuit_0290.jpg",
+    "error_delta_iou75": -2,
+    "baseline": {
+      "tp": 7,
+      "fp": 4,
+      "fn": 4,
+      "precision": 0.6363636363636364,
+      "recall": 0.6363636363636364,
+      "f1": 0.6363636363636364
+    },
+    "candidate": {
+      "tp": 8,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.7272727272727273,
+      "recall": 0.7272727272727273,
+      "f1": 0.7272727272727273
+    }
+  },
+  {
+    "image": "circuit_0045.jpg",
+    "error_delta_iou75": -1,
+    "baseline": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.25,
+      "recall": 0.5,
+      "f1": 0.3333333333333333
+    },
+    "candidate": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  {
+    "image": "circuit_0067.jpg",
+    "error_delta_iou75": -1,
+    "baseline": {
+      "tp": 14,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333333333333333
+    },
+    "candidate": {
+      "tp": 14,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.9333333333333333,
+      "recall": 1.0,
+      "f1": 0.9655172413793104
+    }
+  },
+  {
+    "image": "circuit_0093.jpg",
+    "error_delta_iou75": -1,
+    "baseline": {
+      "tp": 25,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.9259259259259259,
+      "recall": 1.0,
+      "f1": 0.9615384615384616
+    },
+    "candidate": {
+      "tp": 25,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.9615384615384616,
+      "recall": 1.0,
+      "f1": 0.9803921568627451
+    }
+  },
+  {
+    "image": "circuit_0289.jpg",
+    "error_delta_iou75": -1,
+    "baseline": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1": 0.8
+    },
+    "candidate": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8888888888888888
+    }
+  },
+  {
+    "image": "circuit_0056.jpg",
+    "error_delta_iou75": 1,
+    "baseline": {
+      "tp": 24,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.96,
+      "f1": 0.9795918367346939
+    },
+    "candidate": {
+      "tp": 24,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.96,
+      "recall": 0.96,
+      "f1": 0.96
+    }
+  },
+  {
+    "image": "circuit_0084.jpg",
+    "error_delta_iou75": 1,
+    "baseline": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "candidate": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666
+    }
+  },
+  {
+    "image": "circuit_0152.jpg",
+    "error_delta_iou75": 1,
+    "baseline": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5
+    },
+    "candidate": {
+      "tp": 1,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0.3333333333333333,
+      "recall": 0.5,
+      "f1": 0.4
+    }
+  },
+  {
+    "image": "circuit_0360.jpg",
+    "error_delta_iou75": 1,
+    "baseline": {
+      "tp": 8,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8
+    },
+    "candidate": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.7777777777777778,
+      "recall": 0.7,
+      "f1": 0.7368421052631579
+    }
+  },
+  {
+    "image": "circuit_0033.jpg",
+    "error_delta_iou75": 2,
+    "baseline": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "candidate": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "f1": 0.8333333333333334
+    }
+  },
+  {
+    "image": "circuit_0086.jpg",
+    "error_delta_iou75": 2,
+    "baseline": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "candidate": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.8888888888888888,
+      "recall": 0.8888888888888888,
+      "f1": 0.8888888888888888
+    }
+  },
+  {
+    "image": "circuit_0108.jpg",
+    "error_delta_iou75": 2,
+    "baseline": {
+      "tp": 13,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.9285714285714286,
+      "recall": 0.9285714285714286,
+      "f1": 0.9285714285714286
+    },
+    "candidate": {
+      "tp": 12,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.8571428571428571,
+      "recall": 0.8571428571428571,
+      "f1": 0.8571428571428571
+    }
+  },
+  {
+    "image": "circuit_0151.jpg",
+    "error_delta_iou75": 2,
+    "baseline": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.8571428571428571,
+      "recall": 0.8571428571428571,
+      "f1": 0.8571428571428571
+    },
+    "candidate": {
+      "tp": 6,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.6666666666666666,
+      "recall": 0.8571428571428571,
+      "f1": 0.75
+    }
+  },
+  {
+    "image": "circuit_0111.jpg",
+    "error_delta_iou75": 3,
+    "baseline": {
+      "tp": 40,
+      "fp": 13,
+      "fn": 4,
+      "precision": 0.7547169811320755,
+      "recall": 0.9090909090909091,
+      "f1": 0.8247422680412371
+    },
+    "candidate": {
+      "tp": 39,
+      "fp": 15,
+      "fn": 5,
+      "precision": 0.7222222222222222,
+      "recall": 0.8863636363636364,
+      "f1": 0.7959183673469388
+    }
+  }
+]

@@ -1,0 +1,999 @@
+{
+  "images_attempted": 66,
+  "stage_attempts": 66,
+  "stage_failures": 0,
+  "class_thresholds": {},
+  "scope": "regression diagnostics, not topology ground-truth accuracy",
+  "results": [
+    {
+      "image": "circuit_0001.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 1,
+          "components": 5,
+          "pins": 13,
+          "unresolved": 0,
+          "seconds": 1.163345500000105
+        }
+      ]
+    },
+    {
+      "image": "circuit_0003.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 8,
+          "pins": 14,
+          "unresolved": 0,
+          "seconds": 0.03261709999969753
+        }
+      ]
+    },
+    {
+      "image": "circuit_0007.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 11,
+          "pins": 23,
+          "unresolved": 0,
+          "seconds": 0.037426200000027166
+        }
+      ]
+    },
+    {
+      "image": "circuit_0013.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 5,
+          "pins": 11,
+          "unresolved": 0,
+          "seconds": 0.04717580000033195
+        }
+      ]
+    },
+    {
+      "image": "circuit_0017.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 10,
+          "pins": 19,
+          "unresolved": 0,
+          "seconds": 0.08567579999998998
+        }
+      ]
+    },
+    {
+      "image": "circuit_0020.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 1,
+          "components": 4,
+          "pins": 8,
+          "unresolved": 0,
+          "seconds": 0.04854669999986072
+        }
+      ]
+    },
+    {
+      "image": "circuit_0021.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 7,
+          "pins": 14,
+          "unresolved": 0,
+          "seconds": 0.08859509999956572
+        }
+      ]
+    },
+    {
+      "image": "circuit_0027.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 8,
+          "pins": 13,
+          "unresolved": 0,
+          "seconds": 0.09345800000028248
+        }
+      ]
+    },
+    {
+      "image": "circuit_0029.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 1,
+          "components": 4,
+          "pins": 9,
+          "unresolved": 0,
+          "seconds": 0.030635199999778706
+        }
+      ]
+    },
+    {
+      "image": "circuit_0033.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 6,
+          "pins": 12,
+          "unresolved": 0,
+          "seconds": 0.08773380000002362
+        }
+      ]
+    },
+    {
+      "image": "circuit_0035.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 6,
+          "pins": 12,
+          "unresolved": 0,
+          "seconds": 0.09048400000028778
+        }
+      ]
+    },
+    {
+      "image": "circuit_0039.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 4,
+          "pins": 8,
+          "unresolved": 0,
+          "seconds": 0.037111499999809894
+        }
+      ]
+    },
+    {
+      "image": "circuit_0042.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 4,
+          "pins": 8,
+          "unresolved": 0,
+          "seconds": 0.023676700000123674
+        }
+      ]
+    },
+    {
+      "image": "circuit_0045.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 4,
+          "components": 4,
+          "pins": 4,
+          "unresolved": 0,
+          "seconds": 0.07040180000012697
+        }
+      ]
+    },
+    {
+      "image": "circuit_0046.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 4,
+          "pins": 8,
+          "unresolved": 0,
+          "seconds": 0.04565460000003441
+        }
+      ]
+    },
+    {
+      "image": "circuit_0052.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 21,
+          "components": 25,
+          "pins": 49,
+          "unresolved": 0,
+          "seconds": 0.11747270000023491
+        }
+      ]
+    },
+    {
+      "image": "circuit_0056.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 29,
+          "components": 24,
+          "pins": 64,
+          "unresolved": 0,
+          "seconds": 0.17686670000011873
+        }
+      ]
+    },
+    {
+      "image": "circuit_0058.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 10,
+          "components": 12,
+          "pins": 24,
+          "unresolved": 0,
+          "seconds": 0.06352530000003753
+        }
+      ]
+    },
+    {
+      "image": "circuit_0065.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 18,
+          "components": 15,
+          "pins": 41,
+          "unresolved": 0,
+          "seconds": 0.12821660000008706
+        }
+      ]
+    },
+    {
+      "image": "circuit_0067.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 20,
+          "components": 16,
+          "pins": 41,
+          "unresolved": 0,
+          "seconds": 0.05835579999984475
+        }
+      ]
+    },
+    {
+      "image": "circuit_0070.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 15,
+          "components": 21,
+          "pins": 43,
+          "unresolved": 0,
+          "seconds": 0.07757130000027246
+        }
+      ]
+    },
+    {
+      "image": "circuit_0072.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 6,
+          "pins": 12,
+          "unresolved": 0,
+          "seconds": 0.06576270000005024
+        }
+      ]
+    },
+    {
+      "image": "circuit_0076.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 4,
+          "pins": 8,
+          "unresolved": 0,
+          "seconds": 0.048122499999863066
+        }
+      ]
+    },
+    {
+      "image": "circuit_0079.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 1,
+          "components": 6,
+          "pins": 11,
+          "unresolved": 0,
+          "seconds": 0.022478100000171253
+        }
+      ]
+    },
+    {
+      "image": "circuit_0084.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 2,
+          "pins": 1,
+          "unresolved": 0,
+          "seconds": 0.014569699999810837
+        }
+      ]
+    },
+    {
+      "image": "circuit_0085.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 3,
+          "pins": 6,
+          "unresolved": 0,
+          "seconds": 0.055788699999993696
+        }
+      ]
+    },
+    {
+      "image": "circuit_0086.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 9,
+          "pins": 17,
+          "unresolved": 0,
+          "seconds": 0.07743819999996049
+        }
+      ]
+    },
+    {
+      "image": "circuit_0093.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 21,
+          "components": 27,
+          "pins": 40,
+          "unresolved": 0,
+          "seconds": 0.05091369999991002
+        }
+      ]
+    },
+    {
+      "image": "circuit_0095.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 10,
+          "components": 2,
+          "pins": 0,
+          "unresolved": 0,
+          "seconds": 0.026488399999834655
+        }
+      ]
+    },
+    {
+      "image": "circuit_0097.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 94,
+          "components": 38,
+          "pins": 6,
+          "unresolved": 0,
+          "seconds": 0.5232655000004343
+        }
+      ]
+    },
+    {
+      "image": "circuit_0105.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 11,
+          "components": 24,
+          "pins": 43,
+          "unresolved": 0,
+          "seconds": 0.06892119999974966
+        }
+      ]
+    },
+    {
+      "image": "circuit_0107.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 15,
+          "components": 18,
+          "pins": 26,
+          "unresolved": 0,
+          "seconds": 0.04754989999992176
+        }
+      ]
+    },
+    {
+      "image": "circuit_0108.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 10,
+          "components": 14,
+          "pins": 20,
+          "unresolved": 0,
+          "seconds": 0.19203680000009626
+        }
+      ]
+    },
+    {
+      "image": "circuit_0111.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 20,
+          "components": 53,
+          "pins": 88,
+          "unresolved": 0,
+          "seconds": 0.12481590000015785
+        }
+      ]
+    },
+    {
+      "image": "circuit_0112.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 12,
+          "components": 14,
+          "pins": 12,
+          "unresolved": 0,
+          "seconds": 0.14470269999992524
+        }
+      ]
+    },
+    {
+      "image": "circuit_0116.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 7,
+          "components": 14,
+          "pins": 27,
+          "unresolved": 0,
+          "seconds": 0.1443752999998651
+        }
+      ]
+    },
+    {
+      "image": "circuit_0149.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 2,
+          "pins": 4,
+          "unresolved": 0,
+          "seconds": 0.05049400000007154
+        }
+      ]
+    },
+    {
+      "image": "circuit_0150.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 4,
+          "components": 8,
+          "pins": 12,
+          "unresolved": 0,
+          "seconds": 0.05189460000019608
+        }
+      ]
+    },
+    {
+      "image": "circuit_0151.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 7,
+          "pins": 13,
+          "unresolved": 0,
+          "seconds": 0.02724839999973483
+        }
+      ]
+    },
+    {
+      "image": "circuit_0152.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 2,
+          "pins": 4,
+          "unresolved": 0,
+          "seconds": 0.03729550000025483
+        }
+      ]
+    },
+    {
+      "image": "circuit_0153.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 9,
+          "pins": 17,
+          "unresolved": 0,
+          "seconds": 0.03435319999971398
+        }
+      ]
+    },
+    {
+      "image": "circuit_0154.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 4,
+          "pins": 6,
+          "unresolved": 0,
+          "seconds": 0.03221480000001975
+        }
+      ]
+    },
+    {
+      "image": "circuit_0155.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 8,
+          "pins": 15,
+          "unresolved": 0,
+          "seconds": 0.04074719999971421
+        }
+      ]
+    },
+    {
+      "image": "circuit_0288.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 10,
+          "components": 56,
+          "pins": 90,
+          "unresolved": 0,
+          "seconds": 0.164497300000221
+        }
+      ]
+    },
+    {
+      "image": "circuit_0289.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 6,
+          "pins": 9,
+          "unresolved": 0,
+          "seconds": 0.035338099999989936
+        }
+      ]
+    },
+    {
+      "image": "circuit_0290.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 18,
+          "components": 11,
+          "pins": 6,
+          "unresolved": 0,
+          "seconds": 0.025091099999826838
+        }
+      ]
+    },
+    {
+      "image": "circuit_0291.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 35,
+          "components": 22,
+          "pins": 14,
+          "unresolved": 0,
+          "seconds": 0.048041099999863945
+        }
+      ]
+    },
+    {
+      "image": "circuit_0292.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 32,
+          "components": 25,
+          "pins": 10,
+          "unresolved": 0,
+          "seconds": 0.07701139999971929
+        }
+      ]
+    },
+    {
+      "image": "circuit_0360.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 10,
+          "pins": 20,
+          "unresolved": 0,
+          "seconds": 0.14448770000035438
+        }
+      ]
+    },
+    {
+      "image": "circuit_0361.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 10,
+          "pins": 20,
+          "unresolved": 0,
+          "seconds": 0.037689899999804766
+        }
+      ]
+    },
+    {
+      "image": "circuit_0362.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 5,
+          "components": 13,
+          "pins": 35,
+          "unresolved": 0,
+          "seconds": 0.05558889999974781
+        }
+      ]
+    },
+    {
+      "image": "circuit_0363.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 1,
+          "components": 6,
+          "pins": 13,
+          "unresolved": 0,
+          "seconds": 0.03240529999993669
+        }
+      ]
+    },
+    {
+      "image": "circuit_0364.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 0,
+          "components": 3,
+          "pins": 6,
+          "unresolved": 0,
+          "seconds": 0.04817930000035631
+        }
+      ]
+    },
+    {
+      "image": "circuit_0650.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 8,
+          "components": 12,
+          "pins": 29,
+          "unresolved": 0,
+          "seconds": 0.053561700000045676
+        }
+      ]
+    },
+    {
+      "image": "circuit_0651.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 5,
+          "components": 7,
+          "pins": 10,
+          "unresolved": 0,
+          "seconds": 0.03445109999984197
+        }
+      ]
+    },
+    {
+      "image": "circuit_0652.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 7,
+          "components": 5,
+          "pins": 10,
+          "unresolved": 0,
+          "seconds": 0.023802599999726226
+        }
+      ]
+    },
+    {
+      "image": "circuit_0653.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 4,
+          "pins": 7,
+          "unresolved": 0,
+          "seconds": 0.046576400000049034
+        }
+      ]
+    },
+    {
+      "image": "circuit_0654.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 4,
+          "components": 2,
+          "pins": 2,
+          "unresolved": 0,
+          "seconds": 0.021726899999976013
+        }
+      ]
+    },
+    {
+      "image": "circuit_0655.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 3,
+          "pins": 4,
+          "unresolved": 0,
+          "seconds": 0.039921099999901344
+        }
+      ]
+    },
+    {
+      "image": "circuit_0656.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 3,
+          "components": 5,
+          "pins": 9,
+          "unresolved": 0,
+          "seconds": 0.04803010000023278
+        }
+      ]
+    },
+    {
+      "image": "circuit_0657.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 2,
+          "components": 6,
+          "pins": 10,
+          "unresolved": 0,
+          "seconds": 0.05492359999971086
+        }
+      ]
+    },
+    {
+      "image": "circuit_0658.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 5,
+          "components": 10,
+          "pins": 22,
+          "unresolved": 0,
+          "seconds": 0.03436280000005354
+        }
+      ]
+    },
+    {
+      "image": "circuit_0659.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 31,
+          "components": 31,
+          "pins": 72,
+          "unresolved": 0,
+          "seconds": 0.0795828000000256
+        }
+      ]
+    },
+    {
+      "image": "circuit_0660.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 4,
+          "components": 5,
+          "pins": 8,
+          "unresolved": 0,
+          "seconds": 0.0485860000003413
+        }
+      ]
+    },
+    {
+      "image": "circuit_0661.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 7,
+          "components": 3,
+          "pins": 5,
+          "unresolved": 0,
+          "seconds": 0.06698110000024826
+        }
+      ]
+    },
+    {
+      "image": "circuit_0662.jpg",
+      "variants": [
+        {
+          "conf": 0.25,
+          "status": "completed",
+          "crossing_status": "completed",
+          "nominal_missing_pins": 7,
+          "components": 5,
+          "pins": 10,
+          "unresolved": 0,
+          "seconds": 0.030112999999801104
+        }
+      ]
+    }
+  ]
+}
