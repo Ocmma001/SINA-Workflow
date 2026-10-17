@@ -108,6 +108,8 @@ python tools/run_stage.py --help
 
 `recognized.json` 的 `components` 是可编辑元件列表；接地信息保存在识别与拓扑证据中。输出默认标记为待复核，不会自动视为可仿真的电路。
 
+详细接口与字段约定见 [接口说明](docs/INTERFACES.md)。
+
 ## 来源与许可
 
 工作流基于 SINA，导线分析源码的许可见 [LICENSE](tools/modules/topology_impl/LICENSE)，第三方依赖说明见 [THIRD_PARTY.md](THIRD_PARTY.md)。
