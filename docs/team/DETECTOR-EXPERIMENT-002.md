@@ -31,7 +31,7 @@ python tools/train_round.py --name detector-exp002-train-warmup0 --initial runs/
 ## 扩展对照：冻结前11层参数
 
 已有强权重继续训练时验证分数早期达到峰值后回落，可能存在对原特征的过度更新。新增一组在warmup_bias_lr=0基础上只改freeze=11。
-本机YOLO11结构的前11层是backbone（至C2PSA）；后续neck/head参数继续训练。这里冻结的是参数，不声称所有BatchNorm运行统计保持不变。
+本机YOLO11结构的前11层是backbone（至C2PSA）；后续neck/head参数继续训练。本机固定库还对匹配冻结层的BatchNorm设置eval；其余neck/head统计仍可变化。
 与warmup0组使用相同原始初始化、学习率、增强、seed及早停。新增freeze参数默认0，不改变旧训练行为。
 
 ```powershell
@@ -39,3 +39,5 @@ python tools/train_round.py --name detector-exp002-train-freeze11 --initial runs
 ```
 
 两组GPU任务顺序运行。全部候选仍须同条件逐图对照，不因损失下降或冻结层数改变而声称准确率提升。
+
+本轮两组训练与逐图对照已完成。结果与候选交接见[实验002报告](../../experiments/detector-exp002/README.md)。
