@@ -43,3 +43,9 @@ GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITH
 仓库保留当前工作流、YOLO11m训练基线与协作指南；旧Pro直接检测、Lite/Pro对比及重复历史交接材料已清理。
 
 检测优化分支的已完成试验：[实验001](experiments/detector-exp001/README.md)、[实验002](experiments/detector-exp002/README.md)。候选单独下载并显式指定，默认模型保持不变。
+# 当前默认版本
+
+按组内选择，默认使用原选定 YOLO11m 权重（SHA256 `0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d`）与组员优化的 OCR、文字归属、导线和引脚模块。完整流程与单独检测入口自动启用组员分类阈值，无需额外传入参数。微调权重只保留为实验候选，不参与默认识别。
+
+66张开发图的检测F1为96.35%，误检32、漏检20；不是独立测试或整电路准确率。结果见[双方集成报告](docs/team/COMBINED-2026-10-17.md)。输出继续保留人工复核状态。自定义`--class-thresholds`可覆盖默认配置，传入内容为`{}`的JSON文件可恢复统一`--conf`阈值。低层实验函数`predict_records`仍保留显式参数，便于公平对照。
+
