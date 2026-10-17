@@ -57,4 +57,3 @@ class DetectionMetricTests(unittest.TestCase):
     def test_invalid_threshold_is_rejected(self):
         with self.assertRaises(ValueError):
             score_detections([], [], 1.1)
-
