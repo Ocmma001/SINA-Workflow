@@ -54,8 +54,8 @@ def main():
         from model_selection import selected_weights
         weights = a.weights or selected_weights(ROOT, ROOT / 'runs/round-002/delivery/detector.pt')
     if a.stage == 'detector':
-        from modules.detector import detect
-        class_conf = json.loads(a.class_thresholds.read_text(encoding='utf-8')) if a.class_thresholds else None
+        from modules.detector import detect, default_class_thresholds
+        class_conf = json.loads(a.class_thresholds.read_text(encoding='utf-8')) if a.class_thresholds else default_class_thresholds()
         detected, confidences = detect(image, weights, a.out / 'detected.jpg', a.device, a.conf, a.imgsz,
             iou=a.nms_iou, class_conf=class_conf, tile_size=a.tile_size, overlap=a.tile_overlap)
         save(a.out / 'detection.json', {'schema_version': '1.0', 'image_sha256': digest,

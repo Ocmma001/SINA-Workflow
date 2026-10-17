@@ -2,7 +2,14 @@
 from collections import Counter
 from functools import lru_cache
 import math
+import json
 from pathlib import Path
+
+
+def default_class_thresholds():
+    """Selected teammate operating point; return a fresh mapping for each run."""
+    path = Path(__file__).resolve().parents[2] / 'experiments/candidates/member-a-class-thresholds.json'
+    return json.loads(path.read_text(encoding='utf-8'))
 
 
 @lru_cache(maxsize=2)
@@ -85,6 +92,8 @@ def detect(image, weights, annotated_path, device='cpu', conf=.25, imgsz=960, *,
            iou=.7, class_conf=None, tile_size=None, overlap=.2):
     import cv2
     from .image_io import write_image
+    if class_conf is None:
+        class_conf = default_class_thresholds()
     records = predict_records(image,weights,device,conf,imgsz,iou=iou,class_conf=class_conf,tile_size=tile_size,overlap=overlap)
     counts, detected, confidences = Counter(), [], {}
     annotated = image.copy()

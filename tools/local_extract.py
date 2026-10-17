@@ -78,6 +78,8 @@ def extract(args, on_stage=None):
             confidences[c['id']] = evidence.get('confidences', {}).get(c['id'], c.get('confidence'))
         write_image(args.out / 'detected.jpg', image)
     else:
+        if getattr(args, 'class_conf', None) is None:
+            args.class_conf = detector.default_class_thresholds()
         detected, confidences = detector.detect(image, args.weights, args.out / 'detected.jpg',
                                                    args.device, args.conf, args.imgsz, iou=getattr(args,'detector_iou',getattr(args,'nms_iou',.7)),
                 class_conf=getattr(args,'class_conf',None), tile_size=getattr(args,'tile_size',None), overlap=getattr(args,'tile_overlap',.2))
