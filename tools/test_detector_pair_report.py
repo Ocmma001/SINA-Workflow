@@ -8,6 +8,11 @@ def example(image='a.jpg'):
 
 
 class PairingTests(unittest.TestCase):
+    def test_cannot_score_below_either_cache_confidence_floor(self):
+        baseline = dict(example(), prediction_cache_confidence=.3)
+        with self.assertRaises(ValueError):
+            pair_cases([baseline], [example()], confidence=.25)
+
     def test_missing_images_cannot_disappear_from_paired_denominator(self):
         with self.assertRaises(ValueError):
             pair_cases([example(), example('b.jpg')], [example()])

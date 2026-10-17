@@ -7,6 +7,9 @@ from detector_metrics import score_detections
 
 
 def pair_cases(baseline, candidate, confidence=.25):
+    # Earlier files from this same evaluator had an implicit .05 cache floor.
+    if any(confidence < case.get('prediction_cache_confidence', .05) for case in baseline + candidate):
+        raise ValueError('Requested confidence is below the prediction cache floor')
     left, right = {c['image']: c for c in baseline}, {c['image']: c for c in candidate}
     if len(left) != len(baseline) or len(right) != len(candidate) or left.keys() != right.keys():
         raise ValueError('Missing or duplicate paired images')
@@ -39,8 +42,8 @@ def main():
     args = p.parse_args()
     if args.out.exists():
         p.error('output file already exists')
-    rows = pair_cases([json.loads(f.read_text(encoding='utf-8')) for f in args.baseline.glob('*.json')],
-                      [json.loads(f.read_text(encoding='utf-8')) for f in args.candidate.glob('*.json')], args.confidence)
+    rows = pair_cases([json.loads(f.read_text(encoding='utf-8')) for f in args.baseline.rglob('*.json')],
+                      [json.loads(f.read_text(encoding='utf-8')) for f in args.candidate.rglob('*.json')], args.confidence)
     if not rows:
         p.error('no prediction pairs')
     summaries = {}

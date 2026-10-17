@@ -1,0 +1,585 @@
+{
+  "schema_version": "1.0",
+  "status": "candidate_requires_downstream_review",
+  "branch": "opt/detector",
+  "base_commit": "f0a0d22",
+  "model": "YOLO11m",
+  "baseline_weight_sha256": "0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d",
+  "images": 66,
+  "objects": 707,
+  "input_manifest_sha256": "e9528fe9494588be8316e524bcda5850891be48d2ae35e7ef754d4ee3fec8dbd",
+  "gpu": "NVIDIA GeForce RTX 5080 Laptop GPU",
+  "torch": "2.11.0+cu128",
+  "ultralytics": "8.4.178",
+  "evaluation": {
+    "batch": 1,
+    "deployment_conf": 0.25,
+    "nms_iou": 0.7,
+    "cache_conf_floor": 0.05,
+    "seed": 42,
+    "independent_test": false
+  },
+  "resolutions": [
+    {
+      "imgsz": 960,
+      "map": {
+        "metrics/precision(B)": 0.9437135127524925,
+        "metrics/recall(B)": 0.946343287866051,
+        "metrics/mAP50(B)": 0.9713496158236279,
+        "metrics/mAP50-95(B)": 0.7449712546309379,
+        "fitness": 0.7449712546309379
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7546243909377675,
+        "Capacitor": 0.6018236265820684,
+        "Inductor": 0.7159731943377197,
+        "Transistor_BJT": 0.7506867974131134,
+        "Transistor_MOSFET": 0.7640697848455197,
+        "Voltage_src": 0.7790518600516915,
+        "Current_src": 0.8970625,
+        "GND": 0.6645911740634168,
+        "Op-Amp": 0.8628757436033754,
+        "Diode": 0.6589534744747086
+      },
+      "prediction_warm_mean_seconds": 0.021241190476829947,
+      "peak_gpu_allocated_bytes": 383323648,
+      "deployment_at_025": {
+        "0.5": {
+          "tp": 687,
+          "fp": 50,
+          "fn": 20,
+          "precision": 0.932157394843962,
+          "recall": 0.9717114568599717,
+          "f1": 0.9515235457063712,
+          "whole_image_correct": 46,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 638,
+          "fp": 99,
+          "fn": 69,
+          "precision": 0.8656716417910447,
+          "recall": 0.9024045261669024,
+          "f1": 0.8836565096952909,
+          "whole_image_correct": 35,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      }
+    },
+    {
+      "imgsz": 1280,
+      "map": {
+        "metrics/precision(B)": 0.9319451291795101,
+        "metrics/recall(B)": 0.943353938959721,
+        "metrics/mAP50(B)": 0.9682164257912511,
+        "metrics/mAP50-95(B)": 0.7314529249224394,
+        "fitness": 0.7314529249224394
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7454291587601709,
+        "Capacitor": 0.6208801881302958,
+        "Inductor": 0.7286053326635087,
+        "Transistor_BJT": 0.7074038369577454,
+        "Transistor_MOSFET": 0.7522751815155267,
+        "Voltage_src": 0.7334100125821857,
+        "Current_src": 0.8679749999999998,
+        "GND": 0.6729339947865325,
+        "Op-Amp": 0.816089462292094,
+        "Diode": 0.6695270815363328
+      },
+      "prediction_warm_mean_seconds": 0.0265827507939234,
+      "peak_gpu_allocated_bytes": 658733056,
+      "deployment_at_025": {
+        "0.5": {
+          "tp": 683,
+          "fp": 55,
+          "fn": 24,
+          "precision": 0.9254742547425474,
+          "recall": 0.9660537482319661,
+          "f1": 0.9453287197231834,
+          "whole_image_correct": 38,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 634,
+          "fp": 104,
+          "fn": 73,
+          "precision": 0.8590785907859079,
+          "recall": 0.8967468175388967,
+          "f1": 0.8775086505190312,
+          "whole_image_correct": 28,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      }
+    },
+    {
+      "imgsz": 1536,
+      "map": {
+        "metrics/precision(B)": 0.9188254424696533,
+        "metrics/recall(B)": 0.9160315715483403,
+        "metrics/mAP50(B)": 0.9547940997263679,
+        "metrics/mAP50-95(B)": 0.7119416813618193,
+        "fitness": 0.7119416813618193
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7403727080985707,
+        "Capacitor": 0.6084528886381514,
+        "Inductor": 0.7025904876926616,
+        "Transistor_BJT": 0.6566187557100632,
+        "Transistor_MOSFET": 0.7398968084151674,
+        "Voltage_src": 0.695307955014638,
+        "Current_src": 0.883375,
+        "GND": 0.6461866237088215,
+        "Op-Amp": 0.7714545856617144,
+        "Diode": 0.675161000678403
+      },
+      "prediction_warm_mean_seconds": 0.02934287142921849,
+      "peak_gpu_allocated_bytes": 859175936,
+      "deployment_at_025": {
+        "0.5": {
+          "tp": 677,
+          "fp": 73,
+          "fn": 30,
+          "precision": 0.9026666666666666,
+          "recall": 0.9575671852899575,
+          "f1": 0.9293067947838023,
+          "whole_image_correct": 30,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 615,
+          "fp": 135,
+          "fn": 92,
+          "precision": 0.82,
+          "recall": 0.8698727015558698,
+          "f1": 0.8442004118050789,
+          "whole_image_correct": 23,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      }
+    }
+  ],
+  "training_candidates": [
+    {
+      "name": "low_lr_mosaic",
+      "train_run": "detector-exp001-train-lr5e5",
+      "eval_run": "detector-exp001-candidate-lr5e5",
+      "epochs_completed": 13,
+      "best_epoch": 3,
+      "train_seconds": 316.058,
+      "lr0": 5e-05,
+      "mosaic": 0.2,
+      "weight_sha256": "55c52fdb2c0331b35cd146648692dd76554fcccda4e3cb8e3de4fc2ca50f4515",
+      "map_batch8": {
+        "metrics/precision(B)": 0.9345018702970599,
+        "metrics/recall(B)": 0.9563589178222843,
+        "metrics/mAP50(B)": 0.9695188892116604,
+        "metrics/mAP50-95(B)": 0.7416868193299632,
+        "fitness": 0.7416868193299632
+      },
+      "map_batch1": {
+        "metrics/precision(B)": 0.9366257699807956,
+        "metrics/recall(B)": 0.956258324807383,
+        "metrics/mAP50(B)": 0.9693145292763725,
+        "metrics/mAP50-95(B)": 0.7400447342148649,
+        "fitness": 0.7400447342148649
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7449088284371183,
+        "Capacitor": 0.6069756499916588,
+        "Inductor": 0.7040860389610389,
+        "Transistor_BJT": 0.7237965972923417,
+        "Transistor_MOSFET": 0.7566023947236612,
+        "Voltage_src": 0.7820477985418848,
+        "Current_src": 0.8860000000000001,
+        "GND": 0.6636072124862742,
+        "Op-Amp": 0.8566253140096618,
+        "Diode": 0.6757975077050112
+      },
+      "deployment": {
+        "0.15": {
+          "0.5": {
+            "tp": 688,
+            "fp": 58,
+            "fn": 19,
+            "precision": 0.9222520107238605,
+            "recall": 0.9731258840169731,
+            "f1": 0.9470061940812113,
+            "whole_image_correct": 40,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 640,
+            "fp": 106,
+            "fn": 67,
+            "precision": 0.8579088471849866,
+            "recall": 0.9052333804809052,
+            "f1": 0.88093599449415,
+            "whole_image_correct": 31,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.25": {
+          "0.5": {
+            "tp": 685,
+            "fp": 48,
+            "fn": 22,
+            "precision": 0.9345156889495225,
+            "recall": 0.9688826025459689,
+            "f1": 0.9513888888888888,
+            "whole_image_correct": 42,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 639,
+            "fp": 94,
+            "fn": 68,
+            "precision": 0.8717598908594816,
+            "recall": 0.9038189533239038,
+            "f1": 0.8875,
+            "whole_image_correct": 33,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.35": {
+          "0.5": {
+            "tp": 682,
+            "fp": 41,
+            "fn": 25,
+            "precision": 0.9432918395573997,
+            "recall": 0.9646393210749646,
+            "f1": 0.9538461538461539,
+            "whole_image_correct": 42,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 637,
+            "fp": 86,
+            "fn": 70,
+            "precision": 0.8810511756569848,
+            "recall": 0.900990099009901,
+            "f1": 0.8909090909090909,
+            "whole_image_correct": 33,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.5": {
+          "0.5": {
+            "tp": 669,
+            "fp": 29,
+            "fn": 38,
+            "precision": 0.9584527220630372,
+            "recall": 0.9462517680339463,
+            "f1": 0.9523131672597864,
+            "whole_image_correct": 45,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 630,
+            "fp": 68,
+            "fn": 77,
+            "precision": 0.9025787965616046,
+            "recall": 0.8910891089108911,
+            "f1": 0.896797153024911,
+            "whole_image_correct": 34,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        }
+      },
+      "paired": {
+        "images": 66,
+        "confidence": 0.25,
+        "iou": {
+          "0.5": {
+            "baseline": {
+              "tp": 687,
+              "fp": 50,
+              "fn": 20,
+              "precision": 0.932157394843962,
+              "recall": 0.9717114568599717,
+              "f1": 0.9515235457063712
+            },
+            "candidate": {
+              "tp": 685,
+              "fp": 48,
+              "fn": 22,
+              "precision": 0.9345156889495225,
+              "recall": 0.9688826025459689,
+              "f1": 0.9513888888888888
+            },
+            "f1_delta": -0.00013465681748237035,
+            "f1_delta_paired_bootstrap_95": [
+              -0.012886314931902398,
+              0.009785317169347718
+            ],
+            "image_error_count_improved": 9,
+            "image_error_count_regressed": 9,
+            "image_error_count_tied": 48
+          },
+          "0.75": {
+            "baseline": {
+              "tp": 638,
+              "fp": 99,
+              "fn": 69,
+              "precision": 0.8656716417910447,
+              "recall": 0.9024045261669024,
+              "f1": 0.8836565096952909
+            },
+            "candidate": {
+              "tp": 639,
+              "fp": 94,
+              "fn": 68,
+              "precision": 0.8717598908594816,
+              "recall": 0.9038189533239038,
+              "f1": 0.8875
+            },
+            "f1_delta": 0.0038434903047090963,
+            "f1_delta_paired_bootstrap_95": [
+              -0.00985632812034265,
+              0.015164988636796495
+            ],
+            "image_error_count_improved": 11,
+            "image_error_count_regressed": 12,
+            "image_error_count_tied": 43
+          }
+        },
+        "bootstrap": {
+          "seed": 42,
+          "samples": 1000,
+          "unit": "image",
+          "limitation": "Descriptive development-set sampling uncertainty; does not account for model/threshold selection or establish independent generalization."
+        },
+        "independent_test": false,
+        "ready_for_simulation": false
+      }
+    },
+    {
+      "name": "low_lr_no_mosaic",
+      "train_run": "detector-exp001-train-no-mosaic",
+      "eval_run": "detector-exp001-candidate-no-mosaic",
+      "epochs_completed": 13,
+      "best_epoch": 3,
+      "train_seconds": 323.074,
+      "lr0": 5e-05,
+      "mosaic": 0,
+      "weight_sha256": "43a5f9fdabe6c8c2da1cd7aad6ff772715d60c7eba60f71c2fe87090cea408f5",
+      "map_batch8": {
+        "metrics/precision(B)": 0.95051467754821,
+        "metrics/recall(B)": 0.9604756168769775,
+        "metrics/mAP50(B)": 0.9702302514327652,
+        "metrics/mAP50-95(B)": 0.7495574129216375,
+        "fitness": 0.7495574129216375
+      },
+      "map_batch1": {
+        "metrics/precision(B)": 0.950872478818801,
+        "metrics/recall(B)": 0.9616137624319133,
+        "metrics/mAP50(B)": 0.9703185165511071,
+        "metrics/mAP50-95(B)": 0.7478700435489246,
+        "fitness": 0.7478700435489246
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7374842365443847,
+        "Capacitor": 0.6130443528952172,
+        "Inductor": 0.7126806413892621,
+        "Transistor_BJT": 0.734276019137867,
+        "Transistor_MOSFET": 0.7556346043933169,
+        "Voltage_src": 0.7828498078026886,
+        "Current_src": 0.908,
+        "GND": 0.6703980188734654,
+        "Op-Amp": 0.887188098938099,
+        "Diode": 0.6771446555149435
+      },
+      "deployment": {
+        "0.15": {
+          "0.5": {
+            "tp": 687,
+            "fp": 52,
+            "fn": 20,
+            "precision": 0.9296346414073072,
+            "recall": 0.9717114568599717,
+            "f1": 0.950207468879668,
+            "whole_image_correct": 43,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 638,
+            "fp": 101,
+            "fn": 69,
+            "precision": 0.8633288227334236,
+            "recall": 0.9024045261669024,
+            "f1": 0.8824343015214384,
+            "whole_image_correct": 32,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.25": {
+          "0.5": {
+            "tp": 684,
+            "fp": 42,
+            "fn": 23,
+            "precision": 0.9421487603305785,
+            "recall": 0.9674681753889675,
+            "f1": 0.9546406140963015,
+            "whole_image_correct": 44,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 636,
+            "fp": 90,
+            "fn": 71,
+            "precision": 0.8760330578512396,
+            "recall": 0.8995756718528995,
+            "f1": 0.8876482903000698,
+            "whole_image_correct": 32,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.35": {
+          "0.5": {
+            "tp": 682,
+            "fp": 30,
+            "fn": 25,
+            "precision": 0.9578651685393258,
+            "recall": 0.9646393210749646,
+            "f1": 0.9612403100775194,
+            "whole_image_correct": 48,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 635,
+            "fp": 77,
+            "fn": 72,
+            "precision": 0.8918539325842697,
+            "recall": 0.8981612446958982,
+            "f1": 0.8949964763918252,
+            "whole_image_correct": 34,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.5": {
+          "0.5": {
+            "tp": 671,
+            "fp": 23,
+            "fn": 36,
+            "precision": 0.9668587896253602,
+            "recall": 0.9490806223479491,
+            "f1": 0.9578872234118487,
+            "whole_image_correct": 47,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 630,
+            "fp": 64,
+            "fn": 77,
+            "precision": 0.9077809798270894,
+            "recall": 0.8910891089108911,
+            "f1": 0.8993576017130621,
+            "whole_image_correct": 34,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        }
+      },
+      "paired": {
+        "images": 66,
+        "confidence": 0.25,
+        "iou": {
+          "0.5": {
+            "baseline": {
+              "tp": 687,
+              "fp": 50,
+              "fn": 20,
+              "precision": 0.932157394843962,
+              "recall": 0.9717114568599717,
+              "f1": 0.9515235457063712
+            },
+            "candidate": {
+              "tp": 684,
+              "fp": 42,
+              "fn": 23,
+              "precision": 0.9421487603305785,
+              "recall": 0.9674681753889675,
+              "f1": 0.9546406140963015
+            },
+            "f1_delta": 0.003117068389930311,
+            "f1_delta_paired_bootstrap_95": [
+              -0.008000529801556855,
+              0.01376881203970548
+            ],
+            "image_error_count_improved": 8,
+            "image_error_count_regressed": 5,
+            "image_error_count_tied": 53
+          },
+          "0.75": {
+            "baseline": {
+              "tp": 638,
+              "fp": 99,
+              "fn": 69,
+              "precision": 0.8656716417910447,
+              "recall": 0.9024045261669024,
+              "f1": 0.8836565096952909
+            },
+            "candidate": {
+              "tp": 636,
+              "fp": 90,
+              "fn": 71,
+              "precision": 0.8760330578512396,
+              "recall": 0.8995756718528995,
+              "f1": 0.8876482903000698
+            },
+            "f1_delta": 0.003991780604778894,
+            "f1_delta_paired_bootstrap_95": [
+              -0.009582907722119782,
+              0.01760149977276171
+            ],
+            "image_error_count_improved": 9,
+            "image_error_count_regressed": 9,
+            "image_error_count_tied": 48
+          }
+        },
+        "bootstrap": {
+          "seed": 42,
+          "samples": 1000,
+          "unit": "image",
+          "limitation": "Descriptive development-set sampling uncertainty; does not account for model/threshold selection or establish independent generalization."
+        },
+        "independent_test": false,
+        "ready_for_simulation": false
+      }
+    }
+  ],
+  "default_model_changed": false,
+  "limitations": [
+    "Development data already used for model selection; no independent test.",
+    "Single training seed; no multi-seed repeat yet.",
+    "Paired bootstrap F1 intervals include zero; improvement is not statistically established.",
+    "OCR/pin/network downstream accuracy not evaluated.",
+    "Batch4/1536 run was resource-stopped and excluded from completed sweep."
+  ],
+  "artifact": {
+    "release": "https://github.com/Ocmma001/SINA-Workflow/releases/tag/detector-exp001",
+    "filename": "detector-exp001-review.zip",
+    "sha256": "b83e8b4c10b907d35a51510c1297d9196e409f09b172b66ab2a96246afa439fd"
+  }
+}

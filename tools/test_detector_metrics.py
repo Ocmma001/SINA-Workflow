@@ -3,6 +3,19 @@ from detector_metrics import score_detections
 
 
 class DetectionMetricTests(unittest.TestCase):
+    def test_image_manifest_includes_png_and_nested_jpeg(self):
+        import tempfile
+        from pathlib import Path
+        from detector_experiment import image_files
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'nested').mkdir()
+            for name in ['a.jpg', 'b.PNG', 'nested/c.jpeg', 'labels.txt']:
+                (root / name).write_bytes(b'fixture')
+            found = image_files(root, ['jpg', 'png', 'jpeg'])
+            self.assertEqual({p.relative_to(root).as_posix() for p in found},
+                             {'a.jpg', 'b.PNG', 'nested/c.jpeg'})
+
     def test_duplicate_detection_cannot_match_one_truth_twice(self):
         truth = [{'class': 0, 'bbox': [0, 0, 10, 10]}]
         predictions = [{'class': 0, 'bbox': [0, 0, 10, 10], 'confidence': c} for c in [.9, .8]]

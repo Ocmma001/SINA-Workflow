@@ -15,7 +15,13 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def write_json(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+def image_files(directory, formats):
+    allowed = {'.' + value.lower().lstrip('.') for value in formats}
+    return sorted(path for path in directory.rglob('*') if path.is_file() and path.suffix.lower() in allowed)
 
 
 def summarize(cases, threshold, confidence):
@@ -44,7 +50,7 @@ def main():
     p.add_argument('--weights', type=Path, required=True)
     p.add_argument('--sizes', type=int, nargs='+', default=[960, 1280, 1536])
     p.add_argument('--device', default='0')
-    p.add_argument('--batch', type=int, default=4)
+    p.add_argument('--batch', type=int, default=1)
     p.add_argument('--data', type=Path, default=ROOT / 'SINA/Netlist Generator/IC/model_training/data')
     a = p.parse_args()
     if Path(a.name).name != a.name or a.name in {'.', '..'} or min(a.sizes) < 32 or a.batch < 1:
@@ -58,8 +64,9 @@ def main():
     import torch
     import ultralytics
     import yaml
-    from PIL import Image
+    from PIL import Image, ImageOps
     from ultralytics import YOLO
+    from ultralytics.data.utils import IMG_FORMATS
     if a.device != 'cpu' and not torch.cuda.is_available():
         raise RuntimeError('GPU requested but CUDA unavailable')
     data = a.data.resolve()
@@ -68,10 +75,11 @@ def main():
     config.write_text(yaml.safe_dump({'path': data.as_posix(), 'train': 'images/train',
         'val': 'images/val', 'names': dict(enumerate(NAMES))}), encoding='utf-8')
     inputs = []
-    for path in sorted((data / 'images/val').glob('*.jpg')):
-        label = data / 'labels/val' / (path.stem + '.txt')
+    for path in image_files(data / 'images/val', IMG_FORMATS):
+        relative = path.relative_to(data / 'images/val')
+        label = data / 'labels/val' / relative.with_suffix('.txt')
         with Image.open(path) as image:
-            width, height = image.size
+            width, height = ImageOps.exif_transpose(image).size
         truth = []
         for line in label.read_text(encoding='utf-8').splitlines():
             if not line.strip():
@@ -79,7 +87,7 @@ def main():
             cid, (cx, cy, w, h) = validate_label(line)
             truth.append({'class': cid, 'bbox': [(cx-w/2)*width, (cy-h/2)*height,
                                                   (cx+w/2)*width, (cy+h/2)*height]})
-        inputs.append({'image': path.name, 'image_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+        inputs.append({'image': relative.as_posix(), 'image_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
             'label_sha256': hashlib.sha256(label.read_bytes()).hexdigest(), 'truth': truth})
     if not inputs:
         raise ValueError('No validation images')
@@ -94,7 +102,7 @@ def main():
         'seed': 42, 'started_utc': datetime.now(timezone.utc).isoformat(),
         'independent_test': False, 'warning': 'Development validation; no OCR, topology or independent test claims.'})
     model = YOLO(str(a.weights.resolve()))
-    if [model.names[i] for i in range(10)] != NAMES:
+    if len(model.names) != len(NAMES) or [model.names[i] for i in range(10)] != NAMES:
         raise ValueError('Class order mismatch')
     summaries = []
     for size in a.sizes:
@@ -112,7 +120,7 @@ def main():
         print(f'PHASE size={size} deployment', flush=True)
         for index, item in enumerate(inputs):
             start = time.monotonic()
-            case = dict(item, predictions=[], error=None)
+            case = dict(item, predictions=[], error=None, prediction_cache_confidence=.05)
             try:
                 pred = model.predict(str(data / 'images/val' / item['image']), imgsz=size,
                     device=a.device, conf=.05, iou=.7, verbose=False)[0]
@@ -122,7 +130,7 @@ def main():
             except Exception as exc:
                 case['error'] = type(exc).__name__
             case['wall_seconds'] = time.monotonic()-start
-            write_json(directory / (Path(item['image']).stem + '.json'), case)
+            write_json(directory / Path(item['image']).with_suffix('.json'), case)
             cases.append(case)
             if (index+1) % 22 == 0:
                 print(f'PROGRESS size={size} images={index+1}/{len(inputs)}', flush=True)
