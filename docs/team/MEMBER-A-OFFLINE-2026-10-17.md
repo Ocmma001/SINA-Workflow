@@ -60,7 +60,7 @@ CPU调用不再修改CUDA_VISIBLE_DEVICES，避免同一服务之后无法使用
 | FN@.75 | 69 | 69 |
 | F1@.75 | .883657 | 0.894811 |
 
-固定这66张图，按图配对bootstrap（2000次、seed42）的F1增量95%区间：IoU .5为[0.004332, 0.021092]；IoU .75为[0.003982, 0.019347]。这些是开发图条件重采样区间，不代表独立泛化。
+固定这66张图，按图配对bootstrap（2000次、seed42）的F1增量95%区间：IoU .5为[0.004332, 0.021092]；IoU .75为[0.003982, 0.019347]。这些是开发图条件重采样区间；阈值也在同一开发集上选择，区间未计入选择偏差，不代表独立泛化。
 
 原始排序检测器的mAP50-95控制值仍为.744967（val conf=.001、batch1）；没有声称分类阈值后处理提高了AP。
 
@@ -68,9 +68,11 @@ CPU调用不再修改CUDA_VISIBLE_DEVICES，避免同一服务之后无法使用
 
 ## 性能与失败记录
 
-高密度`circuit_0097`在原接触点循环中长时间停留，旧回放在完成29张后被主动中止；该图的未完成阶段保留在原summary中，未算作成功。边界查询优化后，完整拓扑阶段在该图约1.52秒完成。原阶段没有完整耗时，不报告精确提速倍数。
+高密度`circuit_0097`在原接触点循环中长时间停留，旧回放在写出29张图的58条阶段记录后被主动中止，另有该图的1次未完成阶段。恢复后逐项审计发现：59次尝试的交叉阶段均为FileNotFoundError，旧summary中的stage_failures=0漏计了内部降级，不能据此宣称成功；保留原记录，并以`historical-failure-audit.json`更正解释。58次为降级结束，1次整体阶段中止，本批完整成功0/59。边界查询优化后，完整拓扑阶段在该图约1.52秒完成。原阶段没有完整耗时，不报告精确提速倍数。
 
 随后首次快速回放132次均发现交叉阶段降级：`outputPath.replace('.',...)`改写了0.25父目录，触发FileNotFoundError。这批132次降级结果保留于`downstream-fast`，不与最终成功批次混淆。修复路径后重跑`downstream-final`才得到132/132完整成功。
+
+四个下游回放批次合计389次阶段尝试：最终198次完整成功，早期190次降级结束、1次中止。198/198仅描述修复后的两批，不能替代全历史分母；这些计数也不是人工网络正确率。
 
 随机50组栅格/边框测试确认边界触点及其排列与原算法一致；三张真实样例的连通栅格和电路候选也精确一致。性能优化没有改动线宽、二值化或聚类半径。
 
@@ -109,3 +111,13 @@ OCR九组顺序实验显示小图放大可找回D1、5V、R2等文字，也出�
 分支按前序提交叠加；若创建多个PR，应以前序分支为base分别审查。尚未推送、未创建PR、未发布。大权重、数据集、虚拟环境和运行目录不进入Git。
 
 主要证据均位于`runs/member-a-opt2/`：acceptance.v1、extra-cli-results.json、detector-sweep、class-candidate、downstream-final、topology-performance-paired.json、pins-paired.json、binding-paired.json及clean-tests-final.log。
+
+## 数据、证据与交付索引
+
+- 本轮运行代码commit：`7f6fc1814ff23c43185e79d9aacba57432405bbb`；验收12命令时为`6949df1`，其后只增加统计工具及两项测试。源文件逐项哈希在`final-source-provenance.json`。
+- 资源版本由`assets/manifest.json`固定，SHA256为`a9eb8213533526b77fca121cffa69135f3b452f0c7fd1b4d1224b4b2edac5b6b`；1329个资源文件已校验。596张训练图、66张开发验证图；独立OCR/语义引脚/网络人工真值未补齐。
+- 参数及逐图预测：`detector-sweep/*-predictions.json`、`summary.json`及`extended-thresholds.json`；检测框、原图哈希及逐图真值/预测均保存在冻结记录。随机统计seed42；推理不新增随机增强或训练。
+- 分类候选实际重推理：`class-candidate/actual-inference.json`；逐图下游：`downstream-final/summary.json`、`downstream-class-candidate/summary.json`；历史失败审计：`historical-failure-audit.json`。
+- 最新源码ZIP、Git bundle、轻量证据ZIP、交接说明及SHA256清单位于`runs/member-a-delivery-002/`。证据包保留JSON、日志、实验脚本和文本；大型栅格/可视化以文件哈希清单索引，仍保留在本机`runs/member-a-opt2/`。模型和数据沿用单独校验资源包，不嵌入源码包。
+
+本次恢复只做08集成交付的历史审计、报告更正与打包，没有更改推理代码、共享接口、选定权重，也没有重跑已完成的模型实验。
