@@ -1,50 +1,113 @@
-# SINA 工作流协作仓库
+# SINA 电路图识别工作流
 
-只管理电路图片识别、模型训练、评测、输出契约和文档；不包含GUI前端或ngspice。
+将电路原理图图片转换为可编辑的结构化电路数据，供 LabPilot 展示、人工核对和后续网表生成使用。
 
-**组员先读：[分区指南](分区指南.md) · [优化指南](优化指南.md)**。分区指南明确负责文件、独立运行和协作边界；优化指南汇总各部分方案与验收要求。
-
-| 独立优化部分 | 详细任务 |
-|---|---|
-| 数据与评估 | [01指南](docs/team/01-data-evaluation.md) |
-| YOLO11m检测 | [02指南](docs/team/02-detector.md) |
-| OCR与参数绑定 | [03指南](docs/team/03-ocr-text.md) |
-| 导线与交叉连接 | [04指南](docs/team/04-topology.md) |
-| 引脚分析 | [05指南](docs/team/05-pins.md) |
-| 豆包复核 | [06指南](docs/team/06-vision-review.md) |
-| 输出契约与校验 | [07指南](docs/team/07-contract.md) |
-| 集成与发布 | [08指南](docs/team/08-integration.md) |
-
-**新聊天入口：[docs/team/START-HERE.md](docs/team/START-HERE.md)**。
-安装与资源导入：[SETUP](docs/team/SETUP.md)。模块接口：[INTERFACES](docs/team/INTERFACES.md)。设备分配：[HARDWARE](docs/team/HARDWARE.md)。
-
-GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITHUB.md)。
-
-当前人员分工：[组员A（RTX 5070 Laptop 8GB）任务单](docs/team/ASSIGNMENT-MEMBER-A.md)。可执行的开发与评测交给组员A，高显存训练由用户电脑承担。
-
-现有图片/标注参考与缺口：[材料说明](resources/development-references/README.md)。含两张待复核开发参考；尚无完整独立测试集或第二人复核真值。
+## 工作流程
 
 ```text
-图片 → YOLO11m → 导线连通区域 → 引脚连接
-图片 → EasyOCR → 位号/参数绑定
-候选 + 可选豆包复核 → recognized.json 待确认草稿
+电路图片
+   ├─ YOLO11m → 元件类型、位置
+   ├─ EasyOCR → 位号、参数文字 → 文字与元件关联
+   └─ OpenCV 连通区域分析 → 导线、交叉点 → 引脚连接候选
+                         ↓
+                 recognized.json
+                         ↓
+                      人工核对
 ```
 
-生产入口 `python tools/gui_workflow.py 图片 --out runs/新目录`，不依赖GUI。
-独立阶段 `python tools/run_stage.py --help`。单测 `python -m unittest discover -s tools -p "test_*.py"`。
+支持电阻、电容、电感、BJT、MOSFET、电压源、电流源、地、运放和二极管的检测。默认流程在本地运行，可使用 CPU 或 NVIDIA GPU，无需 API 密钥。
 
-选定模型：YOLO11m round-002，imgsz960/conf0.25。66张开发验证图mAP50-95=0.745407，固定阈值F1@IoU.5=0.951524。不是独立测试成绩或整图识别准确率。
-代码已拆分至 `tools/modules/`：detector、ocr、text_binding、topology、pins、vision；输出契约在 `tools/gui_contract.py`。
-上游拓扑源码在 `tools/modules/topology_impl`，含MIT许可和出处。依赖各自许可见 [THIRD_PARTY.md](THIRD_PARTY.md)。
+识别结果保留元件位置、文字证据和连接候选。无法确定的参数或引脚顺序留空，结果需人工确认后再用于生成仿真网表。本仓库提供识别工作流，不包含 GUI 前端或 ngspice。
 
-大资源单独分发，Git不含权重、数据集、虚拟环境、API密钥及运行历史。下载源码后按SETUP导入资源。
-公开协作仓库：[Ocmma001/SINA-Workflow](https://github.com/Ocmma001/SINA-Workflow)。模型和数据下载：[workflow-v1 Release](https://github.com/Ocmma001/SINA-Workflow/releases/tag/workflow-v1)。
+## 安装
 
-仓库保留当前工作流、YOLO11m训练基线与协作指南；旧Pro直接检测、Lite/Pro对比及重复历史交接材料已清理。
+以下命令使用 Windows PowerShell，在安装 Python 和 Git 后执行。
 
-检测优化分支的已完成试验：[实验001](experiments/detector-exp001/README.md)、[实验002](experiments/detector-exp002/README.md)。候选单独下载并显式指定，默认模型保持不变。
-# 当前默认版本
+### 1. 获取代码并创建环境
 
-按组内选择，默认使用原选定 YOLO11m 权重（SHA256 `0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d`）与组员优化的 OCR、文字归属、导线和引脚模块。完整流程与单独检测入口自动启用组员分类阈值，无需额外传入参数。微调权重只保留为实验候选，不参与默认识别。
+```powershell
+git clone https://github.com/Ocmma001/SINA-Workflow.git
+cd SINA-Workflow
+python -m venv SINA-venv
+.\SINA-venv\Scripts\Activate.ps1
+```
 
-66张开发图的检测F1为96.35%，误检32、漏检20；不是独立测试或整电路准确率。结果见[双方集成报告](docs/team/COMBINED-2026-10-17.md)。输出继续保留人工复核状态。自定义`--class-thresholds`可覆盖默认配置，传入内容为`{}`的JSON文件可恢复统一`--conf`阈值。低层实验函数`predict_records`仍保留显式参数，便于公平对照。
+### 2. 安装依赖
+
+CPU 环境：
+
+```powershell
+python -m pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements-workflow.txt
+```
+
+使用 NVIDIA GPU 时，将第一条命令的安装索引替换为与设备、驱动兼容的 CUDA 版本。本项目已验证的 CUDA 安装索引为 `https://download.pytorch.org/whl/cu128`。
+
+### 3. 导入模型资源
+
+从 [workflow-v1 Release](https://github.com/Ocmma001/SINA-Workflow/releases/tag/workflow-v1) 下载 `SINA-workflow-assets.zip`，然后导入：
+
+```powershell
+python tools/import_assets.py "D:\Downloads\SINA-workflow-assets.zip"
+```
+
+请将示例路径替换为实际下载位置。导入器会校验文件哈希并恢复所需资源，包括：
+
+| 资源 | 导入位置 |
+|---|---|
+| YOLO11m 权重 | `runs/round-002/delivery/detector.pt` |
+| EasyOCR 权重 | `SINA-venv/easyocr_models/` |
+| SINA 资源 | `SINA/` |
+
+权重和虚拟环境不随 Git 仓库分发。先创建环境，再导入资源。
+
+## 使用方法
+
+### 识别一张电路图
+
+```powershell
+python tools/gui_workflow.py examples/user_bjt_bias.jpg --out runs/first-local
+```
+
+识别自己的图片时，替换输入路径。每次使用一个新的输出目录，避免覆盖已有识别记录。
+
+### 使用 GPU
+
+```powershell
+python tools/gui_workflow.py "D:\Pictures\circuit.png" --out runs/circuit-gpu --device 0
+```
+
+`--device cpu` 使用 CPU（默认），`--device 0` 使用第一张 NVIDIA GPU。
+
+### 单独运行检测或 OCR
+
+```powershell
+python tools/run_stage.py detector --image examples/user_bjt_bias.jpg --out runs/detection-only
+python tools/run_stage.py ocr --image examples/user_bjt_bias.jpg --out runs/ocr-only
+```
+
+查看完整参数：
+
+```powershell
+python tools/gui_workflow.py --help
+python tools/run_stage.py --help
+```
+
+## 输出文件
+
+完整流程的输出保存在 `--out` 指定的目录中：
+
+| 文件 | 内容 |
+|---|---|
+| `recognized.json` | 可编辑电路草稿：元件、位号、参数、型号及候选节点 |
+| `candidates.json` | 本地检测、OCR、引脚与连接证据 |
+| `workflow.json` | 模型信息、运行参数、阶段状态和耗时 |
+| `events.jsonl` | 各阶段进度记录 |
+| `evidence/detected.jpg` | 元件检测框可视化 |
+| `evidence/debug/` | 导线、交叉点及连接分析的中间结果 |
+
+`recognized.json` 的 `components` 是可编辑元件列表；接地信息保存在识别与拓扑证据中。输出默认标记为待复核，不会自动视为可仿真的电路。
+
+## 来源与许可
+
+工作流基于 SINA，导线分析源码的许可见 [LICENSE](tools/modules/topology_impl/LICENSE)，第三方依赖说明见 [THIRD_PARTY.md](THIRD_PARTY.md)。
