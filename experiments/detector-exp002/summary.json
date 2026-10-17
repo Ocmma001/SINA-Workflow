@@ -1,0 +1,672 @@
+{
+  "schema_version": "1.0",
+  "experiment": "detector-exp002",
+  "date": "2026-10-17",
+  "branch": "opt/detector",
+  "input_manifest_sha256": "e9528fe9494588be8316e524bcda5850891be48d2ae35e7ef754d4ee3fec8dbd",
+  "images": 66,
+  "objects": 707,
+  "evaluation": {
+    "imgsz": 960,
+    "map_batch": 1,
+    "deployment_conf": 0.25,
+    "nms_iou": 0.7,
+    "seed": 42
+  },
+  "baseline_model_sha256": "0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d",
+  "baseline_map": {
+    "metrics/precision(B)": 0.9437135127524925,
+    "metrics/recall(B)": 0.946343287866051,
+    "metrics/mAP50(B)": 0.9713496158236279,
+    "metrics/mAP50-95(B)": 0.7449712546309379,
+    "fitness": 0.7449712546309379
+  },
+  "baseline_deployment": {
+    "0.5": {
+      "tp": 687,
+      "fp": 50,
+      "fn": 20,
+      "precision": 0.932157394843962,
+      "recall": 0.9717114568599717,
+      "f1": 0.9515235457063712,
+      "whole_image_correct": 46,
+      "attempted_images": 66,
+      "failed_images": 0
+    },
+    "0.75": {
+      "tp": 638,
+      "fp": 99,
+      "fn": 69,
+      "precision": 0.8656716417910447,
+      "recall": 0.9024045261669024,
+      "f1": 0.8836565096952909,
+      "whole_image_correct": 35,
+      "attempted_images": 66,
+      "failed_images": 0
+    }
+  },
+  "previous_no_mosaic_candidate": {
+    "name": "low_lr_no_mosaic",
+    "train_run": "detector-exp001-train-no-mosaic",
+    "eval_run": "detector-exp001-candidate-no-mosaic",
+    "epochs_completed": 13,
+    "best_epoch": 3,
+    "train_seconds": 323.074,
+    "lr0": 5e-05,
+    "mosaic": 0,
+    "weight_sha256": "43a5f9fdabe6c8c2da1cd7aad6ff772715d60c7eba60f71c2fe87090cea408f5",
+    "map_batch8": {
+      "metrics/precision(B)": 0.95051467754821,
+      "metrics/recall(B)": 0.9604756168769775,
+      "metrics/mAP50(B)": 0.9702302514327652,
+      "metrics/mAP50-95(B)": 0.7495574129216375,
+      "fitness": 0.7495574129216375
+    },
+    "map_batch1": {
+      "metrics/precision(B)": 0.950872478818801,
+      "metrics/recall(B)": 0.9616137624319133,
+      "metrics/mAP50(B)": 0.9703185165511071,
+      "metrics/mAP50-95(B)": 0.7478700435489246,
+      "fitness": 0.7478700435489246
+    },
+    "per_class_map50_95": {
+      "Resistor": 0.7374842365443847,
+      "Capacitor": 0.6130443528952172,
+      "Inductor": 0.7126806413892621,
+      "Transistor_BJT": 0.734276019137867,
+      "Transistor_MOSFET": 0.7556346043933169,
+      "Voltage_src": 0.7828498078026886,
+      "Current_src": 0.908,
+      "GND": 0.6703980188734654,
+      "Op-Amp": 0.887188098938099,
+      "Diode": 0.6771446555149435
+    },
+    "deployment": {
+      "0.15": {
+        "0.5": {
+          "tp": 687,
+          "fp": 52,
+          "fn": 20,
+          "precision": 0.9296346414073072,
+          "recall": 0.9717114568599717,
+          "f1": 0.950207468879668,
+          "whole_image_correct": 43,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 638,
+          "fp": 101,
+          "fn": 69,
+          "precision": 0.8633288227334236,
+          "recall": 0.9024045261669024,
+          "f1": 0.8824343015214384,
+          "whole_image_correct": 32,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      },
+      "0.25": {
+        "0.5": {
+          "tp": 684,
+          "fp": 42,
+          "fn": 23,
+          "precision": 0.9421487603305785,
+          "recall": 0.9674681753889675,
+          "f1": 0.9546406140963015,
+          "whole_image_correct": 44,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 636,
+          "fp": 90,
+          "fn": 71,
+          "precision": 0.8760330578512396,
+          "recall": 0.8995756718528995,
+          "f1": 0.8876482903000698,
+          "whole_image_correct": 32,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      },
+      "0.35": {
+        "0.5": {
+          "tp": 682,
+          "fp": 30,
+          "fn": 25,
+          "precision": 0.9578651685393258,
+          "recall": 0.9646393210749646,
+          "f1": 0.9612403100775194,
+          "whole_image_correct": 48,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 635,
+          "fp": 77,
+          "fn": 72,
+          "precision": 0.8918539325842697,
+          "recall": 0.8981612446958982,
+          "f1": 0.8949964763918252,
+          "whole_image_correct": 34,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      },
+      "0.5": {
+        "0.5": {
+          "tp": 671,
+          "fp": 23,
+          "fn": 36,
+          "precision": 0.9668587896253602,
+          "recall": 0.9490806223479491,
+          "f1": 0.9578872234118487,
+          "whole_image_correct": 47,
+          "attempted_images": 66,
+          "failed_images": 0
+        },
+        "0.75": {
+          "tp": 630,
+          "fp": 64,
+          "fn": 77,
+          "precision": 0.9077809798270894,
+          "recall": 0.8910891089108911,
+          "f1": 0.8993576017130621,
+          "whole_image_correct": 34,
+          "attempted_images": 66,
+          "failed_images": 0
+        }
+      }
+    },
+    "paired": {
+      "images": 66,
+      "confidence": 0.25,
+      "iou": {
+        "0.5": {
+          "baseline": {
+            "tp": 687,
+            "fp": 50,
+            "fn": 20,
+            "precision": 0.932157394843962,
+            "recall": 0.9717114568599717,
+            "f1": 0.9515235457063712
+          },
+          "candidate": {
+            "tp": 684,
+            "fp": 42,
+            "fn": 23,
+            "precision": 0.9421487603305785,
+            "recall": 0.9674681753889675,
+            "f1": 0.9546406140963015
+          },
+          "f1_delta": 0.003117068389930311,
+          "f1_delta_paired_bootstrap_95": [
+            -0.008000529801556855,
+            0.01376881203970548
+          ],
+          "image_error_count_improved": 8,
+          "image_error_count_regressed": 5,
+          "image_error_count_tied": 53
+        },
+        "0.75": {
+          "baseline": {
+            "tp": 638,
+            "fp": 99,
+            "fn": 69,
+            "precision": 0.8656716417910447,
+            "recall": 0.9024045261669024,
+            "f1": 0.8836565096952909
+          },
+          "candidate": {
+            "tp": 636,
+            "fp": 90,
+            "fn": 71,
+            "precision": 0.8760330578512396,
+            "recall": 0.8995756718528995,
+            "f1": 0.8876482903000698
+          },
+          "f1_delta": 0.003991780604778894,
+          "f1_delta_paired_bootstrap_95": [
+            -0.009582907722119782,
+            0.01760149977276171
+          ],
+          "image_error_count_improved": 9,
+          "image_error_count_regressed": 9,
+          "image_error_count_tied": 48
+        }
+      },
+      "bootstrap": {
+        "seed": 42,
+        "samples": 1000,
+        "unit": "image",
+        "limitation": "Descriptive development-set sampling uncertainty; does not account for model/threshold selection or establish independent generalization."
+      },
+      "independent_test": false,
+      "ready_for_simulation": false
+    }
+  },
+  "candidates": [
+    {
+      "name": "warmup0",
+      "train_run": "detector-exp002-train-warmup0",
+      "eval_run": "detector-exp002-candidate-warmup0",
+      "train_code_commit": "c629b30",
+      "epochs_completed": 11,
+      "best_epoch": 1,
+      "train_seconds": 290.74,
+      "weight_sha256": "abb1849d9b718c798adff45f9e623bae7c2f73f6f694d3bd5990c784e8156a94",
+      "hyperparameters": {
+        "lr0": 5e-05,
+        "mosaic": 0,
+        "warmup_bias_lr": 0,
+        "freeze": 0,
+        "imgsz": 960,
+        "batch": 8,
+        "seed": 42
+      },
+      "map": {
+        "metrics/precision(B)": 0.9348024612389322,
+        "metrics/recall(B)": 0.9532549065387693,
+        "metrics/mAP50(B)": 0.9696646707110828,
+        "metrics/mAP50-95(B)": 0.7469791382126191,
+        "fitness": 0.7469791382126191
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7496938584736116,
+        "Capacitor": 0.603983592178308,
+        "Inductor": 0.6988083695633999,
+        "Transistor_BJT": 0.7638869632577696,
+        "Transistor_MOSFET": 0.7658191079852581,
+        "Voltage_src": 0.7841832368511261,
+        "Current_src": 0.8975833333333334,
+        "GND": 0.6654925902449588,
+        "Op-Amp": 0.8705470625281153,
+        "Diode": 0.66979326771031
+      },
+      "deployment": {
+        "0.15": {
+          "0.5": {
+            "tp": 689,
+            "fp": 57,
+            "fn": 18,
+            "precision": 0.9235924932975871,
+            "recall": 0.9745403111739745,
+            "f1": 0.9483826565726085,
+            "whole_image_correct": 47,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 639,
+            "fp": 107,
+            "fn": 68,
+            "precision": 0.8565683646112601,
+            "recall": 0.9038189533239038,
+            "f1": 0.8795595320027529,
+            "whole_image_correct": 36,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.25": {
+          "0.5": {
+            "tp": 687,
+            "fp": 46,
+            "fn": 20,
+            "precision": 0.937244201909959,
+            "recall": 0.9717114568599717,
+            "f1": 0.9541666666666667,
+            "whole_image_correct": 47,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 638,
+            "fp": 95,
+            "fn": 69,
+            "precision": 0.8703956343792633,
+            "recall": 0.9024045261669024,
+            "f1": 0.8861111111111111,
+            "whole_image_correct": 36,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.35": {
+          "0.5": {
+            "tp": 685,
+            "fp": 40,
+            "fn": 22,
+            "precision": 0.9448275862068966,
+            "recall": 0.9688826025459689,
+            "f1": 0.9567039106145251,
+            "whole_image_correct": 47,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 637,
+            "fp": 88,
+            "fn": 70,
+            "precision": 0.8786206896551724,
+            "recall": 0.900990099009901,
+            "f1": 0.8896648044692738,
+            "whole_image_correct": 36,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.5": {
+          "0.5": {
+            "tp": 680,
+            "fp": 27,
+            "fn": 27,
+            "precision": 0.9618104667609618,
+            "recall": 0.9618104667609618,
+            "f1": 0.9618104667609618,
+            "whole_image_correct": 50,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 633,
+            "fp": 74,
+            "fn": 74,
+            "precision": 0.8953323903818954,
+            "recall": 0.8953323903818954,
+            "f1": 0.8953323903818954,
+            "whole_image_correct": 37,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        }
+      },
+      "paired": {
+        "images": 66,
+        "confidence": 0.25,
+        "iou": {
+          "0.5": {
+            "baseline": {
+              "tp": 687,
+              "fp": 50,
+              "fn": 20,
+              "precision": 0.932157394843962,
+              "recall": 0.9717114568599717,
+              "f1": 0.9515235457063712
+            },
+            "candidate": {
+              "tp": 687,
+              "fp": 46,
+              "fn": 20,
+              "precision": 0.937244201909959,
+              "recall": 0.9717114568599717,
+              "f1": 0.9541666666666667
+            },
+            "f1_delta": 0.0026431209602955086,
+            "f1_delta_paired_bootstrap_95": [
+              0.0,
+              0.006296047555323758
+            ],
+            "image_error_count_improved": 3,
+            "image_error_count_regressed": 0,
+            "image_error_count_tied": 63
+          },
+          "0.75": {
+            "baseline": {
+              "tp": 638,
+              "fp": 99,
+              "fn": 69,
+              "precision": 0.8656716417910447,
+              "recall": 0.9024045261669024,
+              "f1": 0.8836565096952909
+            },
+            "candidate": {
+              "tp": 638,
+              "fp": 95,
+              "fn": 69,
+              "precision": 0.8703956343792633,
+              "recall": 0.9024045261669024,
+              "f1": 0.8861111111111111
+            },
+            "f1_delta": 0.0024546014158202123,
+            "f1_delta_paired_bootstrap_95": [
+              -0.008167697825771092,
+              0.012305916039347942
+            ],
+            "image_error_count_improved": 5,
+            "image_error_count_regressed": 4,
+            "image_error_count_tied": 57
+          }
+        },
+        "bootstrap": {
+          "seed": 42,
+          "samples": 1000,
+          "unit": "image",
+          "limitation": "Descriptive development-set sampling uncertainty; does not account for model/threshold selection or establish independent generalization."
+        },
+        "independent_test": false,
+        "ready_for_simulation": false
+      },
+      "independent_test": false
+    },
+    {
+      "name": "freeze11",
+      "train_run": "detector-exp002-train-freeze11",
+      "eval_run": "detector-exp002-candidate-freeze11",
+      "train_code_commit": "b2e8eb6",
+      "epochs_completed": 11,
+      "best_epoch": 1,
+      "train_seconds": 213.432,
+      "weight_sha256": "f58620c5b08f66fbb819c1a698af7e8d5f71575eeea99e0778c82b1da0d0db6f",
+      "hyperparameters": {
+        "lr0": 5e-05,
+        "mosaic": 0,
+        "warmup_bias_lr": 0,
+        "freeze": 11,
+        "imgsz": 960,
+        "batch": 8,
+        "seed": 42
+      },
+      "map": {
+        "metrics/precision(B)": 0.9334653149002701,
+        "metrics/recall(B)": 0.9595689157999201,
+        "metrics/mAP50(B)": 0.9725125739983402,
+        "metrics/mAP50-95(B)": 0.7458656116734315,
+        "fitness": 0.7458656116734315
+      },
+      "per_class_map50_95": {
+        "Resistor": 0.7475235494782017,
+        "Capacitor": 0.6117112861956444,
+        "Inductor": 0.7068117556234548,
+        "Transistor_BJT": 0.7455662508325008,
+        "Transistor_MOSFET": 0.7640198600367751,
+        "Voltage_src": 0.7866945871364222,
+        "Current_src": 0.8975833333333334,
+        "GND": 0.6688361986752094,
+        "Op-Amp": 0.8619509204643988,
+        "Diode": 0.667958374958375
+      },
+      "deployment": {
+        "0.15": {
+          "0.5": {
+            "tp": 688,
+            "fp": 57,
+            "fn": 19,
+            "precision": 0.9234899328859061,
+            "recall": 0.9731258840169731,
+            "f1": 0.9476584022038568,
+            "whole_image_correct": 45,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 638,
+            "fp": 107,
+            "fn": 69,
+            "precision": 0.8563758389261745,
+            "recall": 0.9024045261669024,
+            "f1": 0.8787878787878788,
+            "whole_image_correct": 36,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.25": {
+          "0.5": {
+            "tp": 687,
+            "fp": 46,
+            "fn": 20,
+            "precision": 0.937244201909959,
+            "recall": 0.9717114568599717,
+            "f1": 0.9541666666666667,
+            "whole_image_correct": 46,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 637,
+            "fp": 96,
+            "fn": 70,
+            "precision": 0.869031377899045,
+            "recall": 0.900990099009901,
+            "f1": 0.8847222222222222,
+            "whole_image_correct": 36,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.35": {
+          "0.5": {
+            "tp": 686,
+            "fp": 36,
+            "fn": 21,
+            "precision": 0.9501385041551247,
+            "recall": 0.9702970297029703,
+            "f1": 0.960111966410077,
+            "whole_image_correct": 48,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 636,
+            "fp": 86,
+            "fn": 71,
+            "precision": 0.8808864265927978,
+            "recall": 0.8995756718528995,
+            "f1": 0.8901329601119664,
+            "whole_image_correct": 36,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        },
+        "0.5": {
+          "0.5": {
+            "tp": 677,
+            "fp": 28,
+            "fn": 30,
+            "precision": 0.9602836879432625,
+            "recall": 0.9575671852899575,
+            "f1": 0.9589235127478754,
+            "whole_image_correct": 48,
+            "attempted_images": 66,
+            "failed_images": 0
+          },
+          "0.75": {
+            "tp": 631,
+            "fp": 74,
+            "fn": 76,
+            "precision": 0.8950354609929078,
+            "recall": 0.8925035360678925,
+            "f1": 0.8937677053824362,
+            "whole_image_correct": 37,
+            "attempted_images": 66,
+            "failed_images": 0
+          }
+        }
+      },
+      "paired": {
+        "images": 66,
+        "confidence": 0.25,
+        "iou": {
+          "0.5": {
+            "baseline": {
+              "tp": 687,
+              "fp": 50,
+              "fn": 20,
+              "precision": 0.932157394843962,
+              "recall": 0.9717114568599717,
+              "f1": 0.9515235457063712
+            },
+            "candidate": {
+              "tp": 687,
+              "fp": 46,
+              "fn": 20,
+              "precision": 0.937244201909959,
+              "recall": 0.9717114568599717,
+              "f1": 0.9541666666666667
+            },
+            "f1_delta": 0.0026431209602955086,
+            "f1_delta_paired_bootstrap_95": [
+              -0.001344406683021604,
+              0.006058768946398896
+            ],
+            "image_error_count_improved": 6,
+            "image_error_count_regressed": 2,
+            "image_error_count_tied": 58
+          },
+          "0.75": {
+            "baseline": {
+              "tp": 638,
+              "fp": 99,
+              "fn": 69,
+              "precision": 0.8656716417910447,
+              "recall": 0.9024045261669024,
+              "f1": 0.8836565096952909
+            },
+            "candidate": {
+              "tp": 637,
+              "fp": 96,
+              "fn": 70,
+              "precision": 0.869031377899045,
+              "recall": 0.900990099009901,
+              "f1": 0.8847222222222222
+            },
+            "f1_delta": 0.0010657125269313283,
+            "f1_delta_paired_bootstrap_95": [
+              -0.004778054230519357,
+              0.006567120244181934
+            ],
+            "image_error_count_improved": 6,
+            "image_error_count_regressed": 5,
+            "image_error_count_tied": 55
+          }
+        },
+        "bootstrap": {
+          "seed": 42,
+          "samples": 1000,
+          "unit": "image",
+          "limitation": "Descriptive development-set sampling uncertainty; does not account for model/threshold selection or establish independent generalization."
+        },
+        "independent_test": false,
+        "ready_for_simulation": false
+      },
+      "independent_test": false
+    }
+  ],
+  "handoff_profile": "warmup0_recall_priority_candidate",
+  "default_changed": false,
+  "independent_test": false,
+  "trainer_source_sha256": "7016131a47b61a8b9b9ea51ef5a9e59b0fb896a328eed4901c89ac7a83169655",
+  "limitations": [
+    "Development validation already used in model selection.",
+    "Single seed; no independent holdout or downstream topology results.",
+    "Equal missed counts do not imply equal missed instances; one recovered resistor and one newly missed diode at IoU .5.",
+    "Previous no-Mosaic candidate retains slightly higher F1/mAP but has three more missed targets."
+  ],
+  "artifact": {
+    "filename": "detector-exp002-review.zip",
+    "sha256": "ba08bc283deabb99927a10361e010df7fc7ad214a3a47b228cc19cebc3423c7c",
+    "release": "https://github.com/Ocmma001/SINA-Workflow/releases/tag/detector-exp002"
+  }
+}

@@ -41,3 +41,5 @@ GitHub克隆、按需检出与分支提交：[组员GitHub指南](docs/team/GITH
 公开协作仓库：[Ocmma001/SINA-Workflow](https://github.com/Ocmma001/SINA-Workflow)。模型和数据下载：[workflow-v1 Release](https://github.com/Ocmma001/SINA-Workflow/releases/tag/workflow-v1)。
 
 仓库保留当前工作流、YOLO11m训练基线与协作指南；旧Pro直接检测、Lite/Pro对比及重复历史交接材料已清理。
+
+检测优化分支的已完成试验：[实验001](experiments/detector-exp001/README.md)、[实验002](experiments/detector-exp002/README.md)。候选单独下载并显式指定，默认模型保持不变。

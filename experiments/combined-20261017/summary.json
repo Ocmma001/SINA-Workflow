@@ -1,0 +1,217 @@
+{
+  "scope": "66 development images used for tuning; not independent test accuracy",
+  "thresholds_fixed_before_this_run": {
+    "Resistor": 0.3,
+    "Capacitor": 0.45,
+    "Inductor": 0.25,
+    "Transistor_BJT": 0.4,
+    "Transistor_MOSFET": 0.4,
+    "Voltage_src": 0.55,
+    "Current_src": 0.75,
+    "GND": 0.25,
+    "Op-Amp": 0.7,
+    "Diode": 0.25
+  },
+  "profiles": {
+    "baseline": {
+      "weights_sha256": "0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d",
+      "images": 66,
+      "objects": 707,
+      "failures": 0,
+      "iou50": {
+        "tp": 687,
+        "fp": 50,
+        "fn": 20,
+        "precision": 0.932157394843962,
+        "recall": 0.9717114568599717,
+        "f1": 0.9515235457063712
+      },
+      "iou75": {
+        "tp": 638,
+        "fp": 99,
+        "fn": 69,
+        "precision": 0.8656716417910447,
+        "recall": 0.9024045261669024,
+        "f1": 0.8836565096952909
+      },
+      "paired": {
+        "scope": "conditional development-image resampling; not independent generalization",
+        "images": 66,
+        "samples": 2000,
+        "seed": 42,
+        "metrics": {
+          "iou50": {
+            "baseline_f1": 0.9515235457063712,
+            "candidate_f1": 0.9515235457063712,
+            "delta_f1": 0.0,
+            "paired_bootstrap_95_percent_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "iou75": {
+            "baseline_f1": 0.8836565096952909,
+            "candidate_f1": 0.8836565096952909,
+            "delta_f1": 0.0,
+            "paired_bootstrap_95_percent_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "baseline_failures": 0,
+        "candidate_failures": 0
+      }
+    },
+    "member": {
+      "weights_sha256": "0d2e5ec31358fc099a8dbef0eca5466acfe8b39346e5cde13def8ce1806aae4d",
+      "images": 66,
+      "objects": 707,
+      "failures": 0,
+      "iou50": {
+        "tp": 687,
+        "fp": 32,
+        "fn": 20,
+        "precision": 0.9554937413073713,
+        "recall": 0.9717114568599717,
+        "f1": 0.9635343618513323
+      },
+      "iou75": {
+        "tp": 638,
+        "fp": 81,
+        "fn": 69,
+        "precision": 0.8873435326842837,
+        "recall": 0.9024045261669024,
+        "f1": 0.8948106591865358
+      },
+      "paired": {
+        "scope": "conditional development-image resampling; not independent generalization",
+        "images": 66,
+        "samples": 2000,
+        "seed": 42,
+        "metrics": {
+          "iou50": {
+            "baseline_f1": 0.9515235457063712,
+            "candidate_f1": 0.9635343618513323,
+            "delta_f1": 0.012010816144961134,
+            "paired_bootstrap_95_percent_interval": [
+              0.004331657161474364,
+              0.021092259543505118
+            ]
+          },
+          "iou75": {
+            "baseline_f1": 0.8836565096952909,
+            "candidate_f1": 0.8948106591865358,
+            "delta_f1": 0.011154149491244936,
+            "paired_bootstrap_95_percent_interval": [
+              0.0039821428708753355,
+              0.01934722204982381
+            ]
+          }
+        },
+        "baseline_failures": 0,
+        "candidate_failures": 0
+      }
+    },
+    "combined-no-mosaic": {
+      "weights_sha256": "43a5f9fdabe6c8c2da1cd7aad6ff772715d60c7eba60f71c2fe87090cea408f5",
+      "images": 66,
+      "objects": 707,
+      "failures": 0,
+      "iou50": {
+        "tp": 682,
+        "fp": 30,
+        "fn": 25,
+        "precision": 0.9578651685393258,
+        "recall": 0.9646393210749646,
+        "f1": 0.9612403100775194
+      },
+      "iou75": {
+        "tp": 634,
+        "fp": 78,
+        "fn": 73,
+        "precision": 0.8904494382022472,
+        "recall": 0.8967468175388967,
+        "f1": 0.8935870331219169
+      },
+      "paired": {
+        "scope": "conditional development-image resampling; not independent generalization",
+        "images": 66,
+        "samples": 2000,
+        "seed": 42,
+        "metrics": {
+          "iou50": {
+            "baseline_f1": 0.9515235457063712,
+            "candidate_f1": 0.9612403100775194,
+            "delta_f1": 0.009716764371148212,
+            "paired_bootstrap_95_percent_interval": [
+              -0.002983579526971464,
+              0.021613042476433978
+            ]
+          },
+          "iou75": {
+            "baseline_f1": 0.8836565096952909,
+            "candidate_f1": 0.8935870331219169,
+            "delta_f1": 0.009930523426626037,
+            "paired_bootstrap_95_percent_interval": [
+              -0.003211786498496086,
+              0.02271073017515771
+            ]
+          }
+        },
+        "baseline_failures": 0,
+        "candidate_failures": 0
+      }
+    },
+    "combined-warmup0": {
+      "weights_sha256": "abb1849d9b718c798adff45f9e623bae7c2f73f6f694d3bd5990c784e8156a94",
+      "images": 66,
+      "objects": 707,
+      "failures": 0,
+      "iou50": {
+        "tp": 687,
+        "fp": 33,
+        "fn": 20,
+        "precision": 0.9541666666666667,
+        "recall": 0.9717114568599717,
+        "f1": 0.9628591450595655
+      },
+      "iou75": {
+        "tp": 638,
+        "fp": 82,
+        "fn": 69,
+        "precision": 0.8861111111111111,
+        "recall": 0.9024045261669024,
+        "f1": 0.8941836019621584
+      },
+      "paired": {
+        "scope": "conditional development-image resampling; not independent generalization",
+        "images": 66,
+        "samples": 2000,
+        "seed": 42,
+        "metrics": {
+          "iou50": {
+            "baseline_f1": 0.9515235457063712,
+            "candidate_f1": 0.9628591450595655,
+            "delta_f1": 0.011335599353194281,
+            "paired_bootstrap_95_percent_interval": [
+              0.005260102049984125,
+              0.018391005253156067
+            ]
+          },
+          "iou75": {
+            "baseline_f1": 0.8836565096952909,
+            "candidate_f1": 0.8941836019621584,
+            "delta_f1": 0.010527092266867544,
+            "paired_bootstrap_95_percent_interval": [
+              0.0006660740543766336,
+              0.02075507106376428
+            ]
+          }
+        },
+        "baseline_failures": 0,
+        "candidate_failures": 0
+      }
+    }
+  }
+}
