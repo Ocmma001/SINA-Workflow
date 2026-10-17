@@ -27,3 +27,15 @@ python tools/train_round.py --name detector-exp002-train-warmup0 --initial runs/
 - 不调用API，不修改GUI/OCR/网络接口，不自动替换选定权重。
 
 训练与部署验证完成后，结果写入experiments/detector-exp002，并给组员提供明确的下游回归输入。
+
+## 扩展对照：冻结前11层参数
+
+已有强权重继续训练时验证分数早期达到峰值后回落，可能存在对原特征的过度更新。新增一组在warmup_bias_lr=0基础上只改freeze=11。
+本机YOLO11结构的前11层是backbone（至C2PSA）；后续neck/head参数继续训练。这里冻结的是参数，不声称所有BatchNorm运行统计保持不变。
+与warmup0组使用相同原始初始化、学习率、增强、seed及早停。新增freeze参数默认0，不改变旧训练行为。
+
+```powershell
+python tools/train_round.py --name detector-exp002-train-freeze11 --initial runs/round-002/delivery/detector.pt --baseline runs/round-002/delivery/detector.pt --epochs 40 --imgsz 960 --batch 8 --device 0 --lr0 0.00005 --patience 10 --mosaic 0 --warmup-bias-lr 0 --freeze 11
+```
+
+两组GPU任务顺序运行。全部候选仍须同条件逐图对照，不因损失下降或冻结层数改变而声称准确率提升。

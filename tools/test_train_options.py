@@ -5,6 +5,12 @@ import unittest
 
 
 class TrainOptionTests(unittest.TestCase):
+    def test_negative_freeze_rejected_before_loading_gpu_or_data(self):
+        result = subprocess.run([sys.executable, str(Path(__file__).with_name('train_round.py')),
+                                 '--freeze', '-1'], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn('freeze must be nonnegative', result.stderr)
+
     def test_invalid_bias_warmup_rejected_before_loading_gpu_or_data(self):
         script = Path(__file__).with_name('train_round.py')
         for value in ['-0.1', 'nan', 'inf']:
